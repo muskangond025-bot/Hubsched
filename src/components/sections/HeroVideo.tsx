@@ -5,10 +5,11 @@ import { gsap } from '@/lib/gsap';
 export const HeroVideo = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoInnerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
   // 1. GSAP Scroll Trigger for Video Expansion
@@ -40,17 +41,42 @@ export const HeroVideo = () => {
 
   // 2. Play/Pause toggle
   const togglePlay = () => {
-    if (!videoRef.current) return;
+    if (!iframeRef.current?.contentWindow) return;
     if (isPlaying) {
-      videoRef.current.pause();
+      iframeRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'pauseVideo', args: '' }),
+        '*'
+      );
       setIsPlaying(false);
     } else {
-      videoRef.current.play().catch((err) => console.log("Video play interrupted:", err));
+      iframeRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'playVideo', args: '' }),
+        '*'
+      );
       setIsPlaying(true);
     }
   };
 
-  // 3. Pointer move to track custom cursor position
+  // 3. Mute/Unmute audio toggle
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!iframeRef.current?.contentWindow) return;
+    if (isMuted) {
+      iframeRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'unMute', args: '' }),
+        '*'
+      );
+      setIsMuted(false);
+    } else {
+      iframeRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'mute', args: '' }),
+        '*'
+      );
+      setIsMuted(true);
+    }
+  };
+
+  // 4. Pointer move to track custom cursor position
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setCursorPos({
@@ -72,22 +98,26 @@ export const HeroVideo = () => {
               {/* VIDEO WRAPPER WITH EXPANSION AND HOVER INTERACTION */}
               <div
                 ref={videoInnerRef}
-                className="hero-video-inner relative w-full aspect-video rounded-[96px] object-cover justify-center items-center flex overflow-hidden cursor-none select-none border border-black/10 shadow-2xl"
+                className="hero-video-inner relative w-full aspect-video rounded-[96px] object-cover justify-center items-center flex overflow-hidden cursor-none select-none border border-black/10 shadow-2xl bg-black"
                 onPointerEnter={() => setIsHovered(true)}
                 onPointerLeave={() => setIsHovered(false)}
                 onPointerMove={handlePointerMove}
                 onClick={togglePlay}
               >
 
-                {/* VIDEO ELEMENT */}
-                <video
-                  ref={videoRef}
-                  src="https://cdn.prod.website-files.com/67b873ab284925c72f7f5176%2F6808ad0ca3423c64b004a0c1_hero-video-NEW-transcode.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover z-0"
+                {/* YOUTUBE SHOWREEL POSTER PLACEHOLDER */}
+                <div 
+                  className="absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none z-0 opacity-40"
+                  style={{ backgroundImage: `url('https://img.youtube.com/vi/yo-VmdTOEUk/maxresdefault.jpg')` }}
+                />
+
+                {/* YOUTUBE EMBED FROM ROHANJOSHI.IN (yo-VmdTOEUk) */}
+                <iframe
+                  ref={iframeRef}
+                  src="https://www.youtube.com/embed/yo-VmdTOEUk?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=yo-VmdTOEUk&controls=0&modestbranding=1&rel=0&playsinline=1"
+                  title="Make My Vid Showreel Banner"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 scale-[1.12]"
                 />
 
                 {/* BLACK OVERLAY (adds cinematic depth) */}
@@ -96,7 +126,7 @@ export const HeroVideo = () => {
                 {/* CUSTOM PLAY/PAUSE FLOATING CURSOR BADGE */}
                 {isHovered && (
                   <div
-                    className="absolute bg-[#ffd600] text-black font-sans text-xs font-bold tracking-widest uppercase rounded-full w-24 h-24 flex items-center justify-center pointer-events-none z-30 transition-transform duration-75 ease-out shadow-xl"
+                    className="absolute bg-[#1b4fd8] text-white font-sans text-xs font-bold tracking-widest uppercase rounded-full w-24 h-24 flex items-center justify-center pointer-events-none z-30 transition-transform duration-75 ease-out shadow-xl"
                     style={{
                       left: cursorPos.x,
                       top: cursorPos.y,
@@ -107,23 +137,44 @@ export const HeroVideo = () => {
                   </div>
                 )}
 
-                {/* BOTTOM RIGHT STATIC TOGGLE INDICATOR */}
-                <div className="absolute bottom-6 right-6 z-20 pointer-events-auto">
+                {/* BOTTOM RIGHT CONTROLS */}
+                <div className="absolute bottom-6 right-6 z-20 pointer-events-auto flex items-center gap-3">
+                  {/* Mute/Unmute audio button */}
                   <button
                     type="button"
+                    aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+                    onClick={toggleMute}
+                    className="w-14 h-14 bg-black/80 hover:bg-[#1b4fd8] hover:text-white text-white rounded-full flex items-center justify-center transition-colors duration-300 border border-white/20 backdrop-blur-md shadow-lg"
+                  >
+                    {isMuted ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                      </svg>
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                      </svg>
+                    )}
+                  </button>
+
+                  {/* Play/Pause Button */}
+                  <button
+                    type="button"
+                    aria-label={isPlaying ? "Pause video" : "Play video"}
                     onClick={(e) => {
                       e.stopPropagation();
                       togglePlay();
                     }}
-                    className="w-14 h-14 bg-black/80 hover:bg-[#ffd600] hover:text-black text-white rounded-full flex items-center justify-center transition-colors duration-300 border border-black/10"
+                    className="w-14 h-14 bg-black/80 hover:bg-[#1b4fd8] hover:text-white text-white rounded-full flex items-center justify-center transition-colors duration-300 border border-white/20 backdrop-blur-md shadow-lg"
                   >
                     {isPlaying ? (
-                      // Pause Icon
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                       </svg>
                     ) : (
-                      // Play Icon
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M8 5v14l11-7z" />
                       </svg>

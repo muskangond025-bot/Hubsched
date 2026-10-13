@@ -4,39 +4,39 @@ import { gsap } from '@/lib/gsap';
 
 const cardsData = [
   {
-    image: "https://hubsched.com/static/image/AI%20Face%20attendance.webp",
-    text: "HubSched AI Face Attendance lets your team clock in instantly with fast, secure facial recognition, removing manual errors.",
-    tag: "FACE ATTENDANCE"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958320_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(2)%20(1).png",
+    text: "Pan-India video shoots across 8+ major cities with high-end cinema cameras, full crew, and seamless local logistics.",
+    tag: "MULTI-CITY PRODUCTION"
   },
   {
-    image: "https://hubsched.com/static/image/finalpagevister.webp",
-    text: "Mobile app enabled visitor alerts, real-time host notifications, and digital visitor logs for enhanced security & compliance.",
-    tag: "VISITOR CONTROL"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737960176_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(5).png",
+    text: "Global remote editing with frame-accurate cloud reviews, multi-camera sync, color grading, and rapid turnaround.",
+    tag: "REMOTE POST-PRODUCTION"
   },
   {
-    image: "https://hubsched.com/static/image/meeting%20room%20ios%20management.webp",
-    text: "Smart IoT sensors automate room booking and occupancy tracking, reducing conflicts and optimizing resource usage.",
-    tag: "IOT MEETING ROOMS"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958403_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(1)%20(1).png",
+    text: "Capturing authentic human impact, sustainability, and corporate stories from Dharavi slums to Karnataka farms.",
+    tag: "CORPORATE AV & CSR"
   },
   {
-    image: "https://hubsched.com/static/image/employee%20tracking%20new%20image.webp",
-    text: "Track live employee GPS locations, capture client visits, meetings, and submit real-time work updates on the go.",
-    tag: "FIELD SALES"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737959797_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(3)%20(1).png",
+    text: "Capturing high-energy booths, delegate interviews, and live event atmospheres for leaders like BPCL and Welspun.",
+    tag: "TRADE SHOWS & SUMMITS"
   },
   {
-    image: "https://hubsched.com/static/image/taskmanage.webp",
-    text: "Create, assign and track tasks directly from the mobile app. Set priorities, deadlines, and get instant notifications.",
-    tag: "TASK MANAGER"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737959841_11.png",
+    text: "Broadcast multi-camera live telecasts across YouTube, Zoom, and hybrid screens with zero-latency broadcast quality.",
+    tag: "LIVE TELECAST OF EVENTS"
   },
   {
-    image: "https://hubsched.com/static/image/ClaimExpenses.webp",
-    text: "Submit business expenses on the go via the mobile app. Upload receipts instantly and track automated approvals.",
-    tag: "CLAIM EXPENSES"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1735391835_CH%2035%20(1).jpg",
+    text: "Full-scale commercial visual campaigns for digital, broadcast, and Amazon e-commerce driving millions of views.",
+    tag: "BRAND CAMPAIGNS"
   },
   {
-    image: "https://hubsched.com/static/image/web%20Dashboard.webp",
-    text: "Unified dashboard accessible on web with real-time data, analytics, insights, and role-based access controls.",
-    tag: "ADMIN DASHBOARD"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737959997_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(2)%20(2).png",
+    text: "Engaging copywriting, concept storyboards, and multi-lingual voiceover casting to articulate your message powerfully.",
+    tag: "SCRIPTING & VOICEOVERS"
   }
 ];
 
@@ -125,17 +125,17 @@ export const CardSwing = () => {
             {/* Tagline title and header details */}
             <div className="title-top-wrap w-full flex flex-col items-center py-20 text-center gap-6">
               <div className="top-tagline flex items-center justify-center gap-4 text-xs font-sans tracking-widest font-semibold uppercase">
-                <span className="text-[#ffd600]">HUBSCHED</span>
+                <span className="text-[#ffd600]">MAKE MY VID</span>
                 <div className="plus-icon text-white w-6 h-6 flex items-center justify-center">
                   <svg width="100%" height="100%" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18.5083 11.7651V0.197266H12.8586V9.46042L9.01862 12.8732H0.5V18.369H11.9317L18.5083 11.7651Z" fill="currentColor" />
                     <path d="M14.4917 20.6294L14.4917 32.1973L20.1414 32.1973L20.1414 22.9341L23.9814 19.5214L32.5 19.5214L32.5 14.0255L21.0683 14.0255L14.4917 20.6294Z" fill="currentColor" />
                   </svg>
                 </div>
-                <span className="text-blue-200">SUITE OF SOLUTIONS</span>
+                <span className="text-blue-200">PRODUCTION CAPABILITIES</span>
               </div>
               <p className="text-blue-100/70 font-sans text-lg md:text-xl max-w-[800px] leading-relaxed">
-                Discover our full suite of workplace automation tools designed to simplify HRMS, tracking, reporting, and visitor logs all in one place.
+                Discover our comprehensive video production capabilities designed to elevate brands, empower creators, and captivate audiences worldwide.
               </p>
             </div>
 

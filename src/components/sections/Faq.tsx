@@ -4,94 +4,94 @@ import { gsap } from '@/lib/gsap';
 
 const faqs = [
   {
-    category: "Onboarding",
-    question: "How long does the implementation process take?",
-    answer: "The implementation timeline depends on the package and modules selected. For essential modules like Attendance, setup can begin within 15 days. More advanced modules may require additional configuration and hardware setup."
+    category: "Services",
+    question: "What services does Make My Vid offer?",
+    answer: "At Make My Vid, we provide a comprehensive suite of video production services tailored to meet the unique needs of personal and professional brands. Our expertise includes Corporate Video Production, Event Coverage, Social Documentaries & CSR videos, Product Explainer Videos, Social Media Content Creation, Remote Editing Services, and Custom Animation and Motion Graphics."
   },
   {
-    category: "Training",
-    question: "Do you provide training for employees?",
-    answer: "Yes. We provide complete employee and admin training on how to use the application effectively and avoid errors. We also offer videos, tutorials, and continuous support."
+    category: "Clients",
+    question: "How does Make My Vid cater to both MSMEs and large corporations?",
+    answer: "At Make My Vid, we adopt a flexible and scalable approach. For MSMEs and startups, we provide cost-effective solutions focusing on high-impact storytelling, such as Wol3D's Shark Tank pitch. For large corporations like BPCL, CIPLA, and Aditya Birla Capital, we manage complex, multi-location shoots, multi-camera live telecasts, and enterprise-grade video assets."
   },
   {
-    category: "Support",
-    question: "What type of support do you provide after onboarding?",
-    answer: "You receive a dedicated support team to help with queries, troubleshooting, and updates via call, WhatsApp, and email."
+    category: "Industries",
+    question: "What industries does Make My Vid specialize in?",
+    answer: "Our expertise spans Corporate and Financial Services (Aditya Birla Capital, Motilal Oswal), Healthcare and Pharmaceuticals (CIPLA), Energy and Infrastructure (BPCL), Smart Home & Tech (Baybot, Wol3D), E-commerce and Retail (Campure, Mangalam Brands), and Education (That Fig Tree, SignBee Academy)."
   },
   {
-    category: "Pricing",
-    question: "What is the pricing structure of HubSched?",
-    answer: "Hubsched provides a set of well-defined Standard Subscription Plans designed to meet the core operational needs of modern organizations. Standard plan pricing begins at ₹70 per employee per month. For enterprises with specialized or advanced deployment needs, Hubsched also offers a custom pricing model, available upon consultation."
+    category: "Uniqueness",
+    question: "What makes Make My Vid unique compared to other video production agencies?",
+    answer: "Our uniqueness lies in our customized end-to-end expertise, emotional storytelling, diverse industry track record, cutting-edge cinema equipment, and seamless remote editing collaboration for global clients across the USA, UK, Singapore, and Canada."
   },
   {
-    category: "Modules",
-    question: "Is there any minimum module requirement?",
-    answer: "No. You can start with only the modules you need and add more anytime as your business grows."
+    category: "Quality",
+    question: "How does Make My Vid ensure high-quality video production across different industries?",
+    answer: "We employ industry-specific research, an experienced creative team of cinematographers and motion designers, professional Sony cinema cameras, gimbals, drones, and rigorous quality assurance reviews on Frame.io before final delivery."
   },
   {
-    category: "Hardware",
-    question: "What hardware is required for attendance tracking?",
-    answer: "Hardware depends on the attendance method: GPS/Geofencing requires no hardware, QR Code requires only a mobile phone, and biometric systems require specific hardware. Our team will guide you based on your setup."
+    category: "Scale",
+    question: "Can Make My Vid handle both large-scale projects and smaller campaigns?",
+    answer: "Yes, our adaptable workflow allows us to scale up for nationwide multi-city event documentation at major conventions like India Energy Week, or scale down for agile social media reels, product demos, and quick-turnaround pitch decks."
   },
   {
-    category: "Meeting Rooms",
-    question: "How does QR-Based Meeting Room Management work?",
-    answer: "Users can check meeting room availability and book a room directly through the HubSched app by selecting the desired date, time, and guests. After booking, invited attendees can scan the QR code placed at the meeting room door to verify the booking and enter. The system uses encrypted QR codes, user authentication, and access controls for security."
+    category: "Process",
+    question: "What is the end-to-end process for creating a video with Make My Vid?",
+    answer: "We follow a 6-stage workflow: 1) Initial Consultation & Creative Brief, 2) Concept Development & Scripting, 3) Pre-Production & Logistics, 4) Production with 4K gear, 5) Post-Production (color grading, sound design, motion graphics), and 6) Client Review & Platform Distribution."
   },
   {
-    category: "Meeting Rooms",
-    question: "How many employees and meeting rooms can HubSched manage?",
-    answer: "HubSched can efficiently manage unlimited employees and meeting rooms. The platform is designed for seamless scalability."
+    category: "Collaboration",
+    question: "How does Make My Vid collaborate with clients during the production process?",
+    answer: "We prioritize transparent planning with detailed schedules and storyboards, assign a dedicated project manager, hold virtual syncs on Zoom/Google Meet, and use Frame.io for real-time draft reviews and timestamped feedback."
+  },
+  {
+    category: "Tools & Gear",
+    question: "What equipment and software are used for video production and editing?",
+    answer: "We utilize Sony A7S III cinema cameras, high-definition prime lenses, gimbals, 4K drones, wireless lavalier microphones, and industry-standard post-production software including Adobe Premiere Pro, After Effects, DaVinci Resolve, and Adobe Audition."
+  },
+  {
+    category: "Remote Editing",
+    question: "Does Make My Vid offer remote editing services for international clients?",
+    answer: "Yes, we provide comprehensive remote editing for clients across the USA, UK, Canada, and Singapore. We leverage secure cloud storage (Google Drive, Dropbox, Frame.io) and accommodate different time zones to guarantee fast, seamless turnarounds."
   },
   {
     category: "Platforms",
-    question: "On which platforms does HubSched work?",
-    answer: "HubSched is available on Android, iOS, and Web dashboard, providing seamless access across all your devices."
+    question: "How does Make My Vid create customized videos for different platforms?",
+    answer: "We craft platform-native formats: vertical 9:16 reels for Instagram and TikTok, concise feature-highlight videos optimized for Amazon e-commerce, and high-bitrate 16:9 cinematic productions for YouTube, LinkedIn, and corporate presentations."
   },
   {
-    category: "Logs",
-    question: "Does HubSched provide an activity log?",
-    answer: "Yes. The system maintains a comprehensive activity log for tracking user actions and system events, ensuring full transparency and accountability."
+    category: "Motion Graphics",
+    question: "How does Make My Vid ensure seamless integration of motion graphics?",
+    answer: "We integrate custom kinetic typography, 2D/3D motion graphics, brand identity logos, and lower thirds into live footage using Adobe After Effects and Cinema 4D, strictly respecting client branding guidelines."
   },
   {
-    category: "Customization",
-    question: "Is customization available for specific organizational needs?",
-    answer: "Yes. HubSched offers customization options based on your workflow and operational requirements to perfectly fit your organization's needs."
+    category: "Drones & Tech",
+    question: "Does Make My Vid offer advanced technologies like drone filming and timelapse?",
+    answer: "Yes, our certified operators capture breathtaking 4K aerial drone footage, multi-day dynamic timelapse photography, high-speed slow-motion, and multi-camera live telecasts for large-scale expos and architectural projects."
   },
   {
-    category: "Support",
-    question: "Does HubSched offer on-site technical support?",
-    answer: "Yes. We offer dedicated on-site technical support when required to ensure smooth operations."
+    category: "Scripting",
+    question: "Does Make My Vid assist with scriptwriting and voiceovers?",
+    answer: "Absolutely. Our expert creative team writes engaging scripts tailored to your target demographic and coordinates professional voiceover artists across multiple languages, accents, and tones for commercials and explainer videos."
   },
   {
-    category: "Security",
-    question: "How secure is company data on HubSched?",
-    answer: "Data security is our top priority. HubSched ensures end-to-end encryption, secure cloud storage, access controls, and regular security audits. Your data remains fully protected at every stage."
+    category: "Turnaround",
+    question: "What is the typical turnaround time for a video project?",
+    answer: "Turnaround depends on scope: social media reels and remote edits are typically delivered in 2 to 4 days, while full-scale corporate AVs, event documentaries, or multi-city campaigns usually take 2 to 3 weeks."
   },
   {
-    category: "Security",
-    question: "How secure are digital passes in HubSched?",
-    answer: "Digital passes use a robust security protocol. Attendee photos, mobile numbers, and QR access codes are securely sent via SMS and email, ensuring confidential and tamper-proof access."
+    category: "Revisions",
+    question: "How does Make My Vid handle revisions and client feedback?",
+    answer: "We include structured revision rounds in all agreements. Using Frame.io, clients can leave frame-by-frame visual comments directly on the video player, ensuring adjustments are implemented quickly and accurately."
   },
   {
-    category: "Integration",
-    question: "How does IoT integration improve HubSched's functionality?",
-    answer: "HubSched uses IoT-enabled hardware to automate office systems such as access control, meeting room equipment, and device operations, providing secure and efficient automation."
+    category: "Coverage",
+    question: "Which cities in India does Make My Vid cover for on-ground shoots?",
+    answer: "We have active production crews and gear setups across Mumbai, Delhi NCR, Bangalore, Hyderabad, Pune, Chennai, Kolkata, Ahmedabad, and can deploy anywhere across India with minimal notice."
   },
   {
-    category: "Domains",
-    question: "Is a domain email ID mandatory to use HubSched?",
-    answer: "Yes. A domain-based email ID is required for secure organizational access and verification."
-  },
-  {
-    category: "Onboarding",
-    question: "How long does employee onboarding take?",
-    answer: "Basic onboarding can be completed in 1–3 days, depending on the number of employees and modules selected."
-  },
-  {
-    category: "Servers",
-    question: "Is HubSched cloud-based? Do we need servers?",
-    answer: "HubSched is 100% cloud-based and requires no additional servers unless biometric hardware is used. This ensures easy deployment and maintenance."
+    category: "Get Started",
+    question: "How do I get a quote or get started with Make My Vid?",
+    answer: "You can click 'Get Quote' on our website or visit rohanjoshi.in/support to submit your project requirements. Our team will review your brief and schedule an initial discovery call within 24 hours."
   }
 ];
 
@@ -231,7 +231,7 @@ export const Faq = () => {
                   <div className="faq-top">
                     <h2 className="heading-style-h2 is--larger text-shadow-glow">QUESTIONS?</h2>
                     <p className="text-size-regular text-color-secondary mt-4 leading-relaxed">
-                      Here are some answers to frequently asked questions about my design process, services, and areas of expertise.
+                      Here are answers to frequently asked questions about Make My Vid's video production process, remote editing workflows, and technical capabilities.
                     </p>
                   </div>
 

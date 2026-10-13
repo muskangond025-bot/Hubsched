@@ -5,55 +5,55 @@ import { gsap, ScrollTrigger } from '@/lib/gsap';
 const projects = [
   {
     id: "01",
-    name: "ESSENTIAL PLAN",
-    tag1: "FaceID + SmartPayroll",
-    tag2: "Only Web",
-    tag3: "₹70/employee/month",
+    name: "BPCL INDIA ENERGY",
+    tag1: "Energy & Infrastructure",
+    tag2: "Event Doc & Interviews",
+    tag3: "Multi-City Expo",
     color: "#1b4fd8",
     textColor: "text-white",
     borderColor: "white",
-    description: "Ideal for small teams needing core office attendance tracking and payroll automation. Includes AI face recognition on web console, overtime calculation, PF/ESI/PT statutory processing, and automated digital payslip generation.",
+    description: "Comprehensive event coverage, cinematic timelapses, and delegate interviews for Bharat Petroleum Corporation Limited at India Energy Week, highlighting global industry participation and technological innovations.",
     video: "",
-    image: "https://hubsched.com/static/image/AI%20Face%20attendance.webp"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737959797_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(3)%20(1).png"
   },
   {
     id: "02",
-    name: "PROFESSIONAL PLAN",
-    tag1: "FaceID + SmartPayroll + App",
-    tag2: "Web • Android • iOS",
-    tag3: "₹120/employee/month",
+    name: "WOL3D SHARK TANK",
+    tag1: "3D Printing & Tech",
+    tag2: "Shark Tank Pitch Video",
+    tag3: "National Broadcast",
     color: "#1b4fd8",
     textColor: "text-white",
     borderColor: "white",
-    description: "Our most popular plan. Empowers employees with Android & iOS apps, featuring a self-service portal, offline attendance sync, geofencing, leave applications, expense claims, task management, and tickets/grievance desk.",
+    description: "Created the viral pitch video and product showcase for Wol3D on Shark Tank India, driving national acclaim, investor funding, and widespread brand recognition.",
     video: "",
-    image: "https://hubsched.com/static/image/selfservice.webp"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958403_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(1)%20(1).png"
   },
   {
     id: "03",
-    name: "ENTERPRISE PLAN",
-    tag1: "FaceID + SmartPayroll + App + Tracking",
-    tag2: "Web • Android • iOS",
-    tag3: "₹250/employee/month",
+    name: "ADITYA BIRLA",
+    tag1: "Corporate & Finance",
+    tag2: "Leadership & Internal AV",
+    tag3: "Executive Communications",
     color: "#1b4fd8",
     textColor: "text-white",
     borderColor: "white",
-    description: "Complete tracking and analytics package for teams with field operations. Adds real-time GPS location tracking, geo-fencing alerts, advanced admin control reporting, and document manager with PDF/Excel exports.",
+    description: "Crafted corporate culture films, employee engagement initiatives, and high-stakes leadership interview series enhancing corporate communication and internal alignment.",
     video: "",
-    image: "https://hubsched.com/static/image/realtimegpstracking.webp"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737960123_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(4)%20(1).png"
   },
   {
     id: "04",
-    name: "CUSTOM DEPLOYMENT",
-    tag1: "Custom Integrations",
-    tag2: "Web • Android • iOS • Hardware",
-    tag3: "Tailored Quote",
+    name: "CIPLA HEALTHCARE",
+    tag1: "Healthcare & CSR",
+    tag2: "Culture & Onboarding",
+    tag3: "Pan-India Documentation",
     color: "#1b4fd8",
     textColor: "text-white",
     borderColor: "white",
-    description: "Built for large enterprises requiring bespoke HRMS integrations, connection with existing physical biometric scanners, custom module additions, API access, and a dedicated customer success support manager.",
+    description: "Produced educational healthcare content, onboarding films, and corporate culture videos for Cipla, highlighting their social impact, manufacturing excellence, and healthcare contributions.",
     video: "",
-    image: "https://hubsched.com/static/image/web%20Dashboard.webp"
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958320_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(2)%20(1).png"
   }
 ];
 
@@ -99,7 +99,7 @@ export const Projects = () => {
   // Mobile layout
   if (isMobile) {
     return (
-      <div id="pricing" className="section-projects-mobile w-full bg-background py-16">
+      <div id="projects" className="section-projects-mobile w-full bg-background py-16">
         <div className="padding-global">
           <div className="container-large">
             <div className="projects-mobile-wrap">
@@ -150,7 +150,7 @@ export const Projects = () => {
 
   // Desktop sticky split scroll
   return (
-    <div ref={containerRef} className="section-projects-wrap w-full relative">
+    <div ref={containerRef} id="projects" className="section-projects-wrap w-full relative">
       <section id="pricing" className="anchor-projects" />
       <section className="section-projects w-full h-full relative">
         <div className="projects-sticky">
@@ -194,7 +194,7 @@ export const Projects = () => {
                         {projects.map((project, i) => (
                           <div key={i} className={`projects-btn-item ${activeIndex === i ? 'is-active' : ''}`}>
                             <a
-                              href="/contact"
+                              href="https://rohanjoshi.in/all-projects"
                               className="btn-main w-variant-3f868a72-10ee-c7cf-16c8-83bb44488a8a w-inline-block"
                               style={{
                                 color: project.textColor === 'text-white' ? 'white' : 'black',
@@ -202,7 +202,7 @@ export const Projects = () => {
                               }}
                             >
                               <div className="btn-frame w-variant-3f868a72-10ee-c7cf-16c8-83bb44488a8a">
-                                <div className="btn-text w-variant-3f868a72-10ee-c7cf-16c8-83bb44488a8a">GET STARTED</div>
+                                <div className="btn-text w-variant-3f868a72-10ee-c7cf-16c8-83bb44488a8a">VIEW CASE STUDY</div>
                               </div>
                               <div className="btn-icon-wrap w-variant-3f868a72-10ee-c7cf-16c8-83bb44488a8a">
                                 <div className="btn-icon w-variant-3f868a72-10ee-c7cf-16c8-83bb44488a8a w-embed">

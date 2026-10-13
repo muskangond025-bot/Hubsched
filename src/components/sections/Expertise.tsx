@@ -165,7 +165,7 @@ export const Expertise = () => {
   };
 
   return (
-    <div ref={containerRef} className="w-full">
+    <div ref={containerRef} id="expertise" className="w-full">
       {/* 1. CHECKERBOARD MARQUEE (Ticker) */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -206,12 +206,12 @@ export const Expertise = () => {
 
                         {/* Heading 1: EXPERTISE */}
                         <h2 ref={title1Ref} className="sticky-title-el is--title font-humane text-white text-[14vw] uppercase leading-[0.8] tracking-widest font-bold select-none">
-                          {splitWordsAndChars("CORE SUITE")}
+                          {splitWordsAndChars("SERVICES")}
                         </h2>
 
                         {/* Heading 2: Description */}
                         <h2 ref={title2Ref} className="sticky-title-el is--stacked font-sans text-center text-[2.5rem] leading-[1.2] font-semibold text-white max-w-[900px] select-none uppercase">
-                          {splitWordsAndChars("Automated Attendance, Smart Payroll, and Workspace Management")}
+                          {splitWordsAndChars("Multi-City Video Production, Remote Editing, and Corporate AV Solutions")}
                         </h2>
 
                       </div>
@@ -223,21 +223,21 @@ export const Expertise = () => {
                     <div className="pin-height">
                       <div className="expertise-container">
 
-                        {/* CARD 1: FACE ID+ */}
+                        {/* CARD 1: MULTI CITY PRODUCTION */}
                         <div className="expertise-card">
                           <div className="media">
                             <div className="expertise-front is--1">
                               <div className="card-inner-top">
                                 <div className="eyebrow-main">
-                                  <div className="eyebrow-text">AI BIOMETRICS</div>
+                                  <div className="eyebrow-text">PAN-INDIA SHOOTS</div>
                                 </div>
-                                <div className="text-size-large text-weight-medium is--title">FACE ID+</div>
+                                <div className="text-size-large text-weight-medium is--title">MULTI CITY PRODUCTION</div>
                                 <p className="text-size-tiny text-color-secondary text-align-center">
-                                  Clock in instantly with secure facial recognition on web and mobile, syncing data in hybrid network zones.
+                                  Comprehensive video shoots across 8+ major Indian cities including Mumbai, Delhi & Bangalore with cinema-grade 4K equipment and full crews.
                                 </p>
                               </div>
                               <div className="button-group is--card">
-                                <a href="#projects" className="btn-main w-inline-block">
+                                <a href="https://rohanjoshi.in/service" className="btn-main w-inline-block">
                                   <div className="btn-frame">
                                     <div className="btn-text">VIEW</div>
                                   </div>
@@ -251,27 +251,27 @@ export const Expertise = () => {
                                 </a>
                               </div>
                               <div className="expertise-image-wrapper !flex !justify-center !items-end w-full h-[55%] relative overflow-hidden mt-auto">
-                                <img src="https://hubsched.com/static/image/AI%20Face%20attendance.webp" loading="eager" alt="AI Face attendance console screen" className="h-full object-contain rounded-t-2xl" />
+                                <img src="https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958320_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(2)%20(1).png" loading="eager" alt="Multi City Video Production" className="h-full object-contain rounded-t-2xl" />
                               </div>
                             </div>
                           </div>
                         </div>
 
-                        {/* CARD 2: SMART PAYROLL */}
+                        {/* CARD 2: REMOTE EDITING */}
                         <div className="expertise-card">
                           <div className="media">
                             <div className="expertise-front is--2">
                               <div className="card-inner-top">
                                 <div className="eyebrow-main">
-                                  <div className="eyebrow-text">COMPLIANCE AUTOMATION</div>
+                                  <div className="eyebrow-text">GLOBAL POST-PRODUCTION</div>
                                 </div>
-                                <div className="text-size-large text-weight-medium is--title">SMART PAYROLL</div>
+                                <div className="text-size-large text-weight-medium is--title">REMOTE EDITING WORK</div>
                                 <p className="text-size-tiny text-color-secondary text-align-center">
-                                  Calculate overtime, process statutory PF/ESI/PT deductions, and generate digital payslips automatically.
+                                  Outsource your video editing to our expert team. High-quality editing, motion graphics, audio cleanup, and rapid turnaround for global clients.
                                 </p>
                               </div>
                               <div className="button-group is--card">
-                                <a href="#projects" className="btn-main w-inline-block">
+                                <a href="https://rohanjoshi.in/service" className="btn-main w-inline-block">
                                   <div className="btn-frame">
                                     <div className="btn-text">VIEW</div>
                                   </div>
@@ -285,27 +285,27 @@ export const Expertise = () => {
                                 </a>
                               </div>
                               <div className="expertise-image-wrapper !flex !justify-center !items-end w-full h-[55%] relative overflow-hidden mt-auto">
-                                <img src="https://hubsched.com/static/image/payroll.webp" loading="eager" alt="Payroll Automation web screen" className="h-full object-contain rounded-t-2xl" />
+                                <img src="https://storage.googleapis.com/mkv_imagesbackend/service_images/1737960176_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(5).png" loading="eager" alt="Remote Editing Work" className="h-full object-contain rounded-t-2xl" />
                               </div>
                             </div>
                           </div>
                         </div>
 
-                        {/* CARD 3: WORKSPACE BOOKINGS */}
+                        {/* CARD 3: CORPORATE AV */}
                         <div className="expertise-card">
                           <div className="media">
                             <div className="expertise-front is--3">
                               <div className="card-inner-top">
                                 <div className="eyebrow-main">
-                                  <div className="eyebrow-text">MEET HUB & VISITORS</div>
+                                  <div className="eyebrow-text">BRAND STORYTELLING</div>
                                 </div>
-                                <div className="text-size-large text-weight-medium is--title">WORKSPACE BOOKINGS</div>
+                                <div className="text-size-large text-weight-medium is--title">CORPORATE AV & ADS</div>
                                 <p className="text-size-tiny text-color-secondary text-align-center">
-                                  Manage digital visitor logs, notify hosts in real-time, and reserve rooms or desks using IoT sensors.
+                                  Showcase your brand's vision, leadership, and products through stunning visuals, documentary storytelling, and Shark Tank pitch films.
                                 </p>
                               </div>
                               <div className="button-group is--card">
-                                <a href="#projects" className="btn-main w-inline-block">
+                                <a href="https://rohanjoshi.in/service" className="btn-main w-inline-block">
                                   <div className="btn-frame">
                                     <div className="btn-text">VIEW</div>
                                   </div>
@@ -319,7 +319,7 @@ export const Expertise = () => {
                                 </a>
                               </div>
                               <div className="expertise-image-wrapper !flex !justify-center !items-end w-full h-[55%] relative overflow-hidden mt-auto">
-                                <img src="https://hubsched.com/static/image/finalpagevister.webp" loading="eager" alt="Workspace MeetHub screen" className="h-full object-contain rounded-t-2xl" />
+                                <img src="https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958403_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(1)%20(1).png" loading="eager" alt="Corporate AV" className="h-full object-contain rounded-t-2xl" />
                               </div>
                             </div>
                           </div>
@@ -333,21 +333,21 @@ export const Expertise = () => {
                   <div className="expertise-cards-mobile">
                     <div className="expertise-container-mobile">
 
-                      {/* CARD 1: FACE ID+ */}
+                      {/* CARD 1: MULTI CITY PRODUCTION */}
                       <div className="expertise-card">
                         <div className="media">
                           <div className="expertise-front is--1">
                             <div className="card-inner-top">
                               <div className="eyebrow-main">
-                                <div className="eyebrow-text">AI BIOMETRICS</div>
+                                <div className="eyebrow-text">PAN-INDIA SHOOTS</div>
                               </div>
-                              <div className="text-size-large text-weight-medium is--title">FACE ID+</div>
+                              <div className="text-size-large text-weight-medium is--title">MULTI CITY PRODUCTION</div>
                               <p className="text-size-tiny text-color-secondary text-align-center">
-                                Clock in instantly with secure facial recognition on web and mobile, syncing data in hybrid network zones.
+                                Comprehensive video shoots across 8+ major Indian cities including Mumbai, Delhi & Bangalore with cinema-grade 4K equipment and full crews.
                               </p>
                             </div>
                             <div className="button-group is--card">
-                              <a href="#projects" className="btn-main w-inline-block">
+                              <a href="https://rohanjoshi.in/service" className="btn-main w-inline-block">
                                 <div className="btn-frame">
                                   <div className="btn-text">VIEW</div>
                                 </div>
@@ -361,27 +361,27 @@ export const Expertise = () => {
                               </a>
                             </div>
                             <div className="expertise-image-wrapper !flex !justify-center !items-end w-full h-[55%] relative overflow-hidden mt-auto">
-                              <img src="https://hubsched.com/static/image/AI%20Face%20attendance.webp" loading="eager" alt="AI Face attendance console screen" className="h-full object-contain rounded-t-2xl" />
+                              <img src="https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958320_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(2)%20(1).png" loading="eager" alt="Multi City Video Production" className="h-full object-contain rounded-t-2xl" />
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      {/* CARD 2: SMART PAYROLL */}
+                      {/* CARD 2: REMOTE EDITING */}
                       <div className="expertise-card">
                         <div className="media">
                           <div className="expertise-front is--2">
                             <div className="card-inner-top">
                               <div className="eyebrow-main">
-                                <div className="eyebrow-text">COMPLIANCE AUTOMATION</div>
+                                <div className="eyebrow-text">GLOBAL POST-PRODUCTION</div>
                               </div>
-                              <div className="text-size-large text-weight-medium is--title">SMART PAYROLL</div>
+                              <div className="text-size-large text-weight-medium is--title">REMOTE EDITING WORK</div>
                               <p className="text-size-tiny text-color-secondary text-align-center">
-                                Calculate overtime, process statutory PF/ESI/PT deductions, and generate digital payslips automatically.
+                                Outsource your video editing to our expert team. High-quality editing, motion graphics, audio cleanup, and rapid turnaround for global clients.
                               </p>
                             </div>
                             <div className="button-group is--card">
-                              <a href="#projects" className="btn-main w-inline-block">
+                              <a href="https://rohanjoshi.in/service" className="btn-main w-inline-block">
                                 <div className="btn-frame">
                                   <div className="btn-text">VIEW</div>
                                 </div>
@@ -395,27 +395,27 @@ export const Expertise = () => {
                               </a>
                             </div>
                             <div className="expertise-image-wrapper !flex !justify-center !items-end w-full h-[55%] relative overflow-hidden mt-auto">
-                              <img src="https://hubsched.com/static/image/payroll.webp" loading="eager" alt="Payroll Automation web screen" className="h-full object-contain rounded-t-2xl" />
+                              <img src="https://storage.googleapis.com/mkv_imagesbackend/service_images/1737960176_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(5).png" loading="eager" alt="Remote Editing Work" className="h-full object-contain rounded-t-2xl" />
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      {/* CARD 3: WORKSPACE BOOKINGS */}
+                      {/* CARD 3: CORPORATE AV */}
                       <div className="expertise-card">
                         <div className="media">
                           <div className="expertise-front is--3">
                             <div className="card-inner-top">
                               <div className="eyebrow-main">
-                                <div className="eyebrow-text">MEET HUB & VISITORS</div>
+                                <div className="eyebrow-text">BRAND STORYTELLING</div>
                               </div>
-                              <div className="text-size-large text-weight-medium is--title">WORKSPACE BOOKINGS</div>
+                              <div className="text-size-large text-weight-medium is--title">CORPORATE AV & ADS</div>
                               <p className="text-size-tiny text-color-secondary text-align-center">
-                                Manage digital visitor logs, notify hosts in real-time, and reserve rooms or desks using IoT sensors.
+                                Showcase your brand's vision, leadership, and products through stunning visuals, documentary storytelling, and Shark Tank pitch films.
                               </p>
                             </div>
                             <div className="button-group is--card">
-                              <a href="#projects" className="btn-main w-inline-block">
+                              <a href="https://rohanjoshi.in/service" className="btn-main w-inline-block">
                                 <div className="btn-frame">
                                   <div className="btn-text">VIEW</div>
                                 </div>
@@ -429,7 +429,7 @@ export const Expertise = () => {
                               </a>
                             </div>
                             <div className="expertise-image-wrapper !flex !justify-center !items-end w-full h-[55%] relative overflow-hidden mt-auto">
-                              <img src="https://hubsched.com/static/image/finalpagevister.webp" loading="eager" alt="Workspace MeetHub screen" className="h-full object-contain rounded-t-2xl" />
+                              <img src="https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958403_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(1)%20(1).png" loading="eager" alt="Corporate AV" className="h-full object-contain rounded-t-2xl" />
                             </div>
                           </div>
                         </div>

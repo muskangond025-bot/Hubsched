@@ -4,49 +4,40 @@ import { gsap, ScrollTrigger } from '@/lib/gsap';
 
 const testimonials = [
   {
-    name: "Davor Egyed",
-    role: "Operations Director",
-    company: "Derokki",
-    quote: "HubSched AI Face Attendance has made our onsite attendance tracking an absolute breeze.",
-    subQuote: "We integrated HubSched FaceID across our remote facilities. Our teams clock in securely in milliseconds, removing buddy punching and manual log entry. It has completely transformed our operations.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=120&h=120&q=80",
-    photo: "https://hubsched.com/static/image/AI%20Face%20attendance.webp"
+    name: "Sanam Arora",
+    role: "Founder",
+    company: "NISAU UK",
+    quote: "We could not have asked for a better videography and photography team.",
+    subQuote: "We've done a phenomenal tour across eight cities in India. And I could not have asked for a better videography and photography team than Make My Vid. I'm going to keep reusing their services not just in India but also for our high-profile events in UK as well.",
+    avatar: "https://storage.googleapis.com/mkv_imagesbackend/logos/675ed813bd21e_logo50.jpg",
+    photo: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737960123_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(4)%20(1).png"
   },
   {
-    name: "Olha Shcherbashyna",
-    role: "HR Lead",
-    company: "co+lab Branding",
-    quote: "A rare blend of simplicity and advanced utility, HubSched payroll sync has elevated our HR workflows.",
-    subQuote: "Our monthly payroll calculation processing time dropped from days to minutes. Having automated calculations for overtime, PF, and statutory payouts integrated with attendance is a game-changer.",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=120&h=120&q=80",
-    photo: "https://hubsched.com/static/image/meeting%20room%20ios%20management.webp"
+    name: "Akshay Dujodwala",
+    role: "Founder",
+    company: "Mangalam Brands & Campure",
+    quote: "We're still using those videos four years later because they were so good and crisp.",
+    subQuote: "I've known Rohan since 2021 and have worked with him on a number of projects together. Rohan made for us our Amazon product videos. We're still using those videos four years later because they were so good and crisp.",
+    avatar: "https://storage.googleapis.com/mkv_imagesbackend/logos/675e8afca1dfc_logo29.jpg",
+    photo: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958403_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(1)%20(1).png"
   },
   {
-    name: "Ugo Udezue",
-    role: "CEO & Co-Founder",
-    company: "AFA Sports",
-    quote: "HubSched's live GPS field tracking has redefined our sales operations and team productivity.",
-    subQuote: "Managing field operations and client visits used to be a major logistical challenge. Now, our field sales reps submit client updates and location check-ins instantly, boosting transparency.",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=120&h=120&q=80",
-    photo: "https://hubsched.com/static/image/employee%20tracking%20new%20image.webp"
+    name: "Siddharta",
+    role: "Founder",
+    company: "Pipal Tree",
+    quote: "All these short films have been made with great sensitivity, shown all over the world.",
+    subQuote: "He's been a person who has made some wonderful videos for us, mainly on sustainable development. All these short films have been made with great sensitivity. And we show it to people all over the world.",
+    avatar: "https://storage.googleapis.com/mkv_imagesbackend/logos/675e8c40d1cbb_logo36.jpg",
+    photo: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737959876_13.png"
   },
   {
-    name: "Elizabeth Jack-Rich",
-    role: "Founder / CEO",
-    company: "EJRAID",
-    quote: "Automated visitor logs and IOT meeting desk setups have made our corporate offices secure.",
-    subQuote: "Visitor logs are completely digital, host alerts are instant, and IOT room bookings have ended room double-bookings. Truly a comprehensive workspace management solution.",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?fit=crop&w=120&h=120&q=80",
-    photo: "https://hubsched.com/static/image/finalpagevister.webp"
-  },
-  {
-    name: "Oliver Clapp",
-    role: "Senior Director",
-    company: "Itineris",
-    quote: "The unified web dashboard gives us real-time data, role-based controls, and complete operational transparency.",
-    subQuote: "Managing multiple offices and departments is simple with HubSched. The analytics dashboard compiles reports instantly, giving our leadership team complete oversight on resource allocation.",
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?fit=crop&w=120&h=120&q=80",
-    photo: "https://hubsched.com/static/image/web%20Dashboard.webp"
+    name: "Amanda Martin",
+    role: "Founder",
+    company: "SignBee Academy, USA",
+    quote: "Never been so impressed with an editor's work as much as I am with Make My Vid.",
+    subQuote: "I have never been so impressed with an editor's work as much as I am with Make My Vid team. They are thorough, reliable, and consistent with all of the work that they complete.",
+    avatar: "https://storage.googleapis.com/mkv_imagesbackend/logos/675ed8566fc19_logo53.jpg",
+    photo: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737960176_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(5).png"
   }
 ];
 
@@ -209,7 +200,7 @@ export const Testimonials = () => {
 
   if (isMobile) {
     return (
-      <section className="section-testimonials-mobile w-full bg-background py-16">
+      <section id="testimonials" className="section-testimonials-mobile w-full bg-background py-16">
         <div className="padding-global">
           <div className="container-large">
             <div className="testimonials-inner">
@@ -223,7 +214,7 @@ export const Testimonials = () => {
                     <path d="M14.4917 20.6294L14.4917 32.1973L20.1414 32.1973L20.1414 22.9341L23.9814 19.5214L32.5 19.5214L32.5 14.0255L21.0683 14.0255L14.4917 20.6294Z" fill="currentColor"/>
                   </svg>
                 </div>
-                <div className="text-size-regular text-color-secondary text-weight-medium">SAY ABOUT HUBSCHED</div>
+                <div className="text-size-regular text-color-secondary text-weight-medium">SAY ABOUT MAKE MY VID</div>
               </div>
 
               {/* Slider View */}
@@ -286,7 +277,7 @@ export const Testimonials = () => {
 
   // Desktop Slider Split layout
   return (
-    <div ref={testimonialsRef} className="section-testimonials-wrap w-full relative">
+    <div ref={testimonialsRef} id="testimonials" className="section-testimonials-wrap w-full relative">
       <section className="section-testimonials w-full relative">
         <div className="padding-global align-center">
           <div className="container-large align-center">
@@ -301,7 +292,7 @@ export const Testimonials = () => {
                     <path d="M14.4917 20.6294L14.4917 32.1973L20.1414 32.1973L20.1414 22.9341L23.9814 19.5214L32.5 19.5214L32.5 14.0255L21.0683 14.0255L14.4917 20.6294Z" fill="currentColor"/>
                   </svg>
                 </div>
-                <div className="text-size-regular text-color-white text-weight-medium">SAY ABOUT HUBSCHED</div>
+                <div className="text-size-regular text-color-white text-weight-medium">SAY ABOUT MAKE MY VID</div>
               </div>
 
               {/* Main Testimonials Slider Frame */}

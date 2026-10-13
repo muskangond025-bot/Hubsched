@@ -1,309 +1,132 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { gsap } from '@/lib/gsap';
+import React, { useState, useEffect } from 'react';
 import { ThemeToggle } from './ThemeToggle';
 import { useTheme } from 'next-themes';
+import { ArrowUpRight } from 'lucide-react';
 
 export const Header = () => {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const isDark = mounted ? resolvedTheme === 'dark' : false;
 
-  const [isOpen, setIsOpen] = useState(false);
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const menuCardRef = useRef<HTMLDivElement>(null);
-  const navLinksRef = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    if (isOpen) {
-      // 1. Show backdrop blur overlay
-      gsap.to(overlayRef.current, { display: 'block', duration: 0 });
-      gsap.fromTo(overlayRef.current, 
-        { opacity: 0 }, 
-        { opacity: 1, duration: 0.4, ease: "power2.out" }
-      );
-      
-      // 2. Slide yellow menu card in from left
-      gsap.fromTo(menuCardRef.current,
-        { xPercent: -120 },
-        { xPercent: 0, duration: 0.8, ease: "power4.out" }
-      );
-
-      // 3. Stagger reveal links inside card
-      gsap.fromTo(navLinksRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, delay: 0.15, ease: "power3.out" }
-      );
-    } else {
-      // 1. Slide yellow menu card out to left
-      gsap.to(menuCardRef.current, {
-        xPercent: -120,
-        duration: 0.6,
-        ease: "power4.in",
-        onComplete: () => {
-          gsap.set(overlayRef.current, { display: 'none' });
-        }
-      });
-
-      // 2. Fade out overlay background
-      gsap.to(overlayRef.current, {
-        opacity: 0,
-        duration: 0.4,
-        ease: "power2.in"
-      });
-    }
-  }, [isOpen]);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const navItems = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '#about' },
+    { name: 'Join Us', href: 'https://rohanjoshi.in/join-us', target: '_blank' },
+    { name: 'Blogs', href: 'https://rohanjoshi.in/all-blogs', target: '_blank' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Services', href: '#expertise' },
+    { name: 'Supports', href: 'https://rohanjoshi.in/support', target: '_blank' },
+  ];
 
   return (
     <>
-      {/* 1. MAIN HEADER NAVIGATION BAR */}
-      <div className="navbar-wrap w-nav fixed top-0 left-0 w-full z-50 pointer-events-auto select-none">
-        <div className="navbar-main">
-          <div className="padding-global full-height align-center">
-            <div className="nav-inner">
-              
-              {/* Column 1: Menu and Designer Eyebrow */}
-              <div id="w-node-_93cc042f-0317-37ba-3357-5f26b01f47ee-b01f47ea" className="navbar-wrapper">
-                
-                {/* Menu / Close Button */}
-                <div 
-                  onClick={toggleMenu}
-                  className="menu-button cursor-pointer z-50 relative pointer-events-auto"
-                >
-                  <div className="menu-button-inner flex items-center gap-3">
-                    <div className="menu-button-text relative overflow-hidden h-[18px] w-[50px] select-none">
-                      <span 
-                        className={`menu-text block absolute transition-all duration-300 font-bold tracking-widest text-xs ${isOpen ? 'translate-y-[-150%] opacity-0' : 'translate-y-0 opacity-100'}`}
-                        style={{ color: isDark ? '#ffffff' : '#101010' }}
-                      >
-                        MENU
-                      </span>
-                      <span 
-                        className={`menu-text block absolute transition-all duration-300 font-bold tracking-widest text-xs ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[150%] opacity-0'}`}
-                        style={{ color: isDark ? '#ffffff' : '#101010' }}
-                      >
-                        CLOSE
-                      </span>
-                    </div>
-                    <div 
-                      className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-[#ffd600] border-[#ffd600] text-black rotate-90 scale-110' : ''}`}
-                      style={isOpen ? {} : {
-                        borderColor: isDark ? 'rgba(255, 255, 255, 0.25)' : 'rgba(16, 16, 16, 0.25)',
-                        color: isDark ? '#ffffff' : '#101010',
-                      }}
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        {isOpen ? (
-                          <>
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                          </>
-                        ) : (
-                          <>
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                          </>
-                        )}
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Lead Designer Eyebrow (Hidden when menu is open on small viewports) */}
-                <div className={`eyebrow-nav transition-opacity duration-300 ${isOpen ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'}`}>
-                  <div className="eyebrow-wrap is--border-white is--nav">
-                    <div className="circle-dot pulse bg-[#ffd600]"></div>
-                    <div className="pill-text is--nav">SMART HRMS</div>
-                    <a 
-                      href="https://hubsched.com" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="pill-text is--nav text-color-primary"
-                    >
-                      --&nbsp;&nbsp;HUBSCHED
-                    </a>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Column 2: Oval Logo (Removed) */}
-              <div 
-                id="w-node-f3b6ddde-b93b-0c60-ecc0-6b22502bacb1-b01f47ea" 
-                className={`logo-nav transition-opacity duration-300 ${isOpen ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'}`}
-              />
-
-              {/* Column 3: Contact button and Theme Toggle */}
-              <div 
-                id="w-node-_93cc042f-0317-37ba-3357-5f26b01f484a-b01f47ea" 
-                className="flex items-center justify-end gap-5 pointer-events-auto z-50"
-              >
-                {/* Theme Toggle */}
-                <div className={`transition-opacity duration-300 ${isOpen ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'}`}>
-                  <ThemeToggle />
-                </div>
-
-                {/* Contact Button */}
-                <div 
-                  className={`button-group is--nav transition-opacity duration-300 ${isOpen ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'}`}
-                >
-                  <a href="#contact" className="btn-main small w-inline-block">
-                    <div className="btn-icon-wrap">
-                      <div className="btn-icon">
-                        <svg width="41" height="37" viewBox="0 0 41 37" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ transform: 'rotate(180deg)' }}>
-                          <path d="M0.500008 21.7256L0.5 15.5L34.7563 17.229L16.5207 6.72555L16.5207 0.5L40.5 18.5269L16.5207 36.5L16.5207 30.5451L35.0306 19.9213L0.500008 21.7256Z" fill="currentColor"/>
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="btn-frame">
-                      <div className="btn-text">BOOK DEMO</div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. DYNAMIC YELLOW MENU OVERLAY REPLICA */}
-      <div 
-        ref={overlayRef}
-        className="fixed inset-0 z-40 hidden select-none bg-black/65 backdrop-blur-md transition-opacity duration-300"
+      {/* 1. ULTRA-PREMIUM, HIGH-VISIBILITY NAVBAR */}
+      <header
+        className={`fixed top-0 left-0 w-full z-50 pointer-events-auto select-none transition-all duration-300 backdrop-blur-2xl border-b ${
+          isScrolled
+            ? 'py-2.5 md:py-3 shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_16px_50px_rgba(0,0,0,0.8)]'
+            : 'py-3.5 md:py-4 shadow-[0_6px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_10px_35px_rgba(0,0,0,0.55)]'
+        }`}
+        style={{
+          backgroundColor: isDark 
+            ? (isScrolled ? 'rgba(7, 10, 20, 0.95)' : 'rgba(7, 10, 20, 0.88)') 
+            : (isScrolled ? 'rgba(255, 255, 255, 0.96)' : 'rgba(255, 255, 255, 0.92)'),
+          borderColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
+          color: isDark ? '#ffffff' : '#111827',
+        }}
       >
-        <div className="relative z-50 h-full flex items-center justify-start p-4 md:p-12">
-          
-          {/* Yellow Card Panel */}
-          <div 
-            ref={menuCardRef}
-            className="w-full max-w-[550px] h-[85vh] md:h-[90vh] rounded-[2.5rem] md:rounded-[3.5rem] bg-[#ffd600] text-black flex flex-col justify-between p-8 md:p-14 relative overflow-hidden shadow-2xl"
-          >
-            {/* Card corner markings (subtle decoration) */}
-            <div className="corners absolute inset-0 pointer-events-none">
-              <div className="frame-corner border-black opacity-10"></div>
-              <div className="frame-corner is--2 border-black opacity-10"></div>
-              <div className="frame-corner is--3 border-black opacity-10"></div>
-              <div className="frame-corner is--4 border-black opacity-10"></div>
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
+          <div className="flex items-center justify-between gap-4 md:gap-8">
+            
+            {/* COLUMN 1: BRAND LOGO */}
+            <div className="flex items-center flex-shrink-0">
+              <a 
+                href="/" 
+                className="flex items-center group transition-transform duration-300 hover:scale-105"
+                aria-label="Make My Vid Home"
+              >
+                <div className="relative flex items-center">
+                  <div className="absolute -inset-1 bg-red-600/25 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <img
+                    src="https://storage.googleapis.com/mkv_imagesbackend/navbar_logo/677e52686d8ba_navbarlogo.png"
+                    alt="Make My Vid Logo"
+                    className="h-8 sm:h-9 w-auto object-contain relative z-10"
+                  />
+                </div>
+              </a>
             </div>
 
-            {/* Top Spacer */}
-            <div />
-
-            {/* Menu Links columns */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 w-full relative z-10">
-              
-              {/* Column 1: QUICK LINKS */}
-              <div className="flex flex-col gap-4 items-start">
-                <span className="font-mono text-[11px] font-black tracking-[0.15em] text-black/40 uppercase mb-2">QUICK LINKS</span>
-                {[
-                  { label: 'Features', link: '#features' },
-                  { label: 'Integrations', link: '#experience' },
-                  { label: 'Pricing Plans', link: '#pricing' },
-                  { label: 'About Us', link: '#about' },
-                ].map((item, i) => (
-                  <div 
-                    key={item.label}
-                    ref={el => { if (el) navLinksRef.current[i] = el; }}
-                    className="transform translate-y-8 opacity-0"
-                  >
-                    <a 
-                      href={item.link}
-                      onClick={toggleMenu}
-                      className="font-bold text-xl md:text-2xl hover:translate-x-2 block transition-transform duration-300 select-none text-black hover:opacity-75"
-                    >
-                      {item.label}
-                    </a>
-                  </div>
-                ))}
-              </div>
-
-              {/* Column 2: PRODUCTS */}
-              <div className="flex flex-col gap-4 items-start">
-                <span className="font-mono text-[11px] font-black tracking-[0.15em] text-black/40 uppercase mb-2">PRODUCTS</span>
-                {[
-                  { label: 'FaceID+', link: '#experience' },
-                  { label: 'Smart Payroll', link: '#experience' },
-                  { label: 'GeoTrace', link: '#experience' },
-                  { label: 'MeetHub', link: '#experience' },
-                ].map((item, i) => (
-                  <div 
-                    key={item.label}
-                    ref={el => { if (el) navLinksRef.current[i + 4] = el; }}
-                    className="transform translate-y-8 opacity-0"
-                  >
-                    <a 
-                      href={item.link}
-                      onClick={toggleMenu}
-                      className="font-bold text-lg md:text-xl hover:translate-x-2 block transition-transform duration-300 select-none text-black hover:opacity-75"
-                    >
-                      {item.label}
-                    </a>
-                  </div>
-                ))}
-              </div>
-
-              {/* Column 3: COMPANY */}
-              <div className="flex flex-col gap-4 items-start">
-                <span className="font-mono text-[11px] font-black tracking-[0.15em] text-black/40 uppercase mb-2">COMPANY</span>
-                {[
-                  { label: 'About Us', link: '#about' },
-                  { label: 'Contact Us', link: '#contact' },
-                  { label: 'Pricing', link: '#pricing' },
-                  { label: 'Integrations', link: '#experience' },
-                ].map((item, i) => (
-                  <div 
-                    key={item.label}
-                    ref={el => { if (el) navLinksRef.current[i + 8] = el; }}
-                    className="transform translate-y-8 opacity-0"
-                  >
-                    <a 
-                      href={item.link}
-                      onClick={toggleMenu}
-                      className="font-bold text-xl md:text-2xl hover:translate-x-2 block transition-transform duration-300 select-none text-black hover:opacity-75"
-                    >
-                      {item.label}
-                    </a>
-                  </div>
-                ))}
-              </div>
-
-            </div>
-
-            {/* Bottom Social Handles */}
-            <div className="flex gap-4 md:gap-6 mt-8 relative z-10 flex-wrap">
-              {[
-                { name: 'WEBSITE', url: 'https://hubsched.com' },
-                { name: 'PLAY STORE', url: 'https://play.google.com/store/apps/details?id=com.nakshatratechnohub.hubsched&pli=1' },
-                { name: 'APP STORE', url: 'https://apps.apple.com/in/app/hubsched/id6475716363' },
-                { name: 'CONTACT', url: '#contact' },
-              ].map((soc) => (
+            {/* COLUMN 2: CENTER DESKTOP NAVIGATION LINKS WITH EXPLICIT GAPS */}
+            <nav 
+              className="hidden md:flex items-center"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '24px',
+              }}
+            >
+              {navItems.map((item) => (
                 <a
-                  key={soc.name}
-                  href={soc.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[10px] font-bold tracking-widest text-black/60 hover:text-black transition-colors uppercase font-mono"
+                  key={item.name}
+                  href={item.href}
+                  target={item.target || '_self'}
+                  rel={item.target === '_blank' ? 'noopener noreferrer' : undefined}
+                  className="text-[14px] xl:text-[15px] font-medium tracking-normal transition-colors duration-200 relative group"
+                  style={{
+                    color: isDark ? '#f3f4f6' : '#222938',
+                    display: 'inline-block',
+                    padding: '6px 8px',
+                    whiteSpace: 'nowrap',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = '#1b4fd8'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = isDark ? '#f3f4f6' : '#222938'; }}
                 >
-                  {soc.name}
+                  {item.name}
+                  <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#1b4fd8] transition-all duration-200 opacity-0 group-hover:opacity-100 rounded-full" />
                 </a>
               ))}
+            </nav>
+
+            {/* COLUMN 3: THEME TOGGLE & GET QUOTE CTA */}
+            <div className="flex items-center justify-end gap-3 sm:gap-4 flex-shrink-0">
+              
+              {/* Theme Toggle */}
+              <div className="transition-opacity duration-300">
+                <ThemeToggle />
+              </div>
+
+              {/* High-Impact GET QUOTE CTA Button */}
+              <a
+                href="#contact"
+                className="group relative overflow-hidden rounded-full font-mono font-bold text-xs tracking-widest text-white px-5 sm:px-6 py-2.5 bg-gradient-to-r from-[#1b4fd8] to-[#2563eb] hover:from-[#1541b6] hover:to-[#1d4ed8] shadow-[0_4px_18px_rgba(27,79,216,0.4)] hover:shadow-[0_6px_28px_rgba(27,79,216,0.6)] transition-all duration-300 flex items-center gap-2 select-none hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span className="relative z-10 hidden xs:inline sm:inline">GET QUOTE</span>
+                <span className="relative z-10 xs:hidden sm:hidden">QUOTE</span>
+                <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 stroke-[2.5]" />
+                <div className="absolute inset-0 bg-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </a>
+
             </div>
 
           </div>
-          
         </div>
-      </div>
+      </header>
 
-      {/* 3. AWWWARDS VERTICAL RIBBON WIDGET */}
+      {/* 2. AWWWARDS VERTICAL RIBBON WIDGET */}
       <div 
         className="awwwards-ribbon hidden lg:block" 
         style={{ 
@@ -315,7 +138,7 @@ export const Header = () => {
         }}
       >
         <a 
-          href="https://hubsched.com" 
+          href="https://rohanjoshi.in" 
           target="_blank" 
           rel="noopener noreferrer"
           className="block hover:translate-x-[-4px] transition-transform duration-300"
@@ -331,3 +154,5 @@ export const Header = () => {
     </>
   );
 };
+
+

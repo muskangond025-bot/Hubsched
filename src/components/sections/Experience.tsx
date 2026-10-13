@@ -14,39 +14,39 @@ interface CardItem {
 const CARDS_DATA: CardItem[] = [
   {
     id: 1,
-    title: "Logitech Biometrics",
-    description: "Seamless integration with advanced fingerprint and facial recognition biometric devices for real-time office attendance syncing.",
-    image: "/enterprise_tracking_1784094192581.png",
-    link: "/product/faceid",
-    price: "$240",
-    icon: "moon-half"
+    title: "Shark Tank Pitch Films",
+    description: "Crafted high-converting pitch and product showcase videos for innovative startups like Wol3D, helping them win deals on Shark Tank India.",
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958403_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(1)%20(1).png",
+    link: "https://rohanjoshi.in/all-projects",
+    price: "1000+ Videos",
+    icon: "layers"
   },
   {
     id: 2,
-    title: "Vogue Rosters",
-    description: "Optimized shift scheduling, roster management, and overtime tracking for dynamic retail and fashion storefront workforces.",
-    image: "/essential_dashboard_1784095488473.png",
-    link: "/features",
-    price: "$180",
+    title: "India Energy Week & BPCL",
+    description: "Full on-ground event documentation, time-lapses, and global delegate interviews for Fortune 500 energy leaders at premier international expos.",
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737959797_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(3)%20(1).png",
+    link: "https://rohanjoshi.in/all-projects",
+    price: "8+ Cities",
     icon: "clock"
   },
   {
     id: 3,
-    title: "Squad Banking",
-    description: "Direct salary transfer integrations with fintech and banking APIs for secure, one-click payroll payouts.",
-    image: "/professional_dashboard_1784095584244.png",
-    link: "/product/smartpayroll",
-    price: "$265",
+    title: "CIPLA & Aditya Birla",
+    description: "Internal culture films, CSR initiatives, leadership interviews, and brand awareness campaigns for corporate powerhouses.",
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737960123_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(4)%20(1).png",
+    link: "https://rohanjoshi.in/all-projects",
+    price: "49+ Brands",
     icon: "moon-crescent"
   },
   {
     id: 4,
-    title: "Bamboo HRMS",
-    description: "Bidirectional sync with global HR portals and tools to keep employee records, leave configurations, and data updated instantly.",
-    image: "/custom_dashboard_1784095603372.png",
-    link: "/features",
-    price: "$290",
-    icon: "layers"
+    title: "Global Remote Production",
+    description: "Serving international creators & enterprises across the USA, UK, Singapore, and Canada with frame-accurate cloud editing and color science.",
+    image: "https://storage.googleapis.com/mkv_imagesbackend/service_images/1737960176_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(5).png",
+    link: "https://rohanjoshi.in/all-projects",
+    price: "Global Reach",
+    icon: "moon-half"
   }
 ];
 
@@ -96,10 +96,10 @@ export const Experience = () => {
       {/* Centered Heading */}
       <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-16 flex flex-col z-10 text-left mb-12">
         <h3 className="font-heading text-4xl md:text-6xl text-white uppercase leading-none font-bold tracking-tight">
-          WORKPLACE <span className="text-blue-200">INTEGRATIONS</span>
+          PROVEN <span className="text-blue-200">TRACK RECORD</span>
         </h3>
         <p className="font-sans text-xs md:text-sm text-blue-100/70 mt-3 uppercase tracking-widest">
-          Connect HubSched with your existing enterprise systems instantly
+          Over 1,000+ films crafted for global enterprises, MSMEs, and top innovators
         </p>
       </div>
 
@@ -174,15 +174,15 @@ export const Experience = () => {
       <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-16 mt-12 flex flex-col sm:flex-row justify-between items-center gap-6 z-10">
         <div className="text-left max-w-sm sm:max-w-md">
           <p className="font-sans text-[11px] md:text-xs text-blue-100/60 leading-relaxed font-semibold uppercase tracking-wider">
-            Real-time biometric attendance syncing, API payroll transfers, and location tracking combined into one automated platform.
+            Pan-India multi-camera shoots, frame-accurate cloud editing, and cinematic storytelling combined into one dedicated agency.
           </p>
         </div>
         <div>
           <a
-            href="/features"
+            href="https://rohanjoshi.in/all-projects"
             className="group inline-flex items-center gap-2 border border-white/20 hover:border-white text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 bg-white/5 hover:bg-white hover:text-[#1b4fd8]"
           >
-            Explore Integrations Hub
+            Explore All Projects
             <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
           </a>
         </div>

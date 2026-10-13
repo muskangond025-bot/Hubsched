@@ -9,7 +9,7 @@ const rulerSegments = [
   "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"
 ];
 
-const textToSplit = "Your complete HRMS and workplace partner — attendance, payroll, visitors, and beyond. HubSched makes it all seamless.";
+const textToSplit = "ELEVATING BRAND THROUGH FILMS, CREATIVE DIRECTION, SOCIAL MEDIA, AND SCRIPTING. MAKE MY VID DELIVERS EXTRAORDINARY VISUAL EXPERIENCES WORLDWIDE.";
 
 const markers = [
   { id: "sf", location: [37.7595, -122.4367] as [number, number], label: "San Francisco" },
@@ -269,20 +269,45 @@ export const Hero = () => {
   // Video Player Refs & States
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const videoInnerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
   const togglePlay = () => {
-    if (!videoRef.current) return;
+    if (!iframeRef.current?.contentWindow) return;
     if (isPlaying) {
-      videoRef.current.pause();
+      iframeRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'pauseVideo', args: '' }),
+        '*'
+      );
       setIsPlaying(false);
     } else {
-      videoRef.current.play().catch((err) => console.log("Video play interrupted:", err));
+      iframeRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'playVideo', args: '' }),
+        '*'
+      );
       setIsPlaying(true);
+    }
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!iframeRef.current?.contentWindow) return;
+    if (isMuted) {
+      iframeRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'unMute', args: '' }),
+        '*'
+      );
+      setIsMuted(false);
+    } else {
+      iframeRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'mute', args: '' }),
+        '*'
+      );
+      setIsMuted(true);
     }
   };
 
@@ -562,7 +587,7 @@ export const Hero = () => {
               {/* Introduction Eyebrow */}
               <div className="hero-top mb-12">
                 <p className="text-size-tiny text-style-allcaps text-align-center text-white/60 tracking-[0.2em] font-sans max-w-[500px]">
-                  HRMS • ATTENDANCE • PAYROLL • VISITOR MANAGEMENT
+                  FILMS • CREATIVE DIRECTION • SOCIAL MEDIA • SCRIPTING
                 </p>
               </div>
 
@@ -574,7 +599,7 @@ export const Hero = () => {
 
                   {/* First Line */}
                   <h1 className="heading-style-h1 is-smaller font-heading text-white tracking-widest text-[5vw] mb-4">
-                    HubSched
+                    MAKE MY VID
                   </h1>
 
                   {/* Second Line in Corners Frame */}
@@ -582,7 +607,7 @@ export const Hero = () => {
 
                     {/* The Tall condensed "DIGITAL DESIGNER" text in yellow */}
                     <span className="heading-style-h1 relative font-humane text-[#1b4fd8] text-[18vw] leading-[0.8] tracking-wider uppercase font-semibold">
-                      WORKPLACE MANAGEMENT
+                      ELEVATING BRAND
                     </span>
 
                     {/* Corner Marks */}
@@ -649,22 +674,29 @@ export const Hero = () => {
               <div className="hero-video-padding w-full py-4">
                 <div
                   ref={videoInnerRef}
-                  className="hero-video-inner relative w-full aspect-video rounded-[96px] object-cover justify-center items-center flex overflow-hidden cursor-none select-none border border-black/10 shadow-2xl"
+                  className="hero-video-inner relative w-full aspect-video rounded-[96px] object-cover justify-center items-center flex overflow-hidden cursor-none select-none border border-black/10 shadow-2xl bg-black"
                   onPointerEnter={() => setIsHovered(true)}
                   onPointerLeave={() => setIsHovered(false)}
                   onPointerMove={handlePointerMove}
                   onClick={togglePlay}
                 >
-                  <video
-                    ref={videoRef}
-                    src="https://cdn.prod.website-files.com/67b873ab284925c72f7f5176%2F6808ad0ca3423c64b004a0c1_hero-video-NEW-transcode.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover z-0"
+                  {/* YouTube Showreel Video Poster Placeholder */}
+                  <div 
+                    className="absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none z-0 opacity-40"
+                    style={{ backgroundImage: `url('https://img.youtube.com/vi/yo-VmdTOEUk/maxresdefault.jpg')` }}
                   />
+
+                  {/* YouTube Embed from rohanjoshi.in (yo-VmdTOEUk) */}
+                  <iframe
+                    ref={iframeRef}
+                    src="https://www.youtube.com/embed/yo-VmdTOEUk?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=yo-VmdTOEUk&controls=0&modestbranding=1&rel=0&playsinline=1"
+                    title="Make My Vid Showreel Banner"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 scale-[1.12]"
+                  />
+
                   <div className="absolute inset-0 bg-black/10 pointer-events-none z-10" />
+
                   {isHovered && (
                     <div
                       className="absolute bg-[#1b4fd8] text-white font-sans text-xs font-bold tracking-widest uppercase rounded-full w-24 h-24 flex items-center justify-center pointer-events-none z-30 transition-transform duration-75 ease-out shadow-xl"
@@ -677,14 +709,38 @@ export const Hero = () => {
                       {isPlaying ? 'PAUSE' : 'PLAY'}
                     </div>
                   )}
-                  <div className="absolute bottom-6 right-6 z-20 pointer-events-auto">
+
+                  <div className="absolute bottom-6 right-6 z-20 pointer-events-auto flex items-center gap-3">
+                    {/* Audio Mute/Unmute Button */}
                     <button
                       type="button"
+                      aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+                      onClick={toggleMute}
+                      className="w-14 h-14 bg-black/80 hover:bg-[#1b4fd8] hover:text-white text-white rounded-full flex items-center justify-center transition-colors duration-300 border border-white/20 backdrop-blur-md shadow-lg"
+                    >
+                      {isMuted ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                          <line x1="23" y1="9" x2="17" y2="15"></line>
+                          <line x1="17" y1="9" x2="23" y2="15"></line>
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                      )}
+                    </button>
+
+                    {/* Play/Pause Button */}
+                    <button
+                      type="button"
+                      aria-label={isPlaying ? "Pause video" : "Play video"}
                       onClick={(e) => {
                         e.stopPropagation();
                         togglePlay();
                       }}
-                      className="w-14 h-14 bg-black/80 hover:bg-[#1b4fd8] hover:text-white text-white rounded-full flex items-center justify-center transition-colors duration-300 border border-black/10"
+                      className="w-14 h-14 bg-black/80 hover:bg-[#1b4fd8] hover:text-white text-white rounded-full flex items-center justify-center transition-colors duration-300 border border-white/20 backdrop-blur-md shadow-lg"
                     >
                       {isPlaying ? (
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">

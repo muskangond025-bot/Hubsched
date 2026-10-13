@@ -65,7 +65,7 @@ export const About = () => {
 
                 {/* Heading */}
                 <h2 className="text-size-large is--header font-heading text-white text-[2.5rem] leading-[1.2] uppercase mb-8 tracking-wide">
-                  HUBSCHED <span className="text-white/40">FEATURES</span>
+                  MAKE MY VID <span className="text-white/40">EXPERTISE</span>
                 </h2>
 
                 {/* Features List */}
@@ -75,11 +75,11 @@ export const About = () => {
                   <div>
                     <h3 className="text-white font-bold text-base mb-1.5 flex items-center gap-2 tracking-wide uppercase">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#ffd600]" />
-                      Face Attendance Management
+                      Multi City Video Production
                     </h3>
                     <ul className="text-white/70 text-xs md:text-sm pl-4 list-disc space-y-1 leading-relaxed">
-                      <li>HubSched AI Face Attendance lets your team clock in instantly with fast and secure facial recognition.</li>
-                      <li>It removes manual errors and buddy punching, giving you clean and reliable attendance data every day.</li>
+                      <li>Comprehensive video production across 8+ major Indian cities including Mumbai, Delhi, and Bangalore.</li>
+                      <li>Equipped with high-end 4K cinema gear, dedicated crews, audio, and lighting for corporate AVs and brand films.</li>
                     </ul>
                   </div>
 
@@ -87,12 +87,11 @@ export const About = () => {
                   <div>
                     <h3 className="text-white font-bold text-base mb-1.5 flex items-center gap-2 tracking-wide uppercase">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#ffd600]" />
-                      Visitor Management
+                      Remote Post-Production & Editing
                     </h3>
                     <ul className="text-white/70 text-xs md:text-sm pl-4 list-disc space-y-1 leading-relaxed">
-                      <li>Mobile app enabled visitor alerts and approvals.</li>
-                      <li>Real-time host notifications.</li>
-                      <li>Digital visitor logs for security and compliance.</li>
+                      <li>Seamless remote editing services for global clients across the USA, UK, Singapore, and Canada.</li>
+                      <li>Advanced multi-camera syncing, color grading, sound design, and rapid revision workflows via Frame.io.</li>
                     </ul>
                   </div>
 
@@ -100,12 +99,11 @@ export const About = () => {
                   <div>
                     <h3 className="text-white font-bold text-base mb-1.5 flex items-center gap-2 tracking-wide uppercase">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#ffd600]" />
-                      IOT-Based Meeting Rooms
+                      Creative Direction & Scriptwriting
                     </h3>
                     <ul className="text-white/70 text-xs md:text-sm pl-4 list-disc space-y-1 leading-relaxed">
-                      <li>Smart IoT sensors automate room booking and occupancy tracking.</li>
-                      <li>Employees can check availability in real time, reducing booking conflicts.</li>
-                      <li>Efficient resource usage leads to streamlined internal meetings.</li>
+                      <li>End-to-end creative ideation, compelling storytelling, and storyboards tailored to elevate brand perception.</li>
+                      <li>Professional multilingual voiceover talent, impactful motion graphics, and Shark Tank pitch video direction.</li>
                     </ul>
                   </div>
 
@@ -113,9 +111,9 @@ export const About = () => {
 
                 {/* About Button */}
                 <div className="button-group is-hero">
-                  <a href="#projects" className="btn-main w-inline-block hover:scale-[0.98] transition-transform duration-300">
+                  <a href="#experience" className="btn-main w-inline-block hover:scale-[0.98] transition-transform duration-300">
                     <div className="btn-frame">
-                      <div className="btn-text">FEATURES</div>
+                      <div className="btn-text">EXPLORE WORK</div>
                     </div>
                     <div className="btn-icon-wrap">
                       <div className="btn-icon">
@@ -147,7 +145,7 @@ export const About = () => {
                         <div
                           className="absolute top-[-10%] h-[120%] w-[800%] bg-cover bg-center"
                           style={{
-                            backgroundImage: `url('https://hubsched.com/static/image/home%20page%20girl%201.webp')`,
+                            backgroundImage: `url('https://storage.googleapis.com/mkv_imagesbackend/service_images/1737958320_Copy%20of%20MMV%20Website%20service%20page%20(1330%20x%201780%20px)%20(2)%20(1).png')`,
                             left: `-${colIndex * 100}%`,
                           }}
                         />

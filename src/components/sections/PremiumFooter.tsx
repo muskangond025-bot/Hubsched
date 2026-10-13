@@ -128,7 +128,7 @@ export const PremiumFooter = () => {
               {/* 3. Footer Top (Contact Me Layout) */}
               <div className="footer-top flex flex-col items-center justify-center text-center mt-12">
                 <div className="heading-style-h1 is-smaller font-heading uppercase text-blue-200 tracking-wider text-xl mb-4">
-                  Ready to optimize your workforce?
+                  Ready to elevate your brand through videos?
                 </div>
 
                 <div className="footer-logo-wrapper relative flex items-center justify-center w-full min-h-[220px]">
@@ -163,11 +163,11 @@ export const PremiumFooter = () => {
                       ref={contactBtnRef}
                       onMouseMove={handleContactMouseMove}
                       onMouseLeave={handleContactMouseLeave}
-                      href="/contact"
+                      href="https://rohanjoshi.in/support"
                       className="btn-main pointer-events-auto bg-white hover:bg-blue-50 border border-white text-[#1b4fd8] rounded-full flex flex-row items-center pl-8 pr-3 py-3 transition-colors duration-300"
                     >
                       <div className="btn-frame mr-6">
-                        <div className="btn-text font-bold text-sm tracking-[0.2em] text-[#1b4fd8]">CONTACT</div>
+                        <div className="btn-text font-bold text-sm tracking-[0.2em] text-[#1b4fd8]">GET QUOTE</div>
                       </div>
                       <div className="btn-icon-wrap bg-[#1b4fd8] text-white rounded-full w-12 h-12 flex items-center justify-center">
                         <div className="btn-icon w-embed">
@@ -183,7 +183,7 @@ export const PremiumFooter = () => {
 
                 {/* Horizontal Navigation List */}
                 <div className="footer-link-list flex flex-row items-center justify-center gap-6 mt-8 mb-16 text-sm font-semibold tracking-widest text-gray-400">
-                  <a href="/" className="footer-link-inner hover:text-white transition-colors">
+                  <a href="https://rohanjoshi.in/" className="footer-link-inner hover:text-white transition-colors">
                     <div className="footer-link-text">HOME</div>
                   </a>
                   <div className="icon-embed-small text-blue-400 w-4 h-4 flex items-center justify-center w-embed">
@@ -192,7 +192,7 @@ export const PremiumFooter = () => {
                       <path d="M10.7605 15.1358L10.7605 23.3203L14.7744 23.3203L14.7744 16.7664L17.5025 14.3518L23.5547 14.3518L23.5547 10.4634L15.4329 10.4634L10.7605 15.1358Z" fill="currentColor" />
                     </svg>
                   </div>
-                  <a href="#about" className="footer-link-inner hover:text-white transition-colors">
+                  <a href="https://rohanjoshi.in/about-us" className="footer-link-inner hover:text-white transition-colors">
                     <div className="footer-link-text">ABOUT</div>
                   </a>
                   <div className="icon-embed-small text-blue-400 w-4 h-4 flex items-center justify-center w-embed">
@@ -201,8 +201,8 @@ export const PremiumFooter = () => {
                       <path d="M10.7605 15.1358L10.7605 23.3203L14.7744 23.3203L14.7744 16.7664L17.5025 14.3518L23.5547 14.3518L23.5547 10.4634L15.4329 10.4634L10.7605 15.1358Z" fill="currentColor" />
                     </svg>
                   </div>
-                  <a href="#pricing" className="footer-link-inner hover:text-white transition-colors">
-                    <div className="footer-link-text">PRICING</div>
+                  <a href="https://rohanjoshi.in/service" className="footer-link-inner hover:text-white transition-colors">
+                    <div className="footer-link-text">SERVICES</div>
                   </a>
                   <div className="icon-embed-small text-blue-400 w-4 h-4 flex items-center justify-center w-embed">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +210,7 @@ export const PremiumFooter = () => {
                       <path d="M10.7605 15.1358L10.7605 23.3203L14.7744 23.3203L14.7744 16.7664L17.5025 14.3518L23.5547 14.3518L23.5547 10.4634L15.4329 10.4634L10.7605 15.1358Z" fill="currentColor" />
                     </svg>
                   </div>
-                  <a href="#contact" className="footer-link-inner hover:text-white transition-colors">
+                  <a href="https://rohanjoshi.in/support" className="footer-link-inner hover:text-white transition-colors">
                     <div className="footer-link-text">CONTACT</div>
                   </a>
                 </div>
@@ -223,24 +223,24 @@ export const PremiumFooter = () => {
                 {/* Column 1: Logo & Text */}
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center gap-2 font-bold text-lg font-heading tracking-wide" style={{ color: '#ffffff' }}>
-                    <span className="text-white">HUBSCHED</span>
+                    <span className="text-white">MAKE MY VID</span>
                   </div>
                   <p className="text-xs leading-relaxed max-w-[240px]" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                    Your complete HRMS and workplace partner — streamlining attendance, payroll, and beyond.
+                    ELEVATING, EMPOWERING, and EVOLVING brands through cinematic video production and remote editing.
                   </p>
                   <p className="text-[10px] uppercase font-bold tracking-wider mt-2" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
-                    Powered by Nakshatra Technohub India Pvt. Ltd.
+                    Founded by Rohan Joshi • Mumbai, India
                   </p>
                 </div>
 
-                {/* Column 2: Products */}
+                {/* Column 2: Services */}
                 <div className="flex flex-col gap-3">
-                  <h4 className="font-bold text-xs uppercase tracking-wider" style={{ color: '#ffffff' }}>Products</h4>
+                  <h4 className="font-bold text-xs uppercase tracking-wider" style={{ color: '#ffffff' }}>Services</h4>
                   <ul className="flex flex-col gap-2 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                    <li><a href="#experience" className="hover:text-blue-400 transition-colors">HubSched FaceID+</a></li>
-                    <li><a href="#experience" className="hover:text-blue-400 transition-colors">HubSched Smart Payroll</a></li>
-                    <li><a href="#experience" className="hover:text-blue-400 transition-colors">HubSched GeoTrace</a></li>
-                    <li><a href="#experience" className="hover:text-blue-400 transition-colors">HubSched MeetHub</a></li>
+                    <li><a href="https://rohanjoshi.in/services/multi-city-videos-production" className="hover:text-blue-400 transition-colors">Multi City Production</a></li>
+                    <li><a href="https://rohanjoshi.in/services/remote-editing-work" className="hover:text-blue-400 transition-colors">Remote Editing Work</a></li>
+                    <li><a href="https://rohanjoshi.in/services/corporate-av" className="hover:text-blue-400 transition-colors">Corporate AV</a></li>
+                    <li><a href="https://rohanjoshi.in/services/trade-shows-exhibition-videos" className="hover:text-blue-400 transition-colors">Trade Shows &amp; Expos</a></li>
                   </ul>
                 </div>
 
@@ -248,10 +248,10 @@ export const PremiumFooter = () => {
                 <div className="flex flex-col gap-3">
                   <h4 className="font-bold text-xs uppercase tracking-wider" style={{ color: '#ffffff' }}>Quick Links</h4>
                   <ul className="flex flex-col gap-2 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                    <li><a href="#" className="hover:text-blue-400 transition-colors">Blog</a></li>
-                    <li><a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
-                    <li><a href="#" className="hover:text-blue-400 transition-colors">Terms &amp; Conditions</a></li>
-                    <li><a href="#features" className="hover:text-blue-400 transition-colors">Features</a></li>
+                    <li><a href="https://rohanjoshi.in/all-projects" className="hover:text-blue-400 transition-colors">Projects</a></li>
+                    <li><a href="https://rohanjoshi.in/all-blogs" className="hover:text-blue-400 transition-colors">Blogs</a></li>
+                    <li><a href="https://rohanjoshi.in/join-us" className="hover:text-blue-400 transition-colors">Join Us</a></li>
+                    <li><a href="#testimonials" className="hover:text-blue-400 transition-colors">Reviews</a></li>
                   </ul>
                 </div>
 
@@ -259,10 +259,10 @@ export const PremiumFooter = () => {
                 <div className="flex flex-col gap-3">
                   <h4 className="font-bold text-xs uppercase tracking-wider" style={{ color: '#ffffff' }}>Company</h4>
                   <ul className="flex flex-col gap-2 text-xs" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                    <li><a href="#about" className="hover:text-blue-400 transition-colors">About Us</a></li>
-                    <li><a href="#contact" className="hover:text-blue-400 transition-colors">Contact Us</a></li>
-                    <li><a href="#pricing" className="hover:text-blue-400 transition-colors">Pricing</a></li>
-                    <li><a href="#" className="hover:text-blue-400 transition-colors">Login</a></li>
+                    <li><a href="https://rohanjoshi.in/about-us" className="hover:text-blue-400 transition-colors">About Us</a></li>
+                    <li><a href="https://rohanjoshi.in/support" className="hover:text-blue-400 transition-colors">Contact &amp; Support</a></li>
+                    <li><a href="#faq" className="hover:text-blue-400 transition-colors">FAQs</a></li>
+                    <li><a href="https://rohanjoshi.in/" className="hover:text-blue-400 transition-colors">Home</a></li>
                   </ul>
                 </div>
 
@@ -272,15 +272,15 @@ export const PremiumFooter = () => {
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center gap-2">
                       <span className="text-blue-400">✉</span>
-                      <a href="mailto:info@hubsched.com" className="hover:text-blue-400 transition-colors">info@hubsched.com</a>
+                      <a href="https://rohanjoshi.in/support" className="hover:text-blue-400 transition-colors">support@rohanjoshi.in</a>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-blue-400">📞</span>
-                      <a href="tel:+918482925926" className="hover:text-blue-400 transition-colors">+91-8482925926</a>
+                      <span className="text-blue-400">🌐</span>
+                      <a href="https://rohanjoshi.in/" className="hover:text-blue-400 transition-colors">rohanjoshi.in</a>
                     </div>
                     <div className="flex items-start gap-2">
                       <span className="text-blue-400 mt-0.5">📍</span>
-                      <span className="leading-relaxed">Plot No. F-89, MIDC, Ambad, Nashik - 422010</span>
+                      <span className="leading-relaxed">Mumbai, Maharashtra • Serving Pan-India &amp; Global Clients</span>
                     </div>
                   </div>
                 </div>
@@ -290,7 +290,7 @@ export const PremiumFooter = () => {
               {/* 5. Footer Bottom Copyright & Socials */}
               <div className="footer-bottom w-full max-w-[1440px] mx-auto px-10 md:px-16 flex flex-col sm:flex-row justify-between items-center gap-6 py-8 border-t border-white/10 font-sans text-xs" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
                 <div className="text-center sm:text-left">
-                  © 2025 HubSched — Designed &amp; Developed by Nakshatra Technohub (I) Pvt. Ltd.
+                  © 2024–2026 Make My Vid • All Rights Reserved.
                 </div>
                 
                 {/* Social Media Links */}

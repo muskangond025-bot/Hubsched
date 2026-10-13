@@ -8,8 +8,11 @@ import { AgentationProvider } from "@/components/AgentationProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "HubSched - Smart Attendance, HRMS & Workspace Management",
-  description: "Hubsched is a smart workspace management & HRMS software offering attendance tracking, leave management, geolocation check-ins, payroll support & team productivity tools.",
+  title: "Make My Vid | Professional Video Production & Editing Services",
+  description: "MakeMyVid – Professional video editing services for creators & businesses. From multi-camera edits to motion graphics, we bring your vision to life!",
+  icons: {
+    icon: "https://storage.googleapis.com/mkv_imagesbackend/favicon/67500cbb6555f_favicon.png",
+  },
 };
 
 export default function RootLayout({
