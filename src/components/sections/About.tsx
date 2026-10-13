@@ -2,338 +2,260 @@
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
-import { gsap } from "@/lib/gsap";
 
-// Project Data inspired by Kenichi Aikawa's portfolio & Make My Vid
-const GALLERY_ITEMS = [
+// Clean High-End Editorial Collection matching user's exact reference screenshot
+const PORTFOLIO_ITEMS = [
   {
     id: "01",
-    title: "NEON SHINJUKU",
-    category: "CINEMATOGRAPHY",
-    client: "SONY ENTERTAINMENT",
+    tag: "Fashion",
+    title: "HAUTE COUTURE",
+    client: "VOGUE EDITORIAL",
     year: "2026",
-    aspect: 1.5,
-    colors: {
-      a: [0.1, 0.05, 0.25],
-      b: [0.95, 0.2, 0.45],
-      c: [0.05, 0.4, 0.85],
-      d: [0.02, 0.02, 0.05],
-    },
-    image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1400&q=85",
-    desc: "35mm anamorphic night documentation captured across Shinjuku & Shibuya backstreets.",
+    // Clean high-res golden-hour fashion model (no duplicate text on the image!)
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1400&q=85",
+    fallback: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=85",
+    desc: "Golden-hour luxury fashion shoot featuring warm sunlight, jewelry specular highlights, and sculptural silhouette.",
   },
   {
     id: "02",
-    title: "MONOCHROME ESSENCE",
-    category: "HIGH FASHION",
-    client: "VOGUE EDITORIAL",
-    year: "2026",
-    aspect: 0.75,
-    colors: {
-      a: [0.9, 0.9, 0.9],
-      b: [0.2, 0.2, 0.25],
-      c: [0.05, 0.05, 0.05],
-      d: [0.85, 0.85, 0.9],
-    },
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=85",
-    desc: "Sculptural portraiture experimenting with high-contrast chiaroscuro lighting and physical film grain.",
-  },
-  {
-    id: "03",
-    title: "HORIZON APERTURE",
-    category: "DIRECTION",
-    client: "BALENCIAGA CAMPAIGN",
-    year: "2025",
-    aspect: 1.4,
-    colors: {
-      a: [0.85, 0.45, 0.15],
-      b: [0.2, 0.1, 0.3],
-      c: [0.95, 0.75, 0.4],
-      d: [0.05, 0.02, 0.1],
-    },
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1400&q=85",
-    desc: "Cinematic commercial film shot at golden twilight on location in Iceland and Hokkaido.",
-  },
-  {
-    id: "04",
+    tag: "Commercial",
     title: "KINETIC DRIFT",
-    category: "COMMERCIAL",
     client: "PORSCHE MOTORSPORT",
     year: "2025",
-    aspect: 1.6,
-    colors: {
-      a: [0.9, 0.1, 0.1],
-      b: [0.1, 0.2, 0.4],
-      c: [0.02, 0.02, 0.04],
-      d: [0.7, 0.05, 0.15],
-    },
     image: "https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=1400&q=85",
     desc: "High-velocity tracking shots synchronized with robotic camera rigs and custom anamorphic optics.",
   },
   {
+    id: "03",
+    tag: "Editorial",
+    title: "MONOCHROME ESSENCE",
+    client: "BALENCIAGA",
+    year: "2026",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=85",
+    desc: "Sculptural portraiture experimenting with high-contrast chiaroscuro studio lighting and physical film grain.",
+  },
+  {
+    id: "04",
+    tag: "Cinema",
+    title: "NEON SHINJUKU",
+    client: "SONY ENTERTAINMENT",
+    year: "2026",
+    image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1400&q=85",
+    desc: "35mm anamorphic night cinematography captured across Shinjuku & Shibuya backstreets.",
+  },
+  {
     id: "05",
-    title: "BRUTALIST MONOLITH",
-    category: "CINEMATOGRAPHY",
-    client: "ARCHITECTURAL DIGEST",
+    tag: "Direction",
+    title: "HORIZON APERTURE",
+    client: "MAKE MY VID ORIGINALS",
     year: "2025",
-    aspect: 0.8,
-    colors: {
-      a: [0.3, 0.35, 0.4],
-      b: [0.75, 0.8, 0.85],
-      c: [0.1, 0.12, 0.15],
-      d: [0.5, 0.55, 0.6],
-    },
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=85",
-    desc: "Exploration of architectural rhythm, concrete mass, and stark daylight shadows.",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1400&q=85",
+    desc: "Cinematic commercial film shot at golden twilight on location in volcanic landscapes.",
   },
   {
     id: "06",
-    title: "PRISMATIC DISPERSION",
-    category: "HIGH FASHION",
+    tag: "Prismatic",
+    title: "SPECTRAL DISPERSION",
     client: "ISSEY MIYAKE",
     year: "2026",
-    aspect: 1.25,
-    colors: {
-      a: [0.4, 0.85, 0.95],
-      b: [0.95, 0.4, 0.8],
-      c: [0.9, 0.85, 0.2],
-      d: [0.1, 0.05, 0.25],
-    },
     image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=85",
     desc: "Optical prism dispersion through multi-coated glass elements, creating real chromatic diffraction.",
   },
 ];
 
-// GLSL Vertex Shader - Sourced directly from aikawakenichi.com
-const VERTEX_SHADER = /* glsl */ `
+// GLSL Vertex Shader - Exact Cylindrical Bend + Convex Upward Arch
+const EXACT_CYLINDER_VERTEX_SHADER = /* glsl */ `
   precision highp float;
   #define PI 3.141592653589793
 
   varying vec2 vUv;
-  varying float vTopFade;
+  varying vec3 vNormalVec;
 
-  uniform vec2 iResolution;
   uniform vec2 uSize;
-  uniform float uScrollPos;
+  uniform float uCurveRadius;
+  uniform float uArchHeight;
   uniform float uVelocity;
+  uniform float uIsReflection;
 
-  // Film Roll / Top Viewport Curl uniforms
-  uniform float uRollTopBend;
-  uniform float uRollTopRadius;
-  uniform float uRollTopRange;
-  uniform float uRollTopReturn;
-  uniform float uRollTopStart;
-  uniform float uRollTopFade;
-  uniform float uRollTopFadeStart;
-
-  // Harmonic Wave & Flutter uniforms
-  uniform float uEffectsStrength;
-  uniform float uEffectsWaveSmooth;
-  uniform float uEffectsWaveSpacing;
-  uniform float uEffectsHorizontalProgress;
-  uniform float uEffectsHorizontalStrength;
-  uniform float uEffectsHorizontalWaveSpacing;
+  // Exact bendCylinder formula
+  vec3 bendCylinder(vec3 p, float radius) {
+    if (radius <= 0.001) return p;
+    float theta = p.x / radius;
+    float radial = radius + p.z;
+    float bentX = sin(theta) * radial;
+    float bentZ = cos(theta) * radial - radius;
+    return vec3(bentX, p.y, bentZ);
+  }
 
   void main() {
     vUv = uv;
-    vec3 nPos = position.xyz;
+    vec3 nPos = position;
 
-    // 1. Film Roll / Top Viewport Curl
-    vec4 worldPosition = modelMatrix * vec4(position, 1.0);
-    float topThreshold = (iResolution.y * 0.5) - (iResolution.y * uRollTopStart);
-    float topRange = max(iResolution.y * uRollTopRange, 1.0);
-    float band = clamp((worldPosition.y - topThreshold) / topRange, 0.0, 1.0);
+    // 1. Physical 3D Cylindrical Curvature
+    vec3 bentPos = bendCylinder(nPos, uCurveRadius);
 
-    vTopFade = 0.0;
-    if (band > 0.0) {
-      float rollMask = smoothstep(0.0, 1.0, band);
-      float rollEnter = smoothstep(0.0, 0.42, band);
-      float rollReturn = smoothstep(0.44, 0.92, band);
-      float curlEnter = sin(rollEnter * PI * 0.5);
-      float curlReturn = sin(rollReturn * PI);
-      float sCurve = (curlEnter * 0.92) - (curlReturn * uRollTopReturn * 0.48);
+    // 2. Exact Upward Convex Arch matching user's screenshot
+    float halfW = max(uSize.x * 0.5, 1.0);
+    float normX = clamp(position.x / halfW, -1.0, 1.0);
+    float arch = (1.0 - normX * normX) * uArchHeight;
 
-      nPos.y += smoothstep(0.62, 0.98, band) * uRollTopBend * 0.18;
-      nPos.z -= sCurve * uRollTopRadius * rollMask;
-      vTopFade = pow(smoothstep(uRollTopFadeStart, 1.0, band), 0.7) * uRollTopFade;
+    if (uIsReflection > 0.5) {
+      bentPos.y -= arch * 0.8;
+    } else {
+      bentPos.y += arch;
     }
 
-    vec4 mvPosition = modelViewMatrix * vec4(nPos, 1.0);
-    float horizontalProgress = clamp(uEffectsHorizontalProgress, 0.0, 1.0);
-
-    // 2. Vertical Flutter: Multi-harmonic waves driven by velocity
-    if (abs(uVelocity) > 0.00001 && abs(uEffectsStrength) > 0.00001) {
-      float flutterPhase = (
-        (mvPosition.y / max(iResolution.y, 1.0)) * PI * 2.0 / max(uEffectsWaveSpacing, 0.001)
-        - uScrollPos / max(iResolution.y, 1.0)
-      );
-      float baseWave = sin(flutterPhase);
-      float detailWave = sin(flutterPhase * 0.48 - 1.1);
-      float tertiaryWave = sin(flutterPhase * 0.26 + 1.6);
-      float smoothFlutter = (baseWave * 0.72) + (detailWave * 0.20) + (tertiaryWave * 0.08);
-
-      mvPosition.z += smoothFlutter * uVelocity * uEffectsStrength * 16.0 * (1.0 - horizontalProgress);
+    // 3. Subtle wave flutter when rotating
+    if (abs(uVelocity) > 0.0001) {
+      float wave = sin((position.x / halfW) * PI * 1.5);
+      bentPos.z += wave * uVelocity * 4.0;
     }
 
-    // 3. Horizontal Flutter: Wave motion when in horizontal strip mode
-    if (horizontalProgress > 0.001 && abs(uVelocity) > 0.00001) {
-      float hPhase = (
-        (mvPosition.x / max(iResolution.x, 1.0)) * PI * 2.0 / max(uEffectsHorizontalWaveSpacing, 0.001)
-        - uScrollPos / max(iResolution.x, 1.0)
-      );
-      float hWave = sin(hPhase);
-      float hDetail = sin(hPhase * 0.42 - 0.8);
-      float smoothHWave = (hWave * 0.7) + (hDetail * 0.3);
-
-      mvPosition.z += smoothHWave * uVelocity * uEffectsHorizontalStrength * 16.0 * horizontalProgress;
-    }
-
+    vec4 mvPosition = modelViewMatrix * vec4(bentPos, 1.0);
     gl_Position = projectionMatrix * mvPosition;
+
+    vNormalVec = normalize(normalMatrix * normal);
   }
 `;
 
-// GLSL Fragment Shader - Sourced directly from aikawakenichi.com
-const FRAGMENT_SHADER = /* glsl */ `
+// GLSL Fragment Shader
+const EXACT_CYLINDER_FRAGMENT_SHADER = /* glsl */ `
   precision highp float;
 
   varying vec2 vUv;
-  varying float vTopFade;
+  varying vec3 vNormalVec;
 
   uniform sampler2D tDiffuse;
-  uniform vec2 uUvScale;
   uniform float uAlpha;
   uniform float uVelocity;
-  uniform float uEffectsBlurVelocity;
-  uniform float uEffectsAberration;
-
-  uniform vec3 uColorA;
-  uniform vec3 uColorB;
-  uniform vec3 uColorC;
-  uniform vec3 uColorD;
-  uniform float uImageMix;
+  uniform float uIsReflection;
 
   void main() {
-    if (uAlpha <= 0.0001) discard;
+    if (uAlpha <= 0.001) discard;
 
-    vec2 uvCover = vUv * uUvScale + (1.0 - uUvScale) * 0.5;
+    vec2 uvCover = vUv;
+    if (uIsReflection > 0.5) {
+      uvCover.y = 1.0 - uvCover.y;
+    }
 
-    // Bilinear 4-Point Color Gradient
-    vec3 grad = mix(
-      mix(uColorA, uColorB, uvCover.x),
-      mix(uColorC, uColorD, uvCover.y),
-      length(uvCover - 0.5)
+    float velocityBlur = clamp(abs(uVelocity) * 0.003, 0.0, 0.04);
+
+    // Subtle chromatic aberration on rotation
+    vec2 aberration = vec2(0.004 * velocityBlur + 0.0008, 0.0);
+    vec4 tex = texture2D(tDiffuse, uvCover);
+    vec3 color = vec3(
+      texture2D(tDiffuse, uvCover + aberration).r,
+      tex.g,
+      texture2D(tDiffuse, uvCover - aberration).b
     );
 
-    float velocityBlur = clamp(abs(uVelocity) * uEffectsBlurVelocity, 0.0, 0.07);
-    vec2 blurDir = vec2(velocityBlur * 0.4, velocityBlur * sign(uVelocity == 0.0 ? 1.0 : uVelocity));
+    // Smooth edge border
+    float edge = smoothstep(0.0, 0.015, vUv.x) * smoothstep(1.0, 0.985, vUv.x)
+               * smoothstep(0.0, 0.015, vUv.y) * smoothstep(1.0, 0.985, vUv.y);
+    float finalAlpha = uAlpha * max(edge, 0.9);
 
-    // Multi-tap directional velocity motion blur
-    vec3 center = texture2D(tDiffuse, uvCover).rgb;
-    vec3 nearA = texture2D(tDiffuse, uvCover - blurDir * 0.5).rgb;
-    vec3 nearB = texture2D(tDiffuse, uvCover + blurDir * 0.5).rgb;
-    vec3 farA  = texture2D(tDiffuse, uvCover - blurDir).rgb;
-    vec3 farB  = texture2D(tDiffuse, uvCover + blurDir).rgb;
-
-    vec3 blurred = (center * 0.32 + nearA * 0.24 + nearB * 0.24 + farA * 0.10 + farB * 0.10);
-
-    // Chromatic Aberration (RGB Split)
-    vec2 aberrationOffset = vec2(uEffectsAberration * (vTopFade * 0.8 + velocityBlur * 1.5), 0.0);
-    vec3 finalImage = vec3(
-      texture2D(tDiffuse, uvCover + aberrationOffset).r,
-      blurred.g,
-      texture2D(tDiffuse, uvCover - aberrationOffset).b
-    );
-
-    vec3 composite = mix(grad, finalImage, clamp(uImageMix, 0.0, 1.0));
-    float finalAlpha = uAlpha * (1.0 - vTopFade);
-
-    gl_FragColor = vec4(composite, finalAlpha);
+    if (uIsReflection > 0.5) {
+      // Mirror reflection floor fade (fades out downwards into white background)
+      float floorFade = pow(vUv.y, 2.0) * 0.42;
+      gl_FragColor = vec4(color, finalAlpha * floorFade);
+    } else {
+      gl_FragColor = vec4(color, finalAlpha);
+    }
   }
 `;
+
+// Helper: Instant warm placeholder texture
+function createPlaceholderTexture(): THREE.Texture {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 320;
+  const ctx = canvas.getContext("2d")!;
+  const grad = ctx.createLinearGradient(0, 0, 512, 320);
+  grad.addColorStop(0, "#FCE0AD");
+  grad.addColorStop(0.5, "#DFAC6C");
+  grad.addColorStop(1, "#8A5A2B");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 512, 320);
+
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.needsUpdate = true;
+  return tex;
+}
 
 export const About = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Layout & UI States
-  const [layoutMode, setLayoutMode] = useState<"vertical" | "horizontal">("horizontal");
-  const [activeFilter, setActiveFilter] = useState<string>("ALL");
+  // States
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [selectedItem, setSelectedItem] = useState<typeof GALLERY_ITEMS[0] | null>(null);
+  const [selectedItem, setSelectedItem] = useState<typeof PORTFOLIO_ITEMS[0] | null>(null);
 
-  // References to WebGL resources for interaction
-  const sceneStateRef = useRef<{
+  // WebGL & Physics State
+  const stateRef = useRef<{
     renderer: THREE.WebGLRenderer | null;
     scene: THREE.Scene | null;
     camera: THREE.PerspectiveCamera | null;
     meshes: THREE.Mesh[];
-    textures: THREE.Texture[];
-    scrollPos: number;
-    targetScrollPos: number;
+    reflectionMeshes: THREE.Mesh[];
+    planeGeo: THREE.PlaneGeometry | null;
+    reflectGeo: THREE.PlaneGeometry | null;
+    angle: number;
+    targetAngle: number;
     velocity: number;
     isDragging: boolean;
     dragStartX: number;
-    dragStartY: number;
-    dragStartScroll: number;
-    layoutProgress: number;
+    dragStartAngle: number;
+    radius: number;
+    cardWidth: number;
+    cardHeight: number;
+    archHeight: number;
+    angleStep: number;
+    mouse: { x: number; y: number; targetX: number; targetY: number };
     rafId: number;
   }>({
     renderer: null,
     scene: null,
     camera: null,
     meshes: [],
-    textures: [],
-    scrollPos: 0,
-    targetScrollPos: 0,
+    reflectionMeshes: [],
+    planeGeo: null,
+    reflectGeo: null,
+    angle: 0,
+    targetAngle: 0,
     velocity: 0,
     isDragging: false,
     dragStartX: 0,
-    dragStartY: 0,
-    dragStartScroll: 0,
-    layoutProgress: 1.0, // starts in horizontal mode
+    dragStartAngle: 0,
+    radius: 520,
+    cardWidth: 490,
+    cardHeight: 285,
+    archHeight: 34,
+    angleStep: (Math.PI * 2) / PORTFOLIO_ITEMS.length,
+    mouse: { x: 0, y: 0, targetX: 0, targetY: 0 },
     rafId: 0,
   });
 
-  // Filter items
-  const filteredItems = activeFilter === "ALL"
-    ? GALLERY_ITEMS
-    : GALLERY_ITEMS.filter((item) => item.category === activeFilter);
+  // Step Rotate with Magnetic Snap (Next / Prev)
+  const handleStep = useCallback((direction: 1 | -1) => {
+    const step = stateRef.current.angleStep;
+    const currentSnapped = Math.round(stateRef.current.targetAngle / step) * step;
+    stateRef.current.targetAngle = currentSnapped + direction * step;
+  }, []);
 
-  // Switch Layout Mode with GSAP
-  const handleToggleLayout = useCallback(() => {
-    const nextMode = layoutMode === "horizontal" ? "vertical" : "horizontal";
-    setLayoutMode(nextMode);
-
-    const targetProgress = nextMode === "horizontal" ? 1.0 : 0.0;
-    gsap.to(sceneStateRef.current, {
-      layoutProgress: targetProgress,
-      duration: 0.9,
-      ease: "power2.inOut",
-      onUpdate: () => {
-        sceneStateRef.current.meshes.forEach((mesh) => {
-          const mat = mesh.material as THREE.ShaderMaterial;
-          if (mat.uniforms.uEffectsHorizontalProgress) {
-            mat.uniforms.uEffectsHorizontalProgress.value = sceneStateRef.current.layoutProgress;
-          }
-        });
-      },
-    });
-  }, [layoutMode]);
-
-  // Three.js Initialization & Render Loop
+  // Main Three.js Setup & Interactive Cylinder Loop
   useEffect(() => {
     if (!canvasRef.current || !containerRef.current) return;
     const container = containerRef.current;
     const canvas = canvasRef.current;
 
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    const width = container.clientWidth || window.innerWidth;
+    const height = container.clientHeight || 750;
 
     // 1. Scene, Camera, Renderer
     const scene = new THREE.Scene();
-    const fov = 45;
-    const camera = new THREE.PerspectiveCamera(fov, width / height, 0.1, 2000);
-    camera.position.z = 600;
+    const camera = new THREE.PerspectiveCamera(40, width / height, 1, 3000);
+    // Camera positioned at Z: 580 looking at center
+    camera.position.set(0, 0, 580);
 
     const renderer = new THREE.WebGLRenderer({
       canvas,
@@ -344,375 +266,354 @@ export const About = () => {
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    const state = sceneStateRef.current;
+    const state = stateRef.current;
     state.renderer = renderer;
     state.scene = scene;
     state.camera = camera;
-    state.layoutProgress = layoutMode === "horizontal" ? 1.0 : 0.0;
 
-    // 2. Texture Loader & Geometry
-    const textureLoader = new THREE.TextureLoader();
-    const planeGeo = new THREE.PlaneGeometry(1, 1, 32, 32);
+    // Proportions matching user's target reference screenshot:
+    // Card width covers ~45% of viewport, leaving PO on left and IO on right clearly visible!
+    const N = PORTFOLIO_ITEMS.length;
+    const angleStep = (Math.PI * 2) / N;
+    state.angleStep = angleStep;
 
-    // 3. Create Meshes for each Gallery Item
+    const cardWidth = Math.min(Math.max(width * 0.445, 360), 485);
+    const cardHeight = Math.round(cardWidth / 1.64);
+    // Subtle gap (~34px) between cards along the perimeter
+    const cardGap = 34;
+    const cylinderRadius = (cardWidth + cardGap) / angleStep;
+    const archHeight = Math.round(cardHeight * 0.12); // Exact upward convex curve matching aikawakenichi
+
+    state.cardWidth = cardWidth;
+    state.cardHeight = cardHeight;
+    state.radius = cylinderRadius;
+    state.archHeight = archHeight;
+
+    // 2. Real-dimension PlaneGeometry
+    const planeGeo = new THREE.PlaneGeometry(cardWidth, cardHeight, 64, 40);
+    const reflectGeo = new THREE.PlaneGeometry(cardWidth, cardHeight * 0.70, 64, 30);
+    state.planeGeo = planeGeo;
+    state.reflectGeo = reflectGeo;
+
     state.meshes = [];
-    state.textures = [];
+    state.reflectionMeshes = [];
 
-    GALLERY_ITEMS.forEach((item) => {
-      const tex = textureLoader.load(item.image);
-      tex.minFilter = THREE.LinearFilter;
-      tex.magFilter = THREE.LinearFilter;
-      tex.generateMipmaps = false;
-      state.textures.push(tex);
+    // 3. Texture Loader with cross-origin
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.setCrossOrigin("anonymous");
 
+    // 4. Create Meshes for each Card and its Floor Reflection
+    PORTFOLIO_ITEMS.forEach((item) => {
+      const defaultTex = createPlaceholderTexture();
+
+      // Primary Card Material
       const mat = new THREE.ShaderMaterial({
-        vertexShader: VERTEX_SHADER,
-        fragmentShader: FRAGMENT_SHADER,
+        vertexShader: EXACT_CYLINDER_VERTEX_SHADER,
+        fragmentShader: EXACT_CYLINDER_FRAGMENT_SHADER,
         transparent: true,
         side: THREE.DoubleSide,
         uniforms: {
-          tDiffuse: { value: tex },
-          uUvScale: { value: new THREE.Vector2(1.0, 1.0) },
-          iResolution: { value: new THREE.Vector2(width, height) },
-          uSize: { value: new THREE.Vector2(320, 320 / item.aspect) },
-          uScrollPos: { value: 0 },
+          tDiffuse: { value: defaultTex },
+          uSize: { value: new THREE.Vector2(cardWidth, cardHeight) },
+          uCurveRadius: { value: cylinderRadius },
+          uArchHeight: { value: archHeight },
           uVelocity: { value: 0 },
           uAlpha: { value: 1.0 },
-
-          // Film Roll / Curl settings from Kenichi Aikawa
-          uRollTopBend: { value: 120.0 },
-          uRollTopRadius: { value: 180.0 },
-          uRollTopRange: { value: 0.5 },
-          uRollTopReturn: { value: 0.65 },
-          uRollTopStart: { value: 0.1 },
-          uRollTopFade: { value: 0.85 },
-          uRollTopFadeStart: { value: 0.2 },
-
-          // Flutter & Waves
-          uEffectsStrength: { value: 2.2 },
-          uEffectsWaveSmooth: { value: 0.8 },
-          uEffectsWaveSpacing: { value: 0.5 },
-          uEffectsHorizontalProgress: { value: state.layoutProgress },
-          uEffectsHorizontalStrength: { value: 2.0 },
-          uEffectsHorizontalWaveSpacing: { value: 0.45 },
-
-          // Motion Blur & Aberration
-          uEffectsBlurVelocity: { value: 0.003 },
-          uEffectsAberration: { value: 0.025 },
-
-          // Bilinear Colors
-          uColorA: { value: new THREE.Vector3(...item.colors.a) },
-          uColorB: { value: new THREE.Vector3(...item.colors.b) },
-          uColorC: { value: new THREE.Vector3(...item.colors.c) },
-          uColorD: { value: new THREE.Vector3(...item.colors.d) },
-          uImageMix: { value: 1.0 },
+          uIsReflection: { value: 0.0 },
         },
       });
 
       const mesh = new THREE.Mesh(planeGeo, mat);
       scene.add(mesh);
       state.meshes.push(mesh);
+
+      // Floor Reflection Material (mirrored underneath)
+      const matReflect = new THREE.ShaderMaterial({
+        vertexShader: EXACT_CYLINDER_VERTEX_SHADER,
+        fragmentShader: EXACT_CYLINDER_FRAGMENT_SHADER,
+        transparent: true,
+        side: THREE.DoubleSide,
+        uniforms: {
+          tDiffuse: { value: defaultTex },
+          uSize: { value: new THREE.Vector2(cardWidth, cardHeight * 0.72) },
+          uCurveRadius: { value: cylinderRadius },
+          uArchHeight: { value: archHeight },
+          uVelocity: { value: 0 },
+          uAlpha: { value: 0.75 },
+          uIsReflection: { value: 1.0 },
+        },
+      });
+
+      const refMesh = new THREE.Mesh(reflectGeo, matReflect);
+      scene.add(refMesh);
+      state.reflectionMeshes.push(refMesh);
+
+      // Load real image asynchronously
+      textureLoader.load(
+        item.image,
+        (loadedTex) => {
+          loadedTex.minFilter = THREE.LinearFilter;
+          loadedTex.magFilter = THREE.LinearFilter;
+          loadedTex.generateMipmaps = false;
+          mat.uniforms.tDiffuse.value = loadedTex;
+          matReflect.uniforms.tDiffuse.value = loadedTex;
+        },
+        undefined,
+        () => {
+          const fb = item.fallback || item.image;
+          textureLoader.load(fb, (fbTex) => {
+            fbTex.minFilter = THREE.LinearFilter;
+            mat.uniforms.tDiffuse.value = fbTex;
+            matReflect.uniforms.tDiffuse.value = fbTex;
+          });
+        }
+      );
     });
 
-    // 4. Position Meshes in 3D Space based on Layout Mode
-    const updateMeshTransforms = (scroll: number, progress: number) => {
-      const cardWidth = Math.min(width * 0.36, 420);
-      const gapX = cardWidth + 48;
-      const gapY = 480;
+    // 5. Update 3D Positions around Cylinder Circumference
+    // CARD POSITIONED AT Y = -76 (exact vertical alignment matching aikawakenichi)
+    const CARD_Y = -76;
+
+    const updateCylinderTransforms = (currentAngle: number) => {
+      const tiltX = -state.mouse.y * 0.035;
+      const tiltY = state.mouse.x * 0.035;
 
       state.meshes.forEach((mesh, idx) => {
-        const item = GALLERY_ITEMS[idx];
-        const cardHeight = cardWidth / item.aspect;
-        mesh.scale.set(cardWidth, cardHeight, 1);
+        const itemAngle = idx * angleStep + currentAngle;
+
+        // Position on 3D Cylinder Perimeter
+        const cylX = Math.sin(itemAngle) * state.radius;
+        const cylZ = (Math.cos(itemAngle) - 1.0) * state.radius;
+        const cylRotY = itemAngle + tiltY;
+
+        // Primary Card transform
+        mesh.position.set(cylX, CARD_Y, cylZ);
+        mesh.rotation.set(tiltX, cylRotY, 0);
+
+        // Reflection Mesh transform (mirrored directly below card)
+        const refMesh = state.reflectionMeshes[idx];
+        refMesh.position.set(cylX, CARD_Y - (cardHeight * 0.84), cylZ);
+        refMesh.rotation.set(tiltX, cylRotY, 0);
+
+        // Card opacity: smooth fade for cards on the backside of the drum
+        const cosAngle = Math.cos(itemAngle);
+        const frontVisibility = THREE.MathUtils.smoothstep(cosAngle, -0.35, 0.4);
 
         const mat = mesh.material as THREE.ShaderMaterial;
-        mat.uniforms.uSize.value.set(cardWidth, cardHeight);
+        mat.uniforms.uAlpha.value = frontVisibility;
 
-        // Horizontal positioning
-        const hX = (idx * gapX) - scroll;
-        const hY = Math.sin(idx * 0.8 + scroll * 0.002) * 20;
-
-        // Vertical positioning (2 columns alternating)
-        const col = idx % 2 === 0 ? -1 : 1;
-        const row = Math.floor(idx / 2);
-        const vX = col * (cardWidth * 0.6 + 24);
-        const vY = -(row * gapY) + scroll;
-
-        // Interpolate between Vertical and Horizontal
-        mesh.position.x = THREE.MathUtils.lerp(vX, hX, progress);
-        mesh.position.y = THREE.MathUtils.lerp(vY, hY, progress);
-        mesh.position.z = Math.sin(idx * 1.5 + scroll * 0.003) * 15;
-
-        // Subtle rotation matching film strip movement
-        mesh.rotation.y = THREE.MathUtils.lerp(0, -state.velocity * 0.001, progress);
-        mesh.rotation.z = THREE.MathUtils.lerp(col * 0.02, state.velocity * 0.0005, progress);
+        const refMat = refMesh.material as THREE.ShaderMaterial;
+        refMat.uniforms.uAlpha.value = frontVisibility * 0.75;
       });
     };
 
-    // 5. Render Loop with Smooth Inertia Dampening
-    let lastScroll = 0;
+    // 6. Physics Animation Loop with Inertial Damping & Magnetic Snap
+    let lastAngle = 0;
     const animate = () => {
-      // Inertia interpolation (Lerp 0.08)
-      state.scrollPos += (state.targetScrollPos - state.scrollPos) * 0.08;
-      state.velocity = state.scrollPos - lastScroll;
-      lastScroll = state.scrollPos;
+      state.angle += (state.targetAngle - state.angle) * 0.085;
+      state.velocity = state.angle - lastAngle;
+      lastAngle = state.angle;
 
-      // Update uniforms for all meshes
+      state.mouse.x += (state.mouse.targetX - state.mouse.x) * 0.06;
+      state.mouse.y += (state.mouse.targetY - state.mouse.y) * 0.06;
+
       state.meshes.forEach((mesh) => {
         const mat = mesh.material as THREE.ShaderMaterial;
-        mat.uniforms.uScrollPos.value = state.scrollPos;
-        mat.uniforms.uVelocity.value = state.velocity;
+        mat.uniforms.uVelocity.value = state.velocity * 25.0;
+      });
+      state.reflectionMeshes.forEach((mesh) => {
+        const mat = mesh.material as THREE.ShaderMaterial;
+        mat.uniforms.uVelocity.value = state.velocity * 25.0;
       });
 
-      updateMeshTransforms(state.scrollPos, state.layoutProgress);
+      updateCylinderTransforms(state.angle);
       renderer.render(scene, camera);
 
-      // Track active center index
-      const cardWidth = Math.min(width * 0.36, 420) + 48;
-      const currentIndex = Math.max(
-        0,
-        Math.min(
-          GALLERY_ITEMS.length - 1,
-          Math.round(state.scrollPos / cardWidth)
-        )
-      );
-      setActiveIndex(currentIndex);
+      // Track active center card
+      const normalizedAngle = (-state.angle % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+      const activeIdx = Math.round(normalizedAngle / angleStep) % N;
+      setActiveIndex(activeIdx);
 
       state.rafId = requestAnimationFrame(animate);
     };
     state.rafId = requestAnimationFrame(animate);
 
-    // 6. Native Wheel & Touch Event Handlers
-    const onWheel = (e: WheelEvent) => {
-      // When hovering over this section, handle gallery scrolling
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-        state.targetScrollPos += e.deltaX * 1.2;
-      } else {
-        // In horizontal mode, vertical scroll drives horizontal gallery
-        if (state.layoutProgress > 0.5) {
-          state.targetScrollPos += e.deltaY * 1.0;
-        } else {
-          state.targetScrollPos += e.deltaY * 0.9;
-        }
-      }
+    // 7. Interactive Event Handlers with Auto-Snap
+    let wheelTimeout: ReturnType<typeof setTimeout>;
 
-      // Bound scrolling range
-      const maxScroll = (GALLERY_ITEMS.length - 1) * 440;
-      state.targetScrollPos = Math.max(-100, Math.min(maxScroll + 200, state.targetScrollPos));
+    const onWheel = (e: WheelEvent) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      state.targetAngle -= delta * 0.0022;
+
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(() => {
+        state.targetAngle = Math.round(state.targetAngle / angleStep) * angleStep;
+      }, 140);
     };
 
     const onPointerDown = (e: PointerEvent) => {
       state.isDragging = true;
       state.dragStartX = e.clientX;
-      state.dragStartY = e.clientY;
-      state.dragStartScroll = state.targetScrollPos;
+      state.dragStartAngle = state.targetAngle;
       canvas.style.cursor = "grabbing";
     };
 
     const onPointerMove = (e: PointerEvent) => {
-      if (!state.isDragging) return;
-      const delta = state.layoutProgress > 0.5
-        ? (state.dragStartX - e.clientX) * 1.5
-        : (e.clientY - state.dragStartY) * 1.5;
-      state.targetScrollPos = state.dragStartScroll + delta;
+      const rect = container.getBoundingClientRect();
+      state.mouse.targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      state.mouse.targetY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
 
-      const maxScroll = (GALLERY_ITEMS.length - 1) * 440;
-      state.targetScrollPos = Math.max(-100, Math.min(maxScroll + 200, state.targetScrollPos));
+      if (!state.isDragging) return;
+      const deltaX = e.clientX - state.dragStartX;
+      state.targetAngle = state.dragStartAngle + (deltaX * 0.0035);
     };
 
     const onPointerUp = () => {
+      if (!state.isDragging) return;
       state.isDragging = false;
       canvas.style.cursor = "grab";
+      state.targetAngle = Math.round(state.targetAngle / angleStep) * angleStep;
     };
 
-    // Resize Handler
-    const onResize = () => {
+    const handleResize = () => {
       if (!container) return;
-      const newW = container.clientWidth;
-      const newH = container.clientHeight;
+      const newW = container.clientWidth || window.innerWidth;
+      const newH = container.clientHeight || 750;
       camera.aspect = newW / newH;
       camera.updateProjectionMatrix();
       renderer.setSize(newW, newH);
-
-      state.meshes.forEach((mesh) => {
-        const mat = mesh.material as THREE.ShaderMaterial;
-        mat.uniforms.iResolution.value.set(newW, newH);
-      });
     };
 
+    window.addEventListener("resize", handleResize);
     container.addEventListener("wheel", onWheel, { passive: true });
     canvas.addEventListener("pointerdown", onPointerDown);
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
-    window.addEventListener("resize", onResize);
 
     return () => {
+      clearTimeout(wheelTimeout);
       cancelAnimationFrame(state.rafId);
+      window.removeEventListener("resize", handleResize);
       container.removeEventListener("wheel", onWheel);
       canvas.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
-      window.removeEventListener("resize", onResize);
 
-      // Dispose WebGL resources
       state.meshes.forEach((mesh) => {
-        mesh.geometry.dispose();
         (mesh.material as THREE.Material).dispose();
       });
-      state.textures.forEach((t) => t.dispose());
+      state.reflectionMeshes.forEach((mesh) => {
+        (mesh.material as THREE.Material).dispose();
+      });
+      if (state.planeGeo) state.planeGeo.dispose();
+      if (state.reflectGeo) state.reflectGeo.dispose();
       renderer.dispose();
     };
-  }, [layoutMode]);
+  }, []);
+
+  const activeItem = PORTFOLIO_ITEMS[activeIndex] || PORTFOLIO_ITEMS[0];
 
   return (
     <section
       id="about"
       ref={containerRef}
-      className="section-intro is--hero w-full min-h-[100vh] h-[100vh] bg-[#000000] text-white flex flex-col justify-between relative overflow-hidden select-none border-t border-b border-white/10"
+      className="section-intro is--hero w-full min-h-[96vh] h-[96vh] bg-[#FFFFFF] text-black flex flex-col justify-between relative overflow-hidden select-none"
     >
-      {/* 1. Hidden SVG Realistic Physical Glass Distortion Filter */}
-      <svg className="hidden">
-        <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
-          <feTurbulence
-            id="glass-turbulence"
-            type="fractalNoise"
-            baseFrequency="0.0015 0.006"
-            numOctaves={1}
-            seed={24}
-            result="turbulence"
-          />
-          <feComponentTransfer in="turbulence" result="mapped">
-            <feFuncR type="gamma" amplitude={1} exponent={10} offset={0.5} />
-            <feFuncG type="gamma" amplitude={0} exponent={1} offset={0} />
-            <feFuncB type="gamma" amplitude={0} exponent={1} offset={0.5} />
-          </feComponentTransfer>
-          <feGaussianBlur in="turbulence" stdDeviation={8} result="softMap" />
-          <feSpecularLighting
-            in="softMap"
-            surfaceScale={5}
-            specularConstant={1}
-            specularExponent={100}
-            lightingColor="white"
-            result="specLight"
-          />
-        </filter>
-      </svg>
-
-      {/* 2. Minimalist Fashion-Editorial Header (Aikawa Aesthetic) */}
-      <div className="w-full px-6 md:px-12 pt-8 z-30 flex items-center justify-between pointer-events-none">
-        <div className="flex items-center gap-4 pointer-events-auto group cursor-pointer">
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <h2 className="text-xs md:text-sm font-mono tracking-[0.2em] uppercase font-semibold text-white/90">
-                MAKE MY VID · CINEMATOGRAPHY
-              </h2>
-            </div>
-            <p className="text-[10px] md:text-xs font-mono text-white/40 tracking-wider mt-0.5">
-              19.0760° N, 72.8777° E · MUMBAI / TOKYO · [2026]
-            </p>
-          </div>
-        </div>
-
-        {/* Live Status & Filter indicators */}
-        <div className="hidden md:flex items-center gap-8 pointer-events-auto">
-          <div className="flex items-center gap-3 text-xs font-mono text-white/60">
-            <span className="text-white/30">[STREAM]</span>
-            <span>{String(activeIndex + 1).padStart(2, "0")} / {String(GALLERY_ITEMS.length).padStart(2, "0")}</span>
-          </div>
-          <div className="h-4 w-[1px] bg-white/20" />
-          <div className="text-xs font-mono text-white/80 tracking-widest uppercase">
-            {GALLERY_ITEMS[activeIndex]?.title || "CINEMA"}
-          </div>
-        </div>
+      {/* 1. Exact top tagline matching aikawakenichi.com */}
+      <div className="w-full pt-5 md:pt-6 z-20 flex flex-col items-center justify-center pointer-events-none">
+        <p className="text-xs md:text-sm font-sans tracking-wide text-neutral-800">
+          <span className="underline decoration-1 underline-offset-4 font-medium text-black">Make My Vid</span> is a high-end commercial video production studio.
+        </p>
       </div>
 
-      {/* 3. Three.js Full-Viewport WebGL Canvas */}
+      {/* 2. EXACT AIKAWAKENICHI PORTFOLIO TITLE (Editorial Old font, 18.1184vw length and height) */}
+      <div className="absolute top-14 md:top-16 lg:top-20 inset-x-0 flex items-center justify-center pointer-events-none z-0">
+        <h1
+          className="w-full text-center uppercase select-none text-[#000000] whitespace-nowrap"
+          style={{
+            fontFamily: "'Editorial Old', 'Bodoni Moda', 'Playfair Display', serif",
+            fontSize: "clamp(42px, 18.1184vw, 360px)",
+            lineHeight: 1,
+            letterSpacing: "0",
+            fontWeight: 400,
+          }}
+        >
+          PORTFOLIO
+        </h1>
+      </div>
+
+      {/* 3. Three.js 3D Curved Cylindrical Canvas (Sits in front, lower down) */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing z-10"
       />
 
-      {/* 4. Editorial Background Micro-Watermark */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-        <span className="text-[18vw] font-black text-white/[0.02] tracking-tighter uppercase select-none font-sans">
-          CINEMA
-        </span>
+      {/* 4. OVERLAID TITLE IN EDITORIAL OLD SERIF (Centered in the card, matching aikawakenichi Journey text) */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 translate-y-20 md:translate-y-24">
+        <div className="flex flex-col items-center justify-center transition-all duration-300">
+          <span
+            key={activeItem.tag}
+            className="text-5xl md:text-6xl lg:text-[5.5rem] font-serif tracking-normal animate-fadeIn select-none font-normal"
+            style={{
+              fontFamily: "'Editorial Old', 'Bodoni Moda', serif",
+              background: "linear-gradient(180deg, #FFFFFF 0%, #EAD5B0 40%, #C49755 80%, #7A4B1A 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              filter: "drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.75))",
+            }}
+          >
+            {activeItem.tag}
+          </span>
+        </div>
       </div>
 
-      {/* 5. Liquid Glass Floating Nav Dock (The Signature Kenichi Aikawa Element) */}
-      <div className="w-full pb-8 flex items-center justify-center z-30 pointer-events-none">
-        <div
-          className="pointer-events-auto flex items-center gap-2 p-1.5 rounded-full transition-all duration-500"
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.06)",
-            backdropFilter: "blur(12px) url(#glass-distortion) saturate(190%)",
-            WebkitBackdropFilter: "blur(12px) saturate(190%)",
-            boxShadow: `
-              inset 0 0 0 1px rgba(255, 255, 255, 0.18),
-              inset 1.8px 3px 0 -2px rgba(255, 255, 255, 0.75),
-              inset -2px -2px 0 -2px rgba(255, 255, 255, 0.5),
-              inset -3px -8px 1px -6px rgba(255, 255, 255, 0.35),
-              inset 0 3px 4px -2px rgba(0, 0, 0, 0.4),
-              0 1px 5px rgba(0, 0, 0, 0.2),
-              0 10px 28px rgba(0, 0, 0, 0.45)
-            `,
-          }}
-        >
-          {/* Mode Switcher Button: Horizontal vs Vertical */}
-          <button
-            onClick={handleToggleLayout}
-            className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono font-medium tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-all duration-300"
-            title="Toggle between Horizontal Film Strip & Vertical Grid"
-          >
-            <svg
-              className={`w-3.5 h-3.5 transition-transform duration-500 ${layoutMode === "vertical" ? "rotate-90" : "rotate-0"}`}
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            >
-              <rect x="2" y="3" width="12" height="4" rx="1" />
-              <rect x="2" y="9" width="12" height="4" rx="1" />
-            </svg>
-            <span className="uppercase">{layoutMode === "horizontal" ? "Horizontal" : "Vertical"}</span>
-          </button>
-
-          <div className="h-4 w-[1px] bg-white/20" />
-
-          {/* Quick Category Filters */}
-          <div className="flex items-center gap-1">
-            {["ALL", "CINEMATOGRAPHY", "HIGH FASHION", "COMMERCIAL"].map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                className={`px-3 py-1.5 rounded-full text-[11px] font-mono tracking-wider transition-all duration-300 ${
-                  activeFilter === cat
-                    ? "bg-white text-black font-semibold shadow-sm"
-                    : "text-white/60 hover:text-white hover:bg-white/10"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+      {/* 5. Minimalist Glass Dock matching aikawakenichi.com */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+        <div className="pointer-events-auto flex items-center gap-2.5 px-3 py-1.5 rounded-full transition-all duration-300 bg-neutral-900/80 text-white shadow-xl border border-white/20 backdrop-blur-md">
+          <div className="w-5 h-5 rounded-full overflow-hidden border border-white/30 flex-shrink-0">
+            <img src={activeItem.image} alt={activeItem.tag} className="w-full h-full object-cover" />
           </div>
 
-          <div className="h-4 w-[1px] bg-white/20" />
+          <span className="text-xs font-mono font-bold tracking-widest uppercase px-1 text-white/90">
+            {activeItem.tag}
+          </span>
 
-          {/* Inspect / View Full Details Button */}
           <button
-            onClick={() => setSelectedItem(GALLERY_ITEMS[activeIndex])}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-mono font-medium bg-white/15 hover:bg-white/25 text-white transition-all duration-300 hover:scale-[1.02]"
+            onClick={() => handleStep(-1)}
+            className="w-6 h-6 rounded-full flex items-center justify-center text-white/75 hover:text-white hover:bg-white/10 transition-all text-xs"
+            title="Previous Card"
           >
-            <span>INFO</span>
-            <svg className="w-3 h-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M6 12L10 8L6 4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            ←
+          </button>
+
+          <button
+            onClick={() => handleStep(1)}
+            className="w-6 h-6 rounded-full flex items-center justify-center text-white/75 hover:text-white hover:bg-white/10 transition-all text-xs"
+            title="Next Card"
+          >
+            →
+          </button>
+
+          <button
+            onClick={() => handleStep(1)}
+            className="w-6 h-6 rounded-full flex items-center justify-center text-white/75 hover:text-white hover:bg-white/10 transition-all text-xs"
+            title="Rotate"
+          >
+            ↻
+          </button>
+
+          <div className="h-3 w-[1px] bg-white/20" />
+
+          <button
+            onClick={() => setSelectedItem(activeItem)}
+            className="px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-white text-black hover:bg-white/90 transition-all"
+          >
+            VIEW
           </button>
         </div>
       </div>
 
-      {/* 6. Full-Screen Radial Lens Modal (applyMainDetailsCamera Effect) */}
+      {/* 6. Fullscreen Modal on View */}
       {selectedItem && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-6 md:p-16 animate-fadeIn"
@@ -724,10 +625,9 @@ export const About = () => {
           onClick={() => setSelectedItem(null)}
         >
           <div
-            className="relative max-w-4xl w-full bg-neutral-950/80 border border-white/15 rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row items-center gap-8 p-6 md:p-10"
+            className="relative max-w-4xl w-full bg-neutral-950/90 border border-white/15 rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row items-center gap-8 p-6 md:p-10"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <button
               onClick={() => setSelectedItem(null)}
               className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all"
@@ -735,7 +635,6 @@ export const About = () => {
               ✕
             </button>
 
-            {/* Modal Image with subtle corner chromatic edge */}
             <div className="w-full md:w-1/2 aspect-[4/3] rounded-xl overflow-hidden relative shadow-lg border border-white/10">
               <img
                 src={selectedItem.image}
@@ -744,12 +643,11 @@ export const About = () => {
               />
             </div>
 
-            {/* Modal Details Content */}
-            <div className="w-full md:w-1/2 flex flex-col text-left">
+            <div className="w-full md:w-1/2 flex flex-col text-left text-white">
               <span className="text-xs font-mono tracking-widest text-white/50 uppercase mb-2">
-                {selectedItem.category} · {selectedItem.year}
+                {selectedItem.tag} · {selectedItem.year}
               </span>
-              <h3 className="text-2xl md:text-3xl font-heading uppercase text-white font-bold mb-4 tracking-wide">
+              <h3 className="text-2xl md:text-3xl font-heading uppercase font-bold mb-4 tracking-wide">
                 {selectedItem.title}
               </h3>
               <p className="text-sm font-sans text-white/70 leading-relaxed mb-6">
@@ -766,8 +664,8 @@ export const About = () => {
                   <span className="text-white font-medium">35MM ANAMORPHIC / 4K PRORES</span>
                 </div>
                 <div className="flex justify-between text-white/50">
-                  <span>PRODUCTION:</span>
-                  <span className="text-white font-medium">MAKE MY VID</span>
+                  <span>CURVATURE:</span>
+                  <span className="text-amber-400 font-medium">3D CYLINDRICAL ARC</span>
                 </div>
               </div>
             </div>
