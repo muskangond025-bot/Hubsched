@@ -1,0 +1,457 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@font-face {
+  font-family: 'HK Guise';
+  src: url('/fonts/HKGuiseRegular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HK Guise';
+  src: url('/fonts/HKGuiseSemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HK Guise';
+  src: url('/fonts/HKGuiseBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CHANEY Wide';
+  src: url('/fonts/CHANEY-Wide.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Humane';
+  src: url('/fonts/Humane-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'HK Guise', sans-serif;
+  --font-mono: 'HK Guise', monospace;
+  --font-heading: 'CHANEY Wide', sans-serif;
+  --font-humane: 'Humane', sans-serif;
+}
+
+:root {
+  --background: #FAF9F6;
+  --foreground: #101010;
+  --primary-red: #E83C25;
+  --cubic-default: cubic-bezier(0.625, 0.05, 0, 1);
+}
+
+.dark {
+  --background: #101010;
+  --foreground: #ffffff;
+}
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -o-font-smoothing: antialiased;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: none;
+    /* We will use a custom cursor */
+  }
+
+  html,
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-size: 1vw;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  @media screen and (min-width: 1440px) {
+
+    html,
+    body {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 990px) {
+
+    html,
+    body {
+      font-size: initial;
+    }
+  }
+
+  /* Lenis Scroll Base */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+}
+
+/* Custom Selection */
+::selection {
+  background: var(--foreground);
+  color: var(--background);
+  text-shadow: none;
+}
+
+img::selection,
+svg::selection {
+  background: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+/* Specific Utilities */
+.heading-style-h1 {
+  @apply font-heading text-[12vw] leading-[0.9] uppercase;
+}
+
+.heading-style-h2 {
+  @apply font-heading text-[8vw] leading-[0.9] uppercase;
+}
+
+.text-size-medium {
+  @apply text-[1.5rem] leading-[1.4] font-medium;
+}
+
+.text-size-small {
+  @apply text-[0.875rem] font-bold tracking-widest uppercase;
+}
+
+.text-size-tiny {
+  @apply text-[0.75rem] font-semibold tracking-widest uppercase;
+}
+
+.project-color {
+  transition: color 0.4s ease;
+}
+
+/* Striped Line */
+.striped-line {
+  width: 100%;
+  height: 48px;
+}
+
+.striped-line-wrap {
+  @apply overflow-hidden border-t border-b border-black/10 dark:border-white/10;
+}
+
+/* About page static HTML styling overrides for light mode */
+.looping-text {
+  color: rgba(16, 16, 16, 0.15) !important;
+  -webkit-text-stroke-color: rgba(16, 16, 16, 0.15) !important;
+}
+
+.dark .looping-text {
+  color: rgba(255, 255, 255, 0.15) !important;
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.process-item-title {
+  color: #101010 !important;
+}
+
+.process-item-desc {
+  color: rgba(16, 16, 16, 0.7) !important;
+}
+
+.dark .process-item-title {
+  color: #ffffff !important;
+}
+
+.dark .process-item-desc {
+  color: #a0aec0 !important;
+}
+
+.section-process .text-color-white {
+  color: #101010 !important;
+}
+
+.section-process .text-color-secondary {
+  color: rgba(16, 16, 16, 0.7) !important;
+}
+
+.dark .section-process .text-color-white {
+  color: #ffffff !important;
+}
+
+.dark .section-process .text-color-secondary {
+  color: #a0aec0 !important;
+}
+
+.heading-style-h2,
+.heading-style-h1 {
+  color: var(--foreground) !important;
+}
+
+.projects-title-wrap .heading-style-h2 {
+  color: white !important;
+}
+
+/* CardSwing Scroll Cards Glassmorphic Overrides */
+.section-expertise-two {
+  background-color: #0a1429 !important;
+  transition: background-color 0.4s ease;
+}
+
+.card-container {
+  border: none !important;
+}
+
+.scroll-card {
+  width: 340px !important;
+  height: 420px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background-color: rgba(13, 27, 62, 0.75) !important; /* solid/semi-trans dark blue glass background */
+  border-radius: 24px !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 20px !important; /* restore card padding */
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4) !important;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.scroll-card:hover {
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  background-color: rgba(13, 27, 62, 0.9) !important;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6) !important;
+}
+
+.scroll-card-image-wrapper {
+  width: 100% !important;
+  height: 180px !important; /* nested image wrapper height */
+  border-radius: 16px !important; /* uniform rounding */
+  overflow: hidden !important;
+  background-color: #ffffff !important;
+  margin: 0 0 20px 0 !important; /* space before text content */
+  padding: 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.scroll-card-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  padding: 12px !important; /* Keeps illustration inside box boundaries */
+  transition: transform 0.5s ease;
+}
+
+.scroll-card:hover .scroll-card-image {
+  transform: scale(1.04);
+}
+
+.scroll-card-inner-wrapper {
+  padding: 0 !important; /* reset since parent has 20px padding */
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.scroll-card p.text-size-tiny {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 11px !important;
+  line-height: 1.55 !important;
+  text-transform: none !important;
+  margin: 0 0 10px 0 !important;
+  text-align: left !important;
+}
+
+.scroll-card .section-tagline {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-top: auto !important;
+  width: 100% !important;
+}
+
+.scroll-card .text-size-large.is--title {
+  color: #ffffff !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+.scroll-card .icon-embed-medium {
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+/* Expertise Cards Glassmorphic Overrides */
+.expertise-front {
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+}
+
+.expertise-front:hover {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.expertise-front.is--1,
+.expertise-front.is--2,
+.expertise-front.is--3 {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Grow Card Accordion - Exoflora Luxury Design */
+.grow-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .grow-card-list {
+    flex-direction: row;
+  }
+}
+
+.grow-card {
+  position: relative;
+  width: 100%;
+  height: 440px !important;
+  min-height: 440px !important;
+  max-height: 440px !important;
+  background: #131415;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: flex 0.5s cubic-bezier(0.25, 1, 0.3, 1), transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+  cursor: pointer;
+  flex: 1;
+  overflow: hidden;
+}
+
+.grow-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 768px) {
+  .grow-card.is-hovered {
+    flex: 2.2; /* expands in width */
+  }
+}
+
+.grow-card-image-wrap {
+  width: 100%;
+  height: 140px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: #1c1d1e;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.grow-card-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.grow-card:hover .grow-card-image-wrap img {
+  transform: scale(1.05);
+}
+
+@keyframes spin-earth {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Pricing Section Split Scroll Transitions */
+.projects-title-list,
+.projects-video-list {
+  transition: transform 0.9s cubic-bezier(0.25, 1, 0.2, 1) !important;
+}
+
+.project-bg-color-item {
+  transition: opacity 0.9s cubic-bezier(0.25, 1, 0.2, 1) !important;
+}
+
+.project-border-item,
+.projects-number-item,
+.projects-text-item,
+.projects-eyebrow-item {
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.25, 1, 0.2, 1) !important;
+}
+
+/* Testimonials Section Rebranding */
+.section-testimonials-wrap,
+.section-testimonials-mobile {
+  background-color: #0b1a36 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.section-testimonials {
+  background-color: transparent !important;
+}
+
+.testimonials-inner p {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.testimonial-slider .text-gray-600 {
+  color: rgba(255, 255, 255, 0.55) !important;
+}

@@ -1,0 +1,1 @@
+gsap.registerPlugin(Flip,ScrollTrigger,SplitText,Draggable,InertiaPlugin,ScrambleTextPlugin,ScrollSmoother,TextPlugin,CustomEase,EasePack,DrawSVGPlugin,CustomBounce,CustomWiggle,ScrollToPlugin);

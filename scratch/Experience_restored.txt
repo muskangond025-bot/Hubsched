@@ -1,0 +1,100 @@
+"use client";
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from '@/lib/gsap';
+import { useTheme } from 'next-themes';
+
+export const Experience = () => {
+const { resolvedTheme } = useTheme();
+const [mounted, setMounted] = useState(false);
+
+useEffect(() => {
+setMounted(true);
+}, []);
+
+const isDark = mounted ? resolvedTheme === 'dark' : false;
+const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+const [isMobile, setIsMobile] = useState<boolean>(false);
+const containerRef = useRef<HTMLDivElement>(null);
+const stripeTopRef = useRef<SVGGElement>(null);
+const stripeBottomRef = useRef<SVGGElement>(null);
+const cardsRef = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+// 1. Monitor window resize to toggle desktop accordion behavior vs mobile static aspect ratios
+const handleResize = () => {
+setIsMobile(window.innerWidth < 768);
+};
+handleResize();
+window.addEventListener('resize', handleResize);
+
+if (!containerRef.current) return () => window.removeEventListener('resize', handleResize);
+
+let ctx = gsap.context(() => {
+// 2. Parallax scroll shift on both top and bottom striped SVG lines
+if (stripeTopRef.current) {
+gsap.to(stripeTopRef.current, {
+x: -120,
+ease: 'none',
+scrollTrigger: {
+trigger: containerRef.current,
+start: 'top bottom',
+end: 'bottom top',
+scrub: 0.5
+}
+});
+}
+if (stripeBottomRef.current) {
+gsap.to(stripeBottomRef.current, {
+x: -120,
+ease: 'none',
+scrollTrigger: {
+trigger: containerRef.current,
+start: 'top bottom',
+end: 'bottom top',
+scrub: 0.5
+}
+});
+}
+
+// 3. Staggered reveal of the brand cards on scroll
+const cards = cardsRef.current?.querySelectorAll('.grow-card');
+if (cards && cards.length > 0) {
+gsap.fromTo(cards,
+{ opacity: 0, y: 40, scale: 0.97 },
+{
+opacity: 1,
+y: 0,
+scale: 1,
+stagger: 0.12,
+ease: 'power3.out',
+duration: 0.8,
+scrollTrigger: {
+trigger: cardsRef.current,
+start: 'top 85%',
+toggleActions: 'play none none none'
+}
+}
+);
+}
+}, containerRef);
+
+return () => {
+window.removeEventListener('resize', handleResize);
+ctx.revert();
+};
+}, []);
+
+const brands = [
+{
+name: "Logitech",
+logoClass: "is--logitech",
+description: "Seamless integration with advanced fingerprint and facial recognition biometric devices for real-time office attendance syncing.",
+logoSvg: (
+<svg width="260" height="67" viewBox="0 0 260 67" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto max-h-[40px] md:max-h-[50px] object-contain">
+<g clipPath="url(#clip0_3921_4563)">
+<path d="M67.5499 29.6402V24.4361H58.4141C56.954 23.9325 55.3688 23.6387 53.7419 23.6387C45.8993 23.6387 39.6836 29.6402 39.6836 37.4882C39.6836 45.3363 45.8576 51.3378 53.7419 51.3378C61.5845 51.3378 67.8002 45.3363 67.8002 37.4882C67.8002 34.8442 67.091 32.2422 65.6727 30.3116L67.5499 29.6402ZM53.7419 45.0426C49.5703 45.0426 46.2747 41.7271 46.2747 37.4463C46.2747 33.2075 49.5703 29.9339 53.7419 29.9339C57.9552 29.9339 61.2508 33.2075 61.2508 37.4882C61.2508 41.769 57.9552 45.0426 53.7419 45.0426Z" fill="white" />
+<path d="M23.4528 23.5957C15.6102 23.5957 9.39453 29.5972 9.39453 37.4453C9.39453 45.2934 15.5685 51.2948 23.4528 51.2948C31.2954 51.2948 37.5111 45.2934 37.5111 37.4453C37.4694 29.6392 31.2954 23.5957 23.4528 23.5957ZM23.4528 45.0416C19.2812 45.0416 15.9857 41.7261 15.9857 37.4453C15.9857 33.2065 19.2812 29.9329 23.4528 29.9329C27.6661 29.9329 30.9617 33.2065 30.9617 37.4872C30.9617 41.768 27.6661 45.0416 23.4528 45.0416Z" fill="white" />
+<path d="M6.89442 13.3555H0.386719V50.5814H6.89442V13.3555Z" fill="white" />
+<path d="M76.8944 24.4355H70.3867V50.5819H76.8944V24.4355Z" fill="white" />
+<path d="M53.7431 59.8561C49.5715 59.8561 46.276 56.5826 46.276 52.3438H39.7266C39.7266 60.1918 45.9005 66.1933 53.7849 66.1933C61.6275 66.1933 67.8431 60.1918 67.8431 52.3438H61.252C61.2103 56.6245 57.9147 59.8561 53.7431 59.8561Z" fill="white" />
+<path d="M107.764 23.5957C99.9627 23.5957 94.0391 29.5972 94.0391 37.6131C94.0391 45.5032 99.4621 51.3368 107.889 51.3368C112.561 51.3368 116.691 49.6161 119.736 46.3426L115.398 42.0198C113.27 44.0763 110.976 45.5452 108.056 45.5452C104.51 45.5452 101.84 43.4887 100.922 40.0893H121.154V38.4945C121.113 29.5972 115.648 23.5957 107.764 23.5957ZM100.755 34.8013C101.631 31.3179 104.259 29.3873 107.638 29.3873C111.017 29.3873 113.562 31.2759 114.396 34.8013H100.755Z" fill="white" />
