@@ -1,0 +1,634 @@
+{
+  "pillars": [
+    {
+      "id": "work",
+      "title": "Work",
+      "japanese": "仕事",
+      "description": "Editorial, commercial campaigns, and portrait commissions for leading international publications and design houses.",
+      "colors": [
+        "#F3ECF3",
+        "#D9C6DB",
+        "#D694AD",
+        "#AD7092"
+      ],
+      "accentColor": "#D694AD",
+      "bgGradient": "linear-gradient(135deg, rgba(214,148,173,0.15) 0%, rgba(26,20,24,0.95) 100%)",
+      "heroImage": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18234246/w_000-scaled.jpg.webp",
+      "thumbnail": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18234246/w_000-256x171.jpg.webp",
+      "items": [
+        {
+          "index": 1,
+          "id": 23,
+          "colors": [
+            "#F0E6EB",
+            "#B05A49",
+            "#E9C88F",
+            "#30334A"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18234428/w_001-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18234428/w_001-256x179.jpg.webp",
+            "width": 2560,
+            "height": 1791
+          }
+        },
+        {
+          "index": 2,
+          "id": 26,
+          "colors": [
+            "#8FAAD7",
+            "#B0CDF2",
+            "#D4ECFC",
+            "#7089B6"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235215/w_002-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235215/w_002-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1707
+          }
+        },
+        {
+          "index": 3,
+          "id": 27,
+          "colors": [
+            "#D0AE93",
+            "#FAEDCE",
+            "#D5CDCA",
+            "#8C7874"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235331/w_003-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235331/w_003-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1708
+          }
+        },
+        {
+          "index": 4,
+          "id": 28,
+          "colors": [
+            "#EDF5F8",
+            "#C8D5DA",
+            "#2A2728",
+            "#B6AAB0"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235506/w_004-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235506/w_004-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1707
+          }
+        },
+        {
+          "index": 5,
+          "id": 29,
+          "colors": [
+            "#EDEDEE",
+            "#332D2D",
+            "#CDB7AC",
+            "#534B4B"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235605/w_005-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235605/w_005-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1707
+          }
+        },
+        {
+          "index": 6,
+          "id": 30,
+          "colors": [
+            "#FAF7EE",
+            "#EBCA94",
+            "#D5D0CF",
+            "#CFAA78"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235748/w_006-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235748/w_006-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1708
+          }
+        },
+        {
+          "index": 7,
+          "id": 31,
+          "colors": [
+            "#524F4A",
+            "#75706A",
+            "#979287",
+            "#B6B3A8"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235948/w_007-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18235948/w_007-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1708
+          }
+        },
+        {
+          "index": 8,
+          "id": 32,
+          "colors": [
+            "#4D4C48",
+            "#757167",
+            "#959288",
+            "#B7B3A7"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19000148/w_008-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19000148/w_008-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1708
+          }
+        },
+        {
+          "index": 9,
+          "id": 33,
+          "colors": [
+            "#4D4B46",
+            "#D8D3C8",
+            "#777066",
+            "#B9B2A7"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19000336/w_009-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19000336/w_009-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1707
+          }
+        },
+        {
+          "index": 10,
+          "id": 34,
+          "colors": [
+            "#8999A7",
+            "#F3EACF",
+            "#4F4C34",
+            "#D0C9B2"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19000530/w_010-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19000530/w_010-205x256.jpg.webp",
+            "width": 2048,
+            "height": 2560
+          }
+        },
+        {
+          "index": 11,
+          "id": 54,
+          "colors": [
+            "#F3FBFE",
+            "#B7C6D3",
+            "#59564D",
+            "#ECD8B5"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004232/w_011-1-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004232/w_011-1-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1708
+          }
+        },
+        {
+          "index": 12,
+          "id": 35,
+          "colors": [
+            "#D3E5F0",
+            "#AFC8DC",
+            "#7193B0",
+            "#B4CFE6"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19001042/w_012-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19001042/w_012-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1708
+          }
+        }
+      ]
+    },
+    {
+      "id": "fashion",
+      "title": "Fashion",
+      "japanese": "ファッション",
+      "description": "Haute couture, seasonal lookbooks, and high-contrast runway explorations balancing form and movement.",
+      "colors": [
+        "#DBD1D0",
+        "#282824",
+        "#E9C797",
+        "#D0A975"
+      ],
+      "accentColor": "#D0A975",
+      "bgGradient": "linear-gradient(135deg, rgba(208,169,117,0.15) 0%, rgba(20,20,18,0.95) 100%)",
+      "heroImage": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004430/f_000-scaled.jpg.webp",
+      "thumbnail": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004430/f_000-256x177.jpg.webp",
+      "items": [
+        {
+          "index": 1,
+          "id": 57,
+          "colors": [
+            "#F2EFF3",
+            "#EED28B",
+            "#EFCC51",
+            "#D3AC75"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004606/f_001-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004606/f_001-256x177.jpg.webp",
+            "width": 2560,
+            "height": 1770
+          }
+        },
+        {
+          "index": 2,
+          "id": 58,
+          "colors": [
+            "#F2F0FD",
+            "#D2C8F0",
+            "#CF95AD",
+            "#8F8BCC"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004702/f_002-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004702/f_002-256x177.jpg.webp",
+            "width": 2560,
+            "height": 1770
+          }
+        },
+        {
+          "index": 3,
+          "id": 59,
+          "colors": [
+            "#EDE8E8",
+            "#191A17",
+            "#CFC6B4",
+            "#AF966E"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004758/f_003-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004758/f_003-256x177.jpg.webp",
+            "width": 2560,
+            "height": 1770
+          }
+        },
+        {
+          "index": 4,
+          "id": 60,
+          "colors": [
+            "#EAE8EC",
+            "#B1B3B0",
+            "#535349",
+            "#8D8676"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004857/f_004-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004857/f_004-256x177.jpg.webp",
+            "width": 2560,
+            "height": 1770
+          }
+        },
+        {
+          "index": 5,
+          "id": 61,
+          "colors": [
+            "#2E2F2E",
+            "#ADB5B2",
+            "#D08C96",
+            "#687677"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005002/f_005-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005002/f_005-256x177.jpg.webp",
+            "width": 2560,
+            "height": 1770
+          }
+        },
+        {
+          "index": 6,
+          "id": 62,
+          "colors": [
+            "#EDEEF2",
+            "#D0D1D3",
+            "#ADAEB0",
+            "#8D9095"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005131/f_006-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005131/f_006-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1707
+          }
+        },
+        {
+          "index": 7,
+          "id": 63,
+          "colors": [
+            "#D3CFCC",
+            "#B8B0A9",
+            "#998F87",
+            "#363435"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005253/f_007-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005253/f_007-171x256.jpg.webp",
+            "width": 1707,
+            "height": 2560
+          }
+        },
+        {
+          "index": 8,
+          "id": 64,
+          "colors": [
+            "#D3D2D1",
+            "#B9B5AC",
+            "#946851",
+            "#6E4C3A"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005351/f_008-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005351/f_008-205x256.jpg.webp",
+            "width": 2048,
+            "height": 2560
+          }
+        },
+        {
+          "index": 9,
+          "id": 65,
+          "colors": [
+            "#D5D4D1",
+            "#B6B3AF",
+            "#534A4B",
+            "#756869"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005445/f_009-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005445/f_009-205x256.jpg.webp",
+            "width": 2048,
+            "height": 2560
+          }
+        },
+        {
+          "index": 10,
+          "id": 66,
+          "colors": [
+            "#E8CFB2",
+            "#B6AFA4",
+            "#918F83",
+            "#717369"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005522/f_010-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005522/f_010-205x256.jpg.webp",
+            "width": 2048,
+            "height": 2560
+          }
+        },
+        {
+          "index": 11,
+          "id": 67,
+          "colors": [
+            "#EFECE6",
+            "#B9B4A9",
+            "#697393",
+            "#4B3930"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005618/f_011-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005618/f_011-205x256.jpg.webp",
+            "width": 2048,
+            "height": 2560
+          }
+        },
+        {
+          "index": 12,
+          "id": 68,
+          "colors": [
+            "#383631",
+            "#726B4A",
+            "#D8CCAF",
+            "#B6AA8F"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005825/f_012-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19005825/f_012-171x256.jpg.webp",
+            "width": 1708,
+            "height": 2560
+          }
+        }
+      ]
+    },
+    {
+      "id": "journey",
+      "title": "Journey",
+      "japanese": "旅路",
+      "description": "Atmospheric landscape impressions, serene natural phenomena, and architectural stillness across continents.",
+      "colors": [
+        "#D7F3FD",
+        "#B4D0E8",
+        "#8DB5D9",
+        "#6B99C5"
+      ],
+      "accentColor": "#6B99C5",
+      "bgGradient": "linear-gradient(135deg, rgba(107,153,197,0.15) 0%, rgba(16,22,28,0.95) 100%)",
+      "heroImage": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19013644/j_000-scaled.jpg.webp",
+      "thumbnail": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19013644/j_000-256x171.jpg.webp",
+      "items": [
+        {
+          "index": 1,
+          "id": 89,
+          "colors": [
+            "#D2EAE9",
+            "#51504A",
+            "#CDD0BC",
+            "#697372"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19014233/j_001-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19014233/j_001-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1707
+          }
+        },
+        {
+          "index": 2,
+          "id": 90,
+          "colors": [
+            "#CDD1AF",
+            "#50524A",
+            "#8F8F69",
+            "#F4EDCB"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19014352/j_002-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19014352/j_002-192x256.jpg.webp",
+            "width": 1920,
+            "height": 2560
+          }
+        },
+        {
+          "index": 3,
+          "id": 91,
+          "colors": [
+            "#D6E4D8",
+            "#CEAF71",
+            "#AF9258",
+            "#74694D"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19014512/j_003-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19014512/j_003-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1708
+          }
+        },
+        {
+          "index": 4,
+          "id": 92,
+          "colors": [
+            "#E5E7C6",
+            "#C7AF72",
+            "#736E52",
+            "#968D66"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19014635/j_004-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19014635/j_004-192x256.jpg.webp",
+            "width": 1920,
+            "height": 2560
+          }
+        },
+        {
+          "index": 5,
+          "id": 93,
+          "colors": [
+            "#595246",
+            "#D3D0CD",
+            "#777369",
+            "#B3B1AC"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19014901/j_005-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19014901/j_005-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1708
+          }
+        },
+        {
+          "index": 6,
+          "id": 94,
+          "colors": [
+            "#D1CDB3",
+            "#EEE9CF",
+            "#F9F8EE",
+            "#D4D6C8"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19015121/j_006-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19015121/j_006-192x256.jpg.webp",
+            "width": 1920,
+            "height": 2560
+          }
+        },
+        {
+          "index": 7,
+          "id": 95,
+          "colors": [
+            "#CCD9D3",
+            "#A9B7B6",
+            "#8C9592",
+            "#70726B"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19015314/j_007-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19015314/j_007-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1708
+          }
+        },
+        {
+          "index": 8,
+          "id": 96,
+          "colors": [
+            "#26324C",
+            "#486994",
+            "#B0CED5",
+            "#6991B5"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19015456/j_008-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19015456/j_008-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1708
+          }
+        },
+        {
+          "index": 9,
+          "id": 97,
+          "colors": [
+            "#F4F2EA",
+            "#D0CCB2",
+            "#8B7449",
+            "#6E5531"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19015616/j_009-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19015616/j_009-192x256.jpg.webp",
+            "width": 1920,
+            "height": 2560
+          }
+        },
+        {
+          "index": 10,
+          "id": 98,
+          "colors": [
+            "#D2D6C7",
+            "#B5BAAB",
+            "#8C8976",
+            "#6D6958"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19020009/j_010-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19020009/j_010-192x256.jpg.webp",
+            "width": 1920,
+            "height": 2560
+          }
+        },
+        {
+          "index": 11,
+          "id": 99,
+          "colors": [
+            "#D9D0D2",
+            "#B0968B",
+            "#EFEEEB",
+            "#E4D9CF"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19020243/j_011-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19020243/j_011-256x171.jpg.webp",
+            "width": 2560,
+            "height": 1707
+          }
+        },
+        {
+          "index": 12,
+          "id": 100,
+          "colors": [
+            "#CEE5F3",
+            "#36504C",
+            "#53706A",
+            "#769185"
+          ],
+          "image": {
+            "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19020344/j_012-scaled.jpg.webp",
+            "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19020344/j_012-205x256.jpg.webp",
+            "width": 2048,
+            "height": 2560
+          }
+        }
+      ]
+    }
+  ]
+}

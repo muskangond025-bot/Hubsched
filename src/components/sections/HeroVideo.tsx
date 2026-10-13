@@ -98,7 +98,7 @@ export const HeroVideo = () => {
               {/* VIDEO WRAPPER WITH EXPANSION AND HOVER INTERACTION */}
               <div
                 ref={videoInnerRef}
-                className="hero-video-inner relative w-full aspect-video rounded-[96px] object-cover justify-center items-center flex overflow-hidden cursor-none select-none border border-black/10 shadow-2xl bg-black"
+                className="hero-video-inner relative w-full aspect-video rounded-[96px] object-cover justify-center items-center flex overflow-hidden select-none border border-black/10 shadow-2xl bg-black cursor-pointer"
                 onPointerEnter={() => setIsHovered(true)}
                 onPointerLeave={() => setIsHovered(false)}
                 onPointerMove={handlePointerMove}

@@ -1,0 +1,424 @@
+{
+  "overview": [
+    {
+      "id": 25,
+      "slug": "work",
+      "title": "Work",
+      "colors": [
+        "#F3ECF3",
+        "#D9C6DB",
+        "#D694AD",
+        "#AD7092"
+      ],
+      "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18234246/w_000-256x171.jpg.webp",
+      "homeImage": {
+        "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/18234246/w_000-scaled.jpg.webp",
+        "alt": "Work",
+        "width": 2560,
+        "height": 1714
+      }
+    },
+    {
+      "id": 55,
+      "slug": "fashion",
+      "title": "Fashion",
+      "colors": [
+        "#DBD1D0",
+        "#282824",
+        "#E9C797",
+        "#D0A975"
+      ],
+      "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004430/f_000-256x177.jpg.webp",
+      "homeImage": {
+        "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19004430/f_000-scaled.jpg.webp",
+        "alt": "Fashion",
+        "width": 2560,
+        "height": 1770
+      }
+    },
+    {
+      "id": 87,
+      "slug": "journey",
+      "title": "Journey",
+      "colors": [
+        "#D7F3FD",
+        "#B4D0E8",
+        "#8DB5D9",
+        "#6B99C5"
+      ],
+      "thumbnailSrc": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19013644/j_000-256x171.jpg.webp",
+      "homeImage": {
+        "src": "https://aikawakenichi-v2.storage.googleapis.com/data/2026/05/19013644/j_000-scaled.jpg.webp",
+        "alt": "Journey",
+        "width": 2560,
+        "height": 1708
+      }
+    }
+  ],
+  "workDetails": [
+    {
+      "title": "",
+      "src": {
+        "src": 82,
+        "thumbnailSrc": 83,
+        "width": 17,
+        "height": 84
+      },
+      "colors": [
+        "#F0E6EB",
+        "#B05A49",
+        "#E9C88F",
+        "#30334A"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 93,
+        "thumbnailSrc": 94,
+        "width": 17,
+        "height": 95
+      },
+      "colors": [
+        "#8FAAD7",
+        "#B0CDF2",
+        "#D4ECFC",
+        "#7089B6"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 104,
+        "thumbnailSrc": 105,
+        "width": 17,
+        "height": 44
+      },
+      "colors": [
+        "#D0AE93",
+        "#FAEDCE",
+        "#D5CDCA",
+        "#8C7874"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 114,
+        "thumbnailSrc": 115,
+        "width": 17,
+        "height": 95
+      },
+      "colors": [
+        "#EDF5F8",
+        "#C8D5DA",
+        "#2A2728",
+        "#B6AAB0"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 124,
+        "thumbnailSrc": 125,
+        "width": 17,
+        "height": 95
+      },
+      "colors": [
+        "#EDEDEE",
+        "#332D2D",
+        "#CDB7AC",
+        "#534B4B"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 134,
+        "thumbnailSrc": 135,
+        "width": 17,
+        "height": 44
+      },
+      "colors": [
+        "#FAF7EE",
+        "#EBCA94",
+        "#D5D0CF",
+        "#CFAA78"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 144,
+        "thumbnailSrc": 145,
+        "width": 17,
+        "height": 44
+      },
+      "colors": [
+        "#524F4A",
+        "#75706A",
+        "#979287",
+        "#B6B3A8"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 154,
+        "thumbnailSrc": 155,
+        "width": 17,
+        "height": 44
+      },
+      "colors": [
+        "#4D4C48",
+        "#757167",
+        "#959288",
+        "#B7B3A7"
+      ]
+    }
+  ],
+  "fashionDetails": [
+    {
+      "title": "",
+      "src": {
+        "src": 388,
+        "thumbnailSrc": 389,
+        "width": 17,
+        "height": 31
+      },
+      "colors": [
+        "#F2EFF3",
+        "#EED28B",
+        "#EFCC51",
+        "#D3AC75"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 398,
+        "thumbnailSrc": 399,
+        "width": 17,
+        "height": 31
+      },
+      "colors": [
+        "#F2F0FD",
+        "#D2C8F0",
+        "#CF95AD",
+        "#8F8BCC"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 408,
+        "thumbnailSrc": 409,
+        "width": 17,
+        "height": 31
+      },
+      "colors": [
+        "#EDE8E8",
+        "#191A17",
+        "#CFC6B4",
+        "#AF966E"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 418,
+        "thumbnailSrc": 419,
+        "width": 17,
+        "height": 31
+      },
+      "colors": [
+        "#EAE8EC",
+        "#B1B3B0",
+        "#535349",
+        "#8D8676"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 428,
+        "thumbnailSrc": 429,
+        "width": 17,
+        "height": 31
+      },
+      "colors": [
+        "#2E2F2E",
+        "#ADB5B2",
+        "#D08C96",
+        "#687677"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 438,
+        "thumbnailSrc": 439,
+        "width": 17,
+        "height": 95
+      },
+      "colors": [
+        "#EDEEF2",
+        "#D0D1D3",
+        "#ADAEB0",
+        "#8D9095"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 448,
+        "thumbnailSrc": 449,
+        "width": 95,
+        "height": 17
+      },
+      "colors": [
+        "#D3CFCC",
+        "#B8B0A9",
+        "#998F87",
+        "#363435"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 458,
+        "thumbnailSrc": 459,
+        "width": 55,
+        "height": 17
+      },
+      "colors": [
+        "#D3D2D1",
+        "#B9B5AC",
+        "#946851",
+        "#6E4C3A"
+      ]
+    }
+  ],
+  "journeyDetails": [
+    {
+      "title": "",
+      "src": {
+        "src": 691,
+        "thumbnailSrc": 692,
+        "width": 17,
+        "height": 95
+      },
+      "colors": [
+        "#D2EAE9",
+        "#51504A",
+        "#CDD0BC",
+        "#697372"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 701,
+        "thumbnailSrc": 702,
+        "width": 703,
+        "height": 17
+      },
+      "colors": [
+        "#CDD1AF",
+        "#50524A",
+        "#8F8F69",
+        "#F4EDCB"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 712,
+        "thumbnailSrc": 713,
+        "width": 17,
+        "height": 44
+      },
+      "colors": [
+        "#D6E4D8",
+        "#CEAF71",
+        "#AF9258",
+        "#74694D"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 722,
+        "thumbnailSrc": 723,
+        "width": 703,
+        "height": 17
+      },
+      "colors": [
+        "#E5E7C6",
+        "#C7AF72",
+        "#736E52",
+        "#968D66"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 732,
+        "thumbnailSrc": 733,
+        "width": 17,
+        "height": 44
+      },
+      "colors": [
+        "#595246",
+        "#D3D0CD",
+        "#777369",
+        "#B3B1AC"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 742,
+        "thumbnailSrc": 743,
+        "width": 703,
+        "height": 17
+      },
+      "colors": [
+        "#D1CDB3",
+        "#EEE9CF",
+        "#F9F8EE",
+        "#D4D6C8"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 752,
+        "thumbnailSrc": 753,
+        "width": 17,
+        "height": 44
+      },
+      "colors": [
+        "#CCD9D3",
+        "#A9B7B6",
+        "#8C9592",
+        "#70726B"
+      ]
+    },
+    {
+      "title": "",
+      "src": {
+        "src": 762,
+        "thumbnailSrc": 763,
+        "width": 17,
+        "height": 44
+      },
+      "colors": [
+        "#26324C",
+        "#486994",
+        "#B0CED5",
+        "#6991B5"
+      ]
+    }
+  ]
+}

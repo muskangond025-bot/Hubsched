@@ -3,7 +3,6 @@ import "./globals.css";
 import "./dumemearts.css";
 import { cn } from "@/lib/utils";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { Cursor } from "@/components/Cursor";
 import { AgentationProvider } from "@/components/AgentationProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
@@ -26,10 +25,9 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", "font-sans")}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col cursor-none">
+      <body className="min-h-full flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <SmoothScroll>
-            <Cursor />
             {children}
           </SmoothScroll>
           <AgentationProvider />
