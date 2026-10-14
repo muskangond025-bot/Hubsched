@@ -1,7 +1,6 @@
 import { Sidebar } from "@/components/Sidebar";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/sections/Hero";
-import { About } from "@/components/sections/About";
 import { Expertise } from "@/components/sections/Expertise";
 import { Projects } from "@/components/sections/Projects";
 import { Testimonials } from "@/components/sections/Testimonials";
@@ -36,7 +35,6 @@ export default function Home() {
 
       <div className="flex flex-col relative w-full z-10">
         <Hero />
-        <About />
         <Expertise />
 
         <SectionCrosses dark={false} />

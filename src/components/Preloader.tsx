@@ -1,91 +1,82 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { CinemaClapper3D } from "@/components/ui/CinemaClapper3D";
+import { ViewfinderOverlay } from "@/components/ui/ViewfinderOverlay";
 
-export const Preloader = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const text = "Make My Vid";
-  const [displayedText, setDisplayedText] = useState("");
+export const Preloader: React.FC = () => {
+  // Runs on every single page load / refresh
+  const [isVisible, setIsVisible] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Check if animation already played in this browser session
-    const hasSeenIntro = sessionStorage.getItem("mmv_intro_seen");
-    if (!hasSeenIntro) {
-      setIsVisible(true);
-
-      // Typing effect
-      let index = 0;
-      const interval = setInterval(() => {
-        if (index < text.length) {
-          setDisplayedText(text.slice(0, index + 1));
-          index++;
-        } else {
-          clearInterval(interval);
-          // Wait and close
-          setTimeout(() => {
-            setIsVisible(false);
-            sessionStorage.setItem("mmv_intro_seen", "true");
-          }, 1200);
-        }
-      }, 90);
-
-      return () => clearInterval(interval);
+    if (isVisible) {
+      document.body.style.overflow = "hidden";
     }
+
+    // Global replay function
+    (window as any).replayCinematicIntro = () => {
+      setIsExiting(false);
+      setIsVisible(true);
+      document.body.style.overflow = "hidden";
+    };
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isVisible]);
+
+  const handleComplete = useCallback(() => {
+    setIsExiting(true);
+    // Smooth fade duration matches transition
+    setTimeout(() => {
+      setIsVisible(false);
+      document.body.style.overflow = "";
+    }, 900);
   }, []);
+
+  const handleSkip = useCallback(() => {
+    setIsExiting(true);
+    setTimeout(() => {
+      setIsVisible(false);
+      document.body.style.overflow = "";
+    }, 400);
+  }, []);
+
+  if (!isVisible) return null;
 
   return (
     <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 0.95, y: -40, filter: "blur(12px)" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#070709] text-white select-none pointer-events-none"
-        >
-          {/* Ambient glow */}
-          <div className="absolute w-[500px] h-[500px] rounded-full bg-red-600/10 blur-[140px] pointer-events-none" />
+      <motion.div
+        initial={{ opacity: 1 }}
+        animate={{ opacity: isExiting ? 0 : 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
+        className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#FFFFFF] text-black select-none overflow-hidden"
+      >
+        {/* Fullscreen Camera Viewfinder Overlay (active throughout preloader duration) */}
+        <ViewfinderOverlay />
 
-          {/* Center Brand Text */}
-          <div className="relative flex items-center gap-3">
-            <span className="font-serif tracking-tight text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
-              {displayedText}
-            </span>
-            {displayedText.length === text.length && (
-              <motion.div
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: 1 }}
-                transition={{ duration: 0.3 }}
-                className="flex items-end gap-1 h-10 ml-2"
-              >
-                {[36, 18, 30, 22].map((h, i) => (
-                  <motion.div
-                    key={i}
-                    animate={{ height: [8, h, 12, h] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 0.7 + i * 0.15,
-                      ease: "easeInOut",
-                    }}
-                    className="w-[3px] bg-red-500 rounded-full"
-                    style={{ height: `${h}px` }}
-                  />
-                ))}
-              </motion.div>
-            )}
-          </div>
-
-          {/* Subtitle tag */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 0.6, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="mt-6 text-xs md:text-sm tracking-[0.3em] uppercase text-zinc-400 font-mono"
+        {/* Minimalist Skip Button (Top-Right) */}
+        <div className="absolute top-8 md:top-12 right-8 md:right-16 z-30">
+          <button
+            onClick={handleSkip}
+            className="px-3.5 py-1.5 rounded-full bg-black/5 hover:bg-black/10 border border-black/15 text-[10px] md:text-xs font-mono tracking-widest text-black/70 hover:text-black transition-all cursor-pointer"
           >
-            Elevating Brands Through Video
-          </motion.p>
-        </motion.div>
-      )}
+            SKIP [ESC]
+          </button>
+        </div>
+
+        {/* 3D Clapperboard Stage (Drops from top in static form) */}
+        <div className="relative w-full h-full flex items-center justify-center z-10 cursor-pointer">
+          <CinemaClapper3D
+            autoPlay={true}
+            onComplete={handleComplete}
+            className="w-full h-full max-w-[1100px] max-h-[800px]"
+          />
+        </div>
+      </motion.div>
     </AnimatePresence>
   );
 };

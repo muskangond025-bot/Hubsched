@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { AgentationProvider } from "@/components/AgentationProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Preloader } from "@/components/Preloader";
 
 export const metadata: Metadata = {
   title: "Make My Vid | Professional Video Production & Editing Services",
@@ -27,6 +28,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <Preloader />
           <SmoothScroll>
             {children}
           </SmoothScroll>

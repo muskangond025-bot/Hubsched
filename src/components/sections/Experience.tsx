@@ -88,7 +88,7 @@ export const Experience = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="experience" className="section-experience relative w-full overflow-hidden bg-[#1b4fd8] py-24 flex flex-col justify-between" style={{ minHeight: '85vh' }}>
+    <section id="about" className="section-experience relative w-full overflow-hidden bg-[#1b4fd8] py-24 flex flex-col justify-between" style={{ minHeight: '85vh' }}>
       
       {/* Decorative top strip */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-white/10" />

@@ -542,11 +542,6 @@ export const About = () => {
         </h1>
       </div>
 
-      {/* 3. Three.js 3D Curved Cylindrical Canvas (Sits in front, lower down) */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing z-10"
-      />
 
       {/* 4. OVERLAID TITLE IN EDITORIAL OLD SERIF (Centered in the card, matching aikawakenichi Journey text) */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 translate-y-20 md:translate-y-24">

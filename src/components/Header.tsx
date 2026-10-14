@@ -12,7 +12,8 @@ import {
   Sparkles,
   MessageSquare,
   HelpCircle,
-  ArrowUpRight
+  ArrowUpRight,
+  Clapperboard
 } from "lucide-react";
 
 export const Header = () => {
@@ -84,6 +85,17 @@ export const Header = () => {
       desc: "Verified feedback from enterprise clients",
       href: "#testimonials",
       icon: MessageSquare,
+    },
+    {
+      title: "Play 3D Clapper Reveal",
+      desc: "Smash & reveal cinematic 3D slate",
+      href: "#",
+      onClick: () => {
+        if (typeof window !== "undefined" && (window as any).replayCinematicIntro) {
+          (window as any).replayCinematicIntro();
+        }
+      },
+      icon: Clapperboard,
     },
     {
       title: "FAQ & Workflow",
@@ -248,8 +260,14 @@ export const Header = () => {
                           <a
                             key={idx}
                             href={item.href}
-                            onClick={() => setDropdownOpen(false)}
-                            className="flex items-center justify-between p-2.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/8 transition-colors duration-150 group"
+                            onClick={(e) => {
+                              if ((item as any).onClick) {
+                                e.preventDefault();
+                                (item as any).onClick();
+                              }
+                              setDropdownOpen(false);
+                            }}
+                            className="flex items-center justify-between p-2.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/8 transition-colors duration-150 group cursor-pointer"
                           >
                             <div className="flex items-center gap-3">
                               <div className="w-8 h-8 rounded-lg bg-black/6 dark:bg-white/10 flex items-center justify-center text-[#1E1E1E] dark:text-white group-hover:bg-[#1b4fd8] group-hover:text-white transition-colors duration-200">

@@ -2,39 +2,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { useTheme } from 'next-themes';
-import { RealGlobe } from '@/components/ui/real-globe';
+import { CinemaCamera3D } from '@/components/ui/CinemaCamera3D';
 
 const rulerSegments = [
   "-11", "-10", "-09", "-08", "-07", "-06", "-05", "-04", "-03", "-02", "-01",
   "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"
-];
-
-
-const markers = [
-  { id: "sf", location: [37.7595, -122.4367] as [number, number], label: "San Francisco" },
-  { id: "nyc", location: [40.7128, -74.006] as [number, number], label: "New York" },
-  { id: "tokyo", location: [35.6762, 139.6503] as [number, number], label: "Tokyo" },
-  { id: "london", location: [51.5074, -0.1278] as [number, number], label: "London" },
-  { id: "sydney", location: [-33.8688, 151.2093] as [number, number], label: "Sydney" },
-  { id: "capetown", location: [-33.9249, 18.4241] as [number, number], label: "Cape Town" },
-  { id: "dubai", location: [25.2048, 55.2708] as [number, number], label: "Dubai" },
-  { id: "paris", location: [48.8566, 2.3522] as [number, number], label: "Paris" },
-  { id: "saopaulo", location: [-23.5505, -46.6333] as [number, number], label: "São Paulo" },
-];
-
-const arcs = [
-  {
-    id: "sf-tokyo",
-    from: [37.7595, -122.4367] as [number, number],
-    to: [35.6762, 139.6503] as [number, number],
-    label: "SF → Tokyo",
-  },
-  {
-    id: "nyc-london",
-    from: [40.7128, -74.006] as [number, number],
-    to: [51.5074, -0.1278] as [number, number],
-    label: "NYC → London",
-  },
 ];
 
 export const Hero = () => {
@@ -48,22 +20,7 @@ export const Hero = () => {
   const isDark = mounted ? resolvedTheme === "dark" : false;
 
   const containerRef = useRef<HTMLDivElement>(null);
-
-  // Interactive Globe States & Refs
-  const lottieContainerRef = useRef<HTMLDivElement>(null);
-  const rootRef = useRef<HTMLDivElement>(null);
   const [cetTime, setCetTime] = useState<string>("00:00:00");
-
-  // Globe parameters refs (to avoid React re-renders during high-frequency drag events)
-  const totalFramesRef = useRef(150);
-  const currentFrameRef = useRef(0);
-  const lastDragDirectionRef = useRef(1);
-  const lastYawVelocityRef = useRef(0);
-  const draggingRef = useRef(false);
-  const lastXRef = useRef(0);
-  const easingSpeedRef = useRef(false);
-  const currentSpeedRef = useRef(1.5);
-  const animationInstanceRef = useRef<any>(null);
 
   // 1. Live CET Clock
   useEffect(() => {
@@ -89,154 +46,7 @@ export const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // 2. Interactive Globe Dragging Logic
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
 
-    let anim: any = null;
-    let mountDiv: HTMLDivElement | null = null;
-
-    // Dynamically import lottie-web to avoid SSR document/window issues
-    import('lottie-web').then((lottieModule) => {
-      const lottie = lottieModule.default;
-
-      if (!lottieContainerRef.current) return;
-
-      mountDiv = document.createElement('div');
-      mountDiv.style.width = '100%';
-      mountDiv.style.height = '100%';
-      lottieContainerRef.current.appendChild(mountDiv);
-
-      anim = lottie.loadAnimation({
-        container: mountDiv,
-        renderer: 'svg',
-        loop: true,
-        autoplay: false,
-        path: 'https://cdn.prod.website-files.com/67b873ab284925c72f7f5176/67bbbd8ade2275798af595f6_63473c637f3d3f5530d4c44c_lf30_editor_meaiixa3.json',
-        rendererSettings: { preserveAspectRatio: 'xMidYMid meet' }
-      });
-
-      animationInstanceRef.current = anim;
-
-      anim.addEventListener('DOMLoaded', () => {
-        totalFramesRef.current = anim.totalFrames || 150;
-        anim.setDirection(lastDragDirectionRef.current);
-        anim.setSpeed(1.5); // IDLE_SPEED
-        anim.play();
-      });
-    });
-
-    const wrap = (f: number) => {
-      const total = totalFramesRef.current;
-      return total > 0 ? ((f % total) + total) % total : f;
-    };
-
-    const easeSpeedLoop = () => {
-      if (!easingSpeedRef.current || !anim) return;
-
-      const IDLE_SPEED = 1.5;
-      const EASE_TO_IDLE = 0.06;
-
-      currentSpeedRef.current += (IDLE_SPEED - currentSpeedRef.current) * EASE_TO_IDLE;
-      anim.setSpeed(currentSpeedRef.current);
-
-      if (Math.abs(currentSpeedRef.current - IDLE_SPEED) < 0.02) {
-        currentSpeedRef.current = IDLE_SPEED;
-        anim.setSpeed(IDLE_SPEED);
-        easingSpeedRef.current = false;
-        return;
-      }
-      requestAnimationFrame(easeSpeedLoop);
-    };
-
-    const handlePointerDown = (e: PointerEvent) => {
-      if (!anim) return;
-      draggingRef.current = true;
-      easingSpeedRef.current = false;
-
-      if (rootRef.current) {
-        rootRef.current.classList.add('gw-dragging');
-        rootRef.current.setPointerCapture(e.pointerId);
-      }
-
-      lastXRef.current = e.clientX;
-      currentFrameRef.current = anim.currentFrame;
-      anim.pause();
-    };
-
-    const handlePointerMove = (e: PointerEvent) => {
-      if (!draggingRef.current || !anim) return;
-
-      const YAW_SENSITIVITY = 0.35;
-
-      const dx = e.clientX - lastXRef.current;
-      lastXRef.current = e.clientX;
-
-      const v = dx * YAW_SENSITIVITY;
-      lastYawVelocityRef.current = v;
-
-      if (dx !== 0) {
-        lastDragDirectionRef.current = dx > 0 ? 1 : -1;
-      }
-
-      currentFrameRef.current = wrap(currentFrameRef.current + v);
-      anim.goToAndStop(currentFrameRef.current, true);
-    };
-
-    const handlePointerUp = () => {
-      if (!draggingRef.current || !anim) return;
-      draggingRef.current = false;
-
-      if (rootRef.current) {
-        rootRef.current.classList.remove('gw-dragging');
-      }
-
-      const MAX_RELEASE_SPEED = 6;
-      const MIN_RELEASE_SPEED = 0.4;
-      const VELOCITY_TO_SPEED = 1.2;
-
-      const releaseSpeed = Math.min(
-        MAX_RELEASE_SPEED,
-        Math.max(MIN_RELEASE_SPEED, Math.abs(lastYawVelocityRef.current) * VELOCITY_TO_SPEED)
-      );
-
-      currentSpeedRef.current = releaseSpeed;
-      anim.setDirection(lastDragDirectionRef.current);
-      anim.goToAndStop(currentFrameRef.current, true);
-      anim.setSpeed(currentSpeedRef.current);
-      anim.play();
-
-      easingSpeedRef.current = true;
-      requestAnimationFrame(easeSpeedLoop);
-    };
-
-    const el = rootRef.current;
-    if (el) {
-      el.addEventListener('pointerdown', handlePointerDown);
-      el.addEventListener('pointermove', handlePointerMove);
-      el.addEventListener('pointerup', handlePointerUp);
-      el.addEventListener('pointercancel', handlePointerUp);
-    }
-
-    return () => {
-      if (el) {
-        el.removeEventListener('pointerdown', handlePointerDown);
-        el.removeEventListener('pointermove', handlePointerMove);
-        el.removeEventListener('pointerup', handlePointerUp);
-        el.removeEventListener('pointercancel', handlePointerUp);
-      }
-      if (anim) {
-        anim.destroy();
-      }
-      if (lottieContainerRef.current && mountDiv) {
-        try {
-          lottieContainerRef.current.removeChild(mountDiv);
-        } catch (e) {
-          // Ignore if already removed by react
-        }
-      }
-    };
-  }, []);
 
 
   // Video Player Refs & States
@@ -367,8 +177,8 @@ export const Hero = () => {
         }
       });
 
-      // Fade out the hero inner content (ruler, clocks, text, globe, copyright) as we scroll down
-      const heroContents = containerRef.current?.querySelectorAll('.hero-ruler, .hero-top, .heading-wrapper, .hero-globe-element, .hero-bottom, .hero-bg-dots, .hero-description-block');
+      // Fade out the hero inner content (ruler, clocks, text, camera, copyright) as we scroll down
+      const heroContents = containerRef.current?.querySelectorAll('.hero-ruler, .hero-top, .heading-wrapper, .hero-camera-element, .hero-bottom, .hero-bg-dots, .hero-description-block');
       if (heroContents && heroContents.length > 0) {
         gsap.to(heroContents, {
           opacity: 0,
@@ -415,7 +225,7 @@ export const Hero = () => {
       gsap.set(".frame-corner", { scale: 0, opacity: 0 });
       gsap.set(".heading-style-h1", { opacity: 0, y: 20 });
       gsap.set(".corners-wrapper", { opacity: 0, scale: 0.95 });
-      gsap.set(".hero-globe-element", { scale: 0.8, opacity: 0 });
+      gsap.set(".hero-camera-element", { scale: 0.85, opacity: 0 });
  
       // 2. Timeline Animation
       const entryTl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -448,11 +258,11 @@ export const Hero = () => {
           duration: 1.2,
           stagger: 0.15
         }, "-=0.8")
-        .to(".hero-globe-element", {
+        .to(".hero-camera-element", {
           scale: 1,
           opacity: 1,
-          duration: 1.5,
-          ease: "elastic.out(1, 0.75)"
+          duration: 1.4,
+          ease: "power3.out"
         }, "-=0.6");
  
       // 3. Mouse Movement Parallax
@@ -593,9 +403,12 @@ export const Hero = () => {
                   </div>
                 </div>
 
-                {/* Overlaid Interactive Globe Widget */}
-                <div data-parallax-layer="9" className="hero-globe-element absolute pointer-events-auto z-20 w-[42vw] max-w-[500px] aspect-square flex items-center justify-center">
-                  <RealGlobe className="w-full h-full" />
+                {/* Overlaid Interactive 3D Cinema Camera in Drawing Form */}
+                <div
+                  data-parallax-layer="9"
+                  className="hero-camera-element absolute pointer-events-auto z-20 w-[48vw] max-w-[560px] aspect-[4/3] flex items-center justify-center -translate-y-2"
+                >
+                  <CinemaCamera3D className="w-full h-full" />
                 </div>
 
               </div>
