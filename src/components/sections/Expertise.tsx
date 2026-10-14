@@ -2,6 +2,111 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap, ScrollTrigger, CustomEase } from '@/lib/gsap';
 
+const FILM_TAPE_FRAMES = [
+  {
+    id: "01",
+    tag: "FASHION",
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
+    code: "EASTMAN 5219",
+    tc: "00:01:24",
+  },
+  {
+    id: "02",
+    tag: "AUTOMOTIVE",
+    image: "https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=600&q=80",
+    code: "35MM 24FPS",
+    tc: "00:02:18",
+  },
+  {
+    id: "03",
+    tag: "EDITORIAL",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+    code: "PANAVISION",
+    tc: "00:03:42",
+  },
+  {
+    id: "04",
+    tag: "CINEMA",
+    image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80",
+    code: "ANAMORPHIC",
+    tc: "00:04:15",
+  },
+  {
+    id: "05",
+    tag: "DIRECTION",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+    code: "HORIZON RAW",
+    tc: "00:05:08",
+  },
+  {
+    id: "06",
+    tag: "STUDIO",
+    image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80",
+    code: "PRORES 4444",
+    tc: "00:06:55",
+  },
+  {
+    id: "07",
+    tag: "COLOR",
+    image: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=600&q=80",
+    code: "DAVINCI ACES",
+    tc: "00:07:31",
+  },
+  {
+    id: "08",
+    tag: "CREATIVE",
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80",
+    code: "KODAK VISION3",
+    tc: "00:08:49",
+  },
+];
+
+// Pre-computed static coordinates with rounded precision to guarantee 100% identical SSR & client hydration
+const REEL_CALIBRATION_TICKS = [
+  {"x1":191,"y1":100,"x2":186,"y2":100,"m":true},{"x1":189.62,"y1":115.8,"x2":186.66,"y2":115.28,"m":false},
+  {"x1":185.51,"y1":131.12,"x2":182.69,"y2":130.1,"m":false},{"x1":178.81,"y1":145.5,"x2":174.48,"y2":143,"m":true},
+  {"x1":169.71,"y1":158.49,"x2":167.41,"y2":156.57,"m":false},{"x1":158.49,"y1":169.71,"x2":156.57,"y2":167.41,"m":false},
+  {"x1":145.5,"y1":178.81,"x2":143,"y2":174.48,"m":true},{"x1":131.12,"y1":185.51,"x2":130.1,"y2":182.69,"m":false},
+  {"x1":115.8,"y1":189.62,"x2":115.28,"y2":186.66,"m":false},{"x1":100,"y1":191,"x2":100,"y2":186,"m":true},
+  {"x1":84.2,"y1":189.62,"x2":84.72,"y2":186.66,"m":false},{"x1":68.88,"y1":185.51,"x2":69.9,"y2":182.69,"m":false},
+  {"x1":54.5,"y1":178.81,"x2":57,"y2":174.48,"m":true},{"x1":41.51,"y1":169.71,"x2":43.43,"y2":167.41,"m":false},
+  {"x1":30.29,"y1":158.49,"x2":32.59,"y2":156.57,"m":false},{"x1":21.19,"y1":145.5,"x2":25.52,"y2":143,"m":true},
+  {"x1":14.49,"y1":131.12,"x2":17.31,"y2":130.1,"m":false},{"x1":10.38,"y1":115.8,"x2":13.34,"y2":115.28,"m":false},
+  {"x1":9,"y1":100,"x2":14,"y2":100,"m":true},{"x1":10.38,"y1":84.2,"x2":13.34,"y2":84.72,"m":false},
+  {"x1":14.49,"y1":68.88,"x2":17.31,"y2":69.9,"m":false},{"x1":21.19,"y1":54.5,"x2":25.52,"y2":57,"m":true},
+  {"x1":30.29,"y1":41.51,"x2":32.59,"y2":43.43,"m":false},{"x1":41.51,"y1":30.29,"x2":43.43,"y2":32.59,"m":false},
+  {"x1":54.5,"y1":21.19,"x2":57,"y2":25.52,"m":true},{"x1":68.88,"y1":14.49,"x2":69.9,"y2":17.31,"m":false},
+  {"x1":84.2,"y1":10.38,"x2":84.72,"y2":13.34,"m":false},{"x1":100,"y1":9,"x2":100,"y2":14,"m":true},
+  {"x1":115.8,"y1":10.38,"x2":115.28,"y2":13.34,"m":false},{"x1":131.12,"y1":14.49,"x2":130.1,"y2":17.31,"m":false},
+  {"x1":145.5,"y1":21.19,"x2":143,"y2":25.52,"m":true},{"x1":158.49,"y1":30.29,"x2":156.57,"y2":32.59,"m":false},
+  {"x1":169.71,"y1":41.51,"x2":167.41,"y2":43.43,"m":false},{"x1":178.81,"y1":54.5,"x2":174.48,"y2":57,"m":true},
+  {"x1":185.51,"y1":68.88,"x2":182.69,"y2":69.9,"m":false},{"x1":189.62,"y1":84.2,"x2":186.66,"y2":84.72,"m":false}
+];
+
+const REEL_INSPECTION_WINDOWS = [
+  { cx: 100, cy: 46, trackR: 54 },
+  { cx: 147, cy: 73, trackR: 54.2 },
+  { cx: 147, cy: 127, trackR: 54.2 },
+  { cx: 100, cy: 154, trackR: 54 },
+  { cx: 53, cy: 127, trackR: 54.2 },
+  { cx: 53, cy: 73, trackR: 54.2 },
+];
+
+const REEL_HEX_BOLTS = [
+  { bx: 128, by: 100 },
+  { bx: 114, by: 124.25 },
+  { bx: 86, by: 124.25 },
+  { bx: 72, by: 100 },
+  { bx: 86, by: 75.75 },
+  { bx: 114, by: 75.75 },
+];
+
+const REEL_DRIVE_LUGS = [
+  { kx: 111, ky: 100 },
+  { kx: 94.5, ky: 109.53 },
+  { kx: 94.5, ky: 90.47 },
+];
+
 export const Expertise = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -152,42 +257,231 @@ export const Expertise = () => {
     ));
   };
 
-  // Render square ornaments for checkerboard pattern
-  const renderSquareOrnaments = (count: number) => {
-    return Array.from({ length: count }).map((_, i) => (
-      <div key={i} className="square-ornament">
-        <div className="square"></div>
-        <div className="square is--black"></div>
-        <div className="square is--black"></div>
-        <div className="square"></div>
-      </div>
-    ));
-  };
-
   return (
     <div ref={containerRef} id="expertise" className="w-full">
-      {/* 1. CHECKERBOARD MARQUEE (Ticker) */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
-        @keyframes ticker-scroll {
-          0% { transform: translate3d(0, 0, 0); }
-          100% { transform: translate3d(-33.333%, 0, 0); }
-        }
-        .ticker-marquee-scroll {
-          display: flex;
-          width: 300%;
-          animation: ticker-scroll 16s linear infinite;
-        }
-      `}} />
-      <section className="section-check-marquee w-full bg-black py-4 border-b border-black/5 overflow-hidden">
-        <div className="ticker-section w-full">
-          <div className="ticker-component align-center w-full">
-            <div className="ticker-main w-full flex">
-              <div className="ticker-marquee-scroll flex gap-2">
-                {renderSquareOrnaments(40)}
+
+      {/* 1. CINEMA TAPE REEL WITH LOOPING MOVING FILMSTRIP */}
+
+      <section
+        className="w-full overflow-hidden select-none py-2 sm:py-3"
+        style={{
+          width: "100vw",
+          maxWidth: "100vw",
+          position: "relative",
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "transparent",
+          backgroundColor: "transparent",
+          border: "none",
+        }}
+      >
+        <div className="w-full flex items-center relative overflow-hidden" style={{ minHeight: "155px" }}>
+          
+          {/* 1. CINEMA REEL SPOOL HOUSING & VERTICAL CHROME TENSION GUIDE ROLLER */}
+          <div className="relative z-30 flex-shrink-0 flex items-center pl-2 sm:pl-4 md:pl-6 pointer-events-none select-none">
+            
+            {/* The Spool Disc & Tension Roller Container */}
+            <div className="relative w-36 h-36 sm:w-40 sm:h-40 md:w-44 md:h-44 flex items-center justify-center flex-shrink-0">
+              
+              {/* Rotating Machined 35mm Titanium Cinema Reel (Hyper-Realistic SVG) */}
+              <svg
+                viewBox="0 0 200 200"
+                className="w-full h-full animate-spool-spin drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)]"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <radialGradient id="titaniumFlange3D" cx="42%" cy="36%" r="65%">
+                    <stop offset="0%" stopColor="#c5cbd8" />
+                    <stop offset="20%" stopColor="#454955" />
+                    <stop offset="42%" stopColor="#8c94a6" />
+                    <stop offset="68%" stopColor="#22252c" />
+                    <stop offset="88%" stopColor="#646b7a" />
+                    <stop offset="100%" stopColor="#2a2d36" />
+                  </radialGradient>
+                  <linearGradient id="specularRim3D" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
+                    <stop offset="25%" stopColor="#3d424e" />
+                    <stop offset="50%" stopColor="#e2e8f4" />
+                    <stop offset="75%" stopColor="#1f2229" />
+                    <stop offset="100%" stopColor="#9da5b5" />
+                  </linearGradient>
+                  <radialGradient id="woundStock3D" cx="50%" cy="50%" r="50%">
+                    <stop offset="30%" stopColor="#0a0b0e" />
+                    <stop offset="60%" stopColor="#1c1e28" />
+                    <stop offset="85%" stopColor="#0e0f14" />
+                    <stop offset="98%" stopColor="#242732" />
+                    <stop offset="100%" stopColor="#08090c" />
+                  </radialGradient>
+                  <radialGradient id="centerHub3D" cx="36%" cy="32%" r="68%">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="28%" stopColor="#a8b0c0" />
+                    <stop offset="65%" stopColor="#22252c" />
+                    <stop offset="85%" stopColor="#555a68" />
+                    <stop offset="100%" stopColor="#16181f" />
+                  </radialGradient>
+                  <linearGradient id="bevelLight3D" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#08090c" stopOpacity="0.95" />
+                    <stop offset="50%" stopColor="#22252c" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="#ffffff" stopOpacity="0.8" />
+                  </linearGradient>
+                  <radialGradient id="boltHead3D" cx="30%" cy="30%" r="70%">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="45%" stopColor="#828896" />
+                    <stop offset="85%" stopColor="#22242a" />
+                    <stop offset="100%" stopColor="#121316" />
+                  </radialGradient>
+                </defs>
+
+                {/* 1. Underlying Coiled 35mm Raw Stock wound on core */}
+                <circle cx="100" cy="100" r="92" fill="url(#woundStock3D)" stroke="#060709" strokeWidth="2.5" />
+                <circle cx="100" cy="100" r="84" fill="none" stroke="#2e313c" strokeWidth="0.8" strokeDasharray="16 4" opacity="0.65" />
+                <circle cx="100" cy="100" r="74" fill="none" stroke="#252732" strokeWidth="0.8" strokeDasharray="20 5" opacity="0.6" />
+                <circle cx="100" cy="100" r="64" fill="none" stroke="#323642" strokeWidth="0.8" strokeDasharray="14 4" opacity="0.65" />
+                <circle cx="100" cy="100" r="54" fill="none" stroke="#21232c" strokeWidth="0.8" strokeDasharray="18 5" opacity="0.6" />
+
+                {/* 2. Main Machined Aluminum Flange Plate */}
+                <circle cx="100" cy="100" r="97" fill="url(#titaniumFlange3D)" stroke="url(#specularRim3D)" strokeWidth="3" />
+                <circle cx="100" cy="100" r="94" fill="none" stroke="#121317" strokeWidth="1.2" opacity="0.8" />
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#5d6372" strokeWidth="0.6" strokeDasharray="2 3" opacity="0.45" />
+
+                {/* 3. Engraved Metric Calibration Markings */}
+                {REEL_CALIBRATION_TICKS.map((tick, i) => (
+                  <line
+                    key={`cal-${i}`}
+                    x1={tick.x1}
+                    y1={tick.y1}
+                    x2={tick.x2}
+                    y2={tick.y2}
+                    stroke={tick.m ? "#ffffff" : "#4a4f5b"}
+                    strokeWidth={tick.m ? "0.9" : "0.5"}
+                    opacity={tick.m ? "0.6" : "0.35"}
+                  />
+                ))}
+
+                {/* 4. 6 Precision Flange Inspection Windows with 3D Bevels */}
+                {REEL_INSPECTION_WINDOWS.map((win, idx) => (
+                  <g key={`win-${idx}`}>
+                    <circle cx={win.cx} cy={win.cy} r="18" fill="url(#woundStock3D)" />
+                    <circle cx={100} cy={100} r={win.trackR} fill="none" stroke="#2d303a" strokeWidth="0.8" opacity="0.5" />
+                    <circle cx={win.cx} cy={win.cy} r="18" fill="none" stroke="url(#bevelLight3D)" strokeWidth="2.4" />
+                    <circle cx={win.cx} cy={win.cy} r="18.5" fill="none" stroke="#0e0f12" strokeWidth="0.8" opacity="0.8" />
+                    <circle cx={win.cx} cy={win.cy} r="15.8" fill="none" stroke="#ffffff" strokeWidth="0.5" opacity="0.3" />
+                  </g>
+                ))}
+
+                {/* 5. Center Mounting Ring with Stainless Hex Bolts */}
+                <circle cx="100" cy="100" r="32" fill="none" stroke="#16171c" strokeWidth="2.2" />
+                <circle cx="100" cy="100" r="31" fill="none" stroke="#484d5a" strokeWidth="0.8" opacity="0.6" />
+                
+                {REEL_HEX_BOLTS.map((bolt, idx) => (
+                  <g key={`bolt-${idx}`}>
+                    <circle cx={bolt.bx} cy={bolt.by} r="2.8" fill="url(#boltHead3D)" stroke="#111215" strokeWidth="0.8" />
+                    <circle cx={bolt.bx} cy={bolt.by} r="1.1" fill="#090a0c" />
+                  </g>
+                ))}
+
+                {/* 6. Heavy-Duty Cinema Center Hub Core with Arriflex Drive Lugs */}
+                <circle cx="100" cy="100" r="20" fill="url(#centerHub3D)" stroke="#14151a" strokeWidth="2.2" />
+                <circle cx="100" cy="100" r="19" fill="none" stroke="#ffffff" strokeWidth="0.75" opacity="0.5" />
+                
+                {REEL_DRIVE_LUGS.map((lug, idx) => (
+                  <circle key={`lug-${idx}`} cx={lug.kx} cy={lug.ky} r="2.4" fill="#0a0b0e" stroke="#2e313b" strokeWidth="0.7" />
+                ))}
+
+                {/* Center Spindle Axle Hole with Brass Bushing */}
+                <circle cx="100" cy="100" r="8" fill="#c49a45" stroke="#141518" strokeWidth="1.2" />
+                <circle cx="100" cy="100" r="6.8" fill="#060708" stroke="#1e2026" strokeWidth="1" />
+                <circle cx="100" cy="100" r="2.5" fill="#000000" />
+              </svg>
+
+              {/* 2. CHROME TENSION GUIDE ROLLER PIN (Spans full 126px film height right at the reel exit point!) */}
+              <div
+                className="absolute -right-2 sm:-right-3 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center justify-between pointer-events-none drop-shadow-[5px_0_10px_rgba(0,0,0,0.75)]"
+                style={{ height: "126px" }}
+              >
+                {/* Top Roller Mounting Bracket Cap */}
+                <div className="w-4 h-3.5 rounded-t-sm bg-gradient-to-b from-[#949cb0] to-[#252830] border border-black/80 flex items-center justify-center shadow-md">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-inner" />
+                </div>
+
+                {/* Chrome Roller Pin (Specular cylinder along full 126px film height) */}
+                <div
+                  className="w-2.5 flex-1 shadow-inner relative"
+                  style={{
+                    background: "linear-gradient(90deg, #4b505c 0%, #ffffff 35%, #252830 65%, #8890a0 85%, #181a20 100%)",
+                    borderRadius: "1px",
+                  }}
+                >
+                  <div className="absolute top-0 bottom-0 left-[30%] w-[1.5px] bg-white/70" />
+                </div>
+
+                {/* Bottom Roller Mounting Bracket Cap */}
+                <div className="w-4 h-3.5 rounded-b-sm bg-gradient-to-b from-[#252830] to-[#949cb0] border border-black/80 flex items-center justify-center shadow-md">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-inner" />
+                </div>
               </div>
+
             </div>
           </div>
+
+          {/* 3. THE MOVING CONTINUOUS FILMSTRIP: Tucked directly behind the Reel & Roller */}
+          <div className="flex-1 overflow-hidden relative flex items-center -ml-16 sm:-ml-20 md:-ml-24 z-10">
+            <div className="animate-filmtape-scroll flex items-center">
+              {[...FILM_TAPE_FRAMES, ...FILM_TAPE_FRAMES].map((item, idx) => (
+                <div
+                  key={`${item.id}-${idx}`}
+                  className="film-frame-cell flex-shrink-0 bg-[#0c0d10] border-y-[3px] border-black/90 rounded-[3px] px-1.5 py-1.5 mx-1 flex flex-col justify-between shadow-xl relative group cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
+                  style={{
+                    width: "196px",
+                    height: "126px",
+                  }}
+                >
+                  {/* Top Sprocket Holes (Perforations) */}
+                  <div className="flex items-center justify-between px-1 h-3.5 opacity-80">
+                    {Array.from({ length: 6 }).map((_, sIdx) => (
+                      <span
+                        key={sIdx}
+                        className="w-2.5 h-1.5 rounded-[1px] bg-white/45 block shadow-inner border border-black/40"
+                      />
+                    ))}
+                  </div>
+
+                  {/* Frame Image Area */}
+                  <div className="relative w-full h-[76px] rounded-[2px] overflow-hidden bg-black border border-white/10 shadow-inner">
+                    <img
+                      src={item.image}
+                      alt={item.tag}
+                      className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-1 left-1.5 text-[9px] font-mono font-bold tracking-wider text-white/95 bg-black/70 px-1.5 py-0.5 rounded-[2px] backdrop-blur-[3px] border border-white/10">
+                      {item.tag}
+                    </div>
+                  </div>
+
+                  {/* Bottom Sprocket Holes with Authentic Film Code */}
+                  <div className="flex items-center justify-between px-1 h-3.5 opacity-80 mt-0.5">
+                    <span className="text-[7.5px] font-mono tracking-tighter text-amber-400 font-semibold select-none">
+                      {item.code}
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      {Array.from({ length: 4 }).map((_, sIdx) => (
+                        <span
+                          key={sIdx}
+                          className="w-2 h-1.5 rounded-[1px] bg-white/45 block shadow-inner border border-black/40"
+                        />
+                      ))}
+                    </div>
+                    <span className="text-[7.5px] font-mono tracking-tighter text-white/60 select-none">
+                      ▶ {item.tc}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 

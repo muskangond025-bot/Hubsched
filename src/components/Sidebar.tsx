@@ -7,7 +7,7 @@ export const Sidebar = () => {
   const [scrollIndex, setScrollIndex] = useState(-11);
 
   useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
+    return scrollYProgress.on("change", (latest) => {
       // Map scroll progress 0-1 to something like -11 to 07
       const mapped = Math.floor(latest * 18) - 11;
       setScrollIndex(mapped);

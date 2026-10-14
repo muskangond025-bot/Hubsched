@@ -9,7 +9,6 @@ const rulerSegments = [
   "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"
 ];
 
-const textToSplit = "ELEVATING BRAND THROUGH FILMS, CREATIVE DIRECTION, SOCIAL MEDIA, AND SCRIPTING. MAKE MY VID DELIVERS EXTRAORDINARY VISUAL EXPERIENCES WORLDWIDE.";
 
 const markers = [
   { id: "sf", location: [37.7595, -122.4367] as [number, number], label: "San Francisco" },
@@ -49,7 +48,6 @@ export const Hero = () => {
   const isDark = mounted ? resolvedTheme === "dark" : false;
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const textContainerRef = useRef<HTMLParagraphElement>(null);
 
   // Interactive Globe States & Refs
   const lottieContainerRef = useRef<HTMLDivElement>(null);
@@ -240,31 +238,6 @@ export const Hero = () => {
     };
   }, []);
 
-  // 3. GSAP Letter-by-Letter Scroll Trigger Text Opacity Reveal
-  useEffect(() => {
-    if (!textContainerRef.current) return;
-
-    const spans = textContainerRef.current.querySelectorAll('.reveal-word');
-
-    const trigger = ScrollTrigger.create({
-      trigger: textContainerRef.current,
-      start: "top 85%",
-      end: "bottom 45%",
-      scrub: true,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const activeIndex = Math.floor(progress * spans.length);
-        spans.forEach((span, index) => {
-          const s = span as HTMLSpanElement;
-          s.style.opacity = index <= activeIndex ? '1' : '0.15';
-        });
-      }
-    });
-
-    return () => {
-      trigger.kill();
-    };
-  }, []);
 
   // Video Player Refs & States
   const videoContainerRef = useRef<HTMLDivElement>(null);
@@ -627,46 +600,31 @@ export const Hero = () => {
 
               </div>
 
+              {/* 3. HERO BOTTOM FOOTER */}
+              <div className="hero-bottom w-full absolute bottom-6 left-0 right-0 px-8 flex justify-between items-center font-sans z-10 pointer-events-none">
+                {/* Left Side: Copyright */}
+                <div className="text-size-tiny text-white/50 tracking-wider font-semibold uppercase pointer-events-auto">
+                  ©COPYRIGHT 2026
+                </div>
 
+                {/* Right Side: CET clock */}
+                <div className="eyebrow-wrap is--border-white is--nav flex items-center gap-3 pointer-events-auto">
+                  <div className="circle-dot pulse is--nav" />
+                  <p className="pill-text is--nav text-white/80 text-size-tiny font-bold tracking-widest uppercase">
+                    {cetTime} <span className="text-[#1b4fd8] text-weight-semibold ml-1">CET</span>
+                  </p>
+                </div>
+              </div>
 
             </div>
           </div>
         </div>
       </div>
 
-      {/* 3. HERO BOTTOM FOOTER */}
-      <div className="hero-bottom w-full flex justify-between items-center px-8 py-6 border-t border-black/5 font-sans z-10">
-        {/* Left Side: Copyright */}
-        <div className="text-size-tiny text-white/50 tracking-wider font-semibold uppercase">
-          ©COPYRIGHT 2026
-        </div>
-
-        {/* Right Side: CET clock */}
-        <div className="eyebrow-wrap is--border-white is--nav flex items-center gap-3">
-          <div className="circle-dot pulse is--nav" />
-          <p className="pill-text is--nav text-white/80 text-size-tiny font-bold tracking-widest uppercase">
-            {cetTime} <span className="text-[#1b4fd8] text-weight-semibold ml-1">CET</span>
-          </p>
-        </div>
-      </div>
-
-      {/* 4. SCROLL HIGHLIGHT INTRO TEXT */}
-      <div className="relative z-10 flex justify-center w-full px-8 mt-24 mb-48">
-        <div className="w-full max-w-[800px] text-center">
-          <p ref={textContainerRef} className="text-white text-3xl md:text-5xl font-sans font-semibold leading-tight tracking-wide">
-            {textToSplit.split(' ').map((word, i) => (
-              <span key={i} className="reveal-word opacity-15 transition-opacity duration-150 mr-3 inline-block">
-                {word}
-              </span>
-            ))}
-          </p>
-        </div>
-      </div>
-
-      {/* 5. HERO VIDEO SECTION (reveals by sliding up over sticky hero-outer) */}
+      {/* 4. HERO VIDEO SECTION (reveals by sliding up over sticky hero-outer) */}
       <section
         ref={videoContainerRef}
-        className="hero-video w-full bg-background py-24 flex flex-col items-center relative overflow-hidden"
+        className="hero-video w-full flex flex-col items-center relative overflow-hidden"
       >
         <header className="hero-video-border w-full max-w-[1440px] px-4 md:px-8">
           <div className="padding-global w-full">

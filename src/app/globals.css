@@ -511,3 +511,50 @@ a {
 .animate-fadeIn {
   animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Butter Floating Navbar Spacing Rules */
+.butter-nav-desktop {
+  display: flex !important;
+  align-items: center !important;
+  gap: 44px !important;
+}
+
+.butter-nav-desktop > a {
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+}
+
+.butter-nav-mobile-list {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .butter-nav-desktop {
+    display: none !important;
+  }
+  .butter-nav-mobile-list {
+    display: grid !important;
+  }
+}
+
+/* Cinema Tape Reel & Filmstrip Animations */
+@keyframes spin-spool-ccw {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes filmtape-scroll {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0%, 0, 0); }
+}
+.animate-spool-spin {
+  animation: spin-spool-ccw 14s linear infinite;
+}
+.animate-filmtape-scroll {
+  display: flex;
+  width: max-content;
+  animation: filmtape-scroll 28s linear infinite;
+  will-change: transform;
+}
+.animate-filmtape-scroll:hover {
+  animation-play-state: paused;
+}
